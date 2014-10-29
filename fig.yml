@@ -1,0 +1,4 @@
+builder:
+    build: .
+    volumes:
+        - .:/home/syslog-ng/source
