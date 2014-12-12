@@ -896,7 +896,7 @@ if test "x$with_libmongo_client" = "xauto"; then
   with_libmongo_client="system"
   PKG_CHECK_MODULES(LIBMONGO, libmongo-client >= $LMC_MIN_VERSION,,with_libmongo_client="auto-internal")
 elif test "x$with_libmongo_client" = "xsystem"; then
-  PKG_CHECK_MODULES(LIBMONGO, libmongo-client >= $LMC_MIN_VERSION)
+  PKG_CHECK_MODULES(LIBMONGO, libmongo-client >= $LMC_MIN_VERSION,,with_libmongo_client="auto-internal")
 fi
 
 if test "x$with_libmongo_client" = "xinternal" || test "x$with_libmongo_client" = "xauto-internal"; then
