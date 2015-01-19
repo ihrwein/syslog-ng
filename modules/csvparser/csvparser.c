@@ -506,17 +506,17 @@ _store_value_escaped(LogCSVParser *self, EscapedParserState *ps)
 }
 
 static inline void
-_reset_variables(LogCSVParser *self, LogMessage *msg, GList **current_column, GString *current_value, gint *state, gboolean *store_value, gchar **src, gint *delim_len)
+_reset_variables(LogCSVParser *self, EscapedParserState *ps)
 {
-  g_string_truncate(current_value, 0);
-  *current_column = (*current_column)->next;
-  *state = PS_COLUMN_START;
-  *store_value = FALSE;
+  g_string_truncate(ps->current_value, 0);
+  ps->current_column = ps->current_column->next;
+  ps->state = PS_COLUMN_START;
+  ps->store_value = FALSE;
 
-  if (*delim_len > 0)
-    *src += *delim_len - 1;
+  if (ps->delim_len > 0)
+    ps->src += ps->delim_len - 1;
 
-  *delim_len = 0;
+  ps->delim_len = 0;
 }
 
 #define has_more_data(ps) (ps.current_column && *ps.src)
@@ -573,7 +573,7 @@ log_csv_parser_process_escaped(LogCSVParser *self, LogMessage *msg, const gchar*
       if (*pstate.src == 0 || pstate.store_value)
         {
           _store_value_escaped(self, &pstate);
-          _reset_variables(self, pstate.msg, &pstate.current_column, pstate.current_value, &pstate.state, &pstate.store_value, &pstate.src, &pstate.delim_len);
+          _reset_variables(self, &pstate);
           _check_and_handle_greedy_mode(self, &pstate.current_column, pstate.msg, &pstate.src);
         }
     }
