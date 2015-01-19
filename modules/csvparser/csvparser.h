@@ -25,6 +25,7 @@
 #define CSVPARSER_H_INCLUDED
 
 #include "parser/parser-expr.h"
+#include "csvparser-unescaped.h"
 
 #define LOG_CSV_PARSER_ESCAPE_NONE        0x0001
 #define LOG_CSV_PARSER_ESCAPE_BACKSLASH   0x0002

@@ -5,7 +5,11 @@ modules_csvparser_libcsvparser_la_SOURCES	=	\
 	modules/csvparser/csvparser-grammar.y		\
 	modules/csvparser/csvparser-parser.c		\
 	modules/csvparser/csvparser-parser.h		\
-	modules/csvparser/csvparser-plugin.c
+	modules/csvparser/csvparser-plugin.c    \
+	modules/csvparser/csvparser-common.h    \
+	modules/csvparser/csvparser-common.c    \
+	modules/csvparser/csvparser-unescaped.c    \
+	modules/csvparser/csvparser-unescaped.h
 
 modules_csvparser_libcsvparser_la_CPPFLAGS	=	\
 	$(AM_CPPFLAGS)					\
