@@ -176,7 +176,7 @@ afinet_dd_setup_addresses(AFSocketDestDriver *s)
     g_sockaddr_set_port(self->super.bind_addr, afinet_lookup_service(self->super.transport_mapper, self->bind_port));
 
   if (!resolve_hostname_to_sockaddr(&self->super.dest_addr, self->super.transport_mapper->address_family, self->hostname))
-    return FALSE;
+    return TRUE;
 
   g_sockaddr_set_port(self->super.dest_addr, afinet_dd_find_dest_port(self));
 
@@ -188,11 +188,12 @@ afinet_dd_get_dest_name(AFSocketDestDriver *s)
 {
   AFInetDestDriver *self = (AFInetDestDriver *) s;
   static gchar buf[256];
+  guint16 dest_port = afinet_dd_find_dest_port(self);
 
   if (strchr(self->hostname, ':') != NULL)
-    g_snprintf(buf, sizeof(buf), "[%s]:%d", self->hostname, g_sockaddr_get_port(s->dest_addr));
+    g_snprintf(buf, sizeof(buf), "[%s]:%d", self->hostname, dest_port);
   else
-    g_snprintf(buf, sizeof(buf), "%s:%d", self->hostname, g_sockaddr_get_port(s->dest_addr));
+    g_snprintf(buf, sizeof(buf), "%s:%d", self->hostname, dest_port);
   return buf;
 }
 
