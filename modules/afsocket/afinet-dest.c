@@ -139,6 +139,25 @@ afinet_dd_construct_writer(AFSocketDestDriver *s)
   return writer;
 }
 
+static guint16
+afinet_dd_find_dest_port(AFInetDestDriver *self)
+{
+  if (!self->dest_port)
+    {
+      const gchar *port_change_warning = transport_mapper_inet_get_port_change_warning(self->super.transport_mapper);
+
+      if (port_change_warning)
+        {
+          msg_warning(port_change_warning,
+                      evt_tag_str("id", self->super.super.super.id),
+                      NULL);
+        }
+      return transport_mapper_inet_get_server_port(self->super.transport_mapper);
+    }
+  else
+    return afinet_lookup_service(self->super.transport_mapper, self->dest_port);
+}
+
 static gboolean
 afinet_dd_setup_addresses(AFSocketDestDriver *s)
 {
@@ -159,20 +178,7 @@ afinet_dd_setup_addresses(AFSocketDestDriver *s)
   if (!resolve_hostname_to_sockaddr(&self->super.dest_addr, self->super.transport_mapper->address_family, self->hostname))
     return FALSE;
 
-  if (!self->dest_port)
-    {
-      const gchar *port_change_warning = transport_mapper_inet_get_port_change_warning(self->super.transport_mapper);
-
-      if (port_change_warning)
-        {
-          msg_warning(port_change_warning,
-                      evt_tag_str("id", self->super.super.super.id),
-                      NULL);
-        }
-      g_sockaddr_set_port(self->super.dest_addr, transport_mapper_inet_get_server_port(self->super.transport_mapper));
-    }
-  else
-    g_sockaddr_set_port(self->super.dest_addr, afinet_lookup_service(self->super.transport_mapper, self->dest_port));
+  g_sockaddr_set_port(self->super.dest_addr, afinet_dd_find_dest_port(self));
 
   return TRUE;
 }
