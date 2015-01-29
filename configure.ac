@@ -211,6 +211,10 @@ AC_ARG_ENABLE(systemd,
               [  --enable-systemd        Enable systemd support (default: auto)]
               ,,enable_systemd="auto")
 
+AC_ARG_ENABLE(seccomp,
+              [  --enable-seccomp        Enable seccomp support (default: no)]
+              ,,enable_seccomp="no")
+
 AC_ARG_ENABLE(geoip,
               [  --enable-geoip          Enable GeoIP support (default: auto)]
               ,,enable_geoip="auto")
@@ -443,6 +447,7 @@ AC_HEADER_STDC
 AC_CHECK_HEADER(dmalloc.h)
 AC_CHECK_HEADERS(strings.h	\
 	getopt.h		\
+	seccomp.h		\
 	stropts.h		\
 	sys/strlog.h		\
 	door.h			\
@@ -1105,6 +1110,20 @@ if test "x$enable_linux_caps" = "xyes" -o "x$enable_linux_caps" = "xauto"; then
         fi
 fi
 
+if test "x$enable_seccomp" = "xyes" -o "x$enable_seccomp" = "xauto"; then
+        if test "x$ac_cv_header_seccomp_h" = "xyes"; then
+                AC_CHECK_LIB(seccomp, seccomp_init, LIBSECCOMP_LIBS="-lseccomp"; has_seccomp="yes", has_seccomp="no")
+        else
+                has_seccomp="no"
+        fi
+        AC_MSG_CHECKING(whether to enable Linux seccomp support)
+        AC_MSG_RESULT([$has_seccomp])
+
+        if test "x$enable_seccomp" = "xyes" -a "x$has_seccomp" = "xno"; then
+           AC_MSG_ERROR([Cannot enable Linux seccomp support.])
+        fi
+fi
+
 if test "x$enable_mongodb" = "xauto"; then
 	AC_MSG_CHECKING(whether to enable mongodb destination support)
 	if test "x$with_mongo_client" != "no"; then
@@ -1242,7 +1261,7 @@ fi
 MODULE_DEPS_LIBS="\$(top_builddir)/lib/libsyslog-ng.la"
 
 if test "x$linking_mode" = "xdynamic"; then
-	SYSLOGNG_DEPS_LIBS="$LIBS $BASE_LIBS $GLIB_LIBS $EVTLOG_LIBS $RESOLV_LIBS $LIBCAP_LIBS $PCRE_LIBS $REGEX_LIBS $DL_LIBS"
+	SYSLOGNG_DEPS_LIBS="$LIBS $BASE_LIBS $GLIB_LIBS $EVTLOG_LIBS $RESOLV_LIBS $LIBCAP_LIBS $PCRE_LIBS $REGEX_LIBS $DL_LIBS $LIBSECCOMP_LIBS "
 
 	if test "x$with_ivykis" = "xinternal"; then
 		# when using the internal ivykis, we're linking it statically into libsyslog-ng.so
@@ -1261,7 +1280,7 @@ if test "x$linking_mode" = "xdynamic"; then
 	# syslog-ng binary is linked with the default link command (e.g. libtool)
 	SYSLOGNG_LINK='$(LINK)'
 else
-	SYSLOGNG_DEPS_LIBS="$LIBS $BASE_LIBS $RESOLV_LIBS $LD_START_STATIC -Wl,--whole-archive $GLIB_LIBS $EVTLOG_LIBS $PCRE_LIBS $REGEX_LIBS -Wl,--no-whole-archive $IVYKIS_NO_LIBTOOL_LIBS $LD_END_STATIC $LIBCAP_LIBS $DL_LIBS "
+	SYSLOGNG_DEPS_LIBS="$LIBS $BASE_LIBS $RESOLV_LIBS $LD_START_STATIC -Wl,--whole-archive $GLIB_LIBS $EVTLOG_LIBS $PCRE_LIBS $REGEX_LIBS -Wl,--no-whole-archive $IVYKIS_NO_LIBTOOL_LIBS $LD_END_STATIC $LIBCAP_LIBS $DL_LIBS $LIBSECCOMP_LIBS "
 	TOOL_DEPS_LIBS="$LIBS $BASE_LIBS $GLIB_LIBS $EVTLOG_LIBS $RESOLV_LIBS $LIBCAP_LIBS $PCRE_LIBS $REGEX_LIBS $IVYKIS_LIBS $DL_LIBS"
 	CORE_DEPS_LIBS=""
 
@@ -1445,6 +1464,7 @@ echo "  IPV6 support                : ${enable_ipv6:=no}"
 echo "  spoof-source support        : ${enable_spoof_source:=no}"
 echo "  tcp-wrapper support         : ${enable_tcp_wrapper:=no}"
 echo "  Linux capability support    : ${has_linux_caps:=no}"
+echo "  Linux seccomp support       : ${has_seccomp:=no}"
 echo "  Env wrapper support         : ${enable_env_wrapper:=no}"
 echo "  systemd support             : ${enable_systemd:=no} (unit dir: ${systemdsystemunitdir:=none})"
 echo "  systemd-journal support     : ${with_systemd_journal:=no}"
