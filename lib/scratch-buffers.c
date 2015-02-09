@@ -26,17 +26,24 @@
 #include "scratch-buffers.h"
 #include "misc.h"
 
+#define SB_MAX_CACHE_SIZE 1000
+#define SB_BUFFER_THROW_AWAY_THRESHOLD 10000
+
 TLS_BLOCK_START
 {
   GTrashStack *sb_gstrings;
   GTrashStack *sb_th_gstrings;
   GList *sb_registry;
+  guint sb_gstrings_size;
+  guint sb_th_gstrings_size;
 }
 TLS_BLOCK_END;
 
 /* GStrings */
 
 #define local_sb_gstrings        __tls_deref(sb_gstrings)
+#define local_sb_size            __tls_deref(sb_gstrings_size)
+#define local_sb_th_size         __tls_deref(sb_th_gstrings_size)
 
 GTrashStack *
 sb_gstring_acquire_buffer(void)
@@ -55,12 +62,34 @@ sb_gstring_acquire_buffer(void)
   return (GTrashStack *) sb;
 }
 
+static guint
+_throw_away_entries(GTrashStack **s, guint current_size)
+{
+  SBGString *sb;
+
+  while ((sb = g_trash_stack_pop(s)) != NULL &&
+          current_size >= SB_MAX_CACHE_SIZE)
+    {
+      g_free(sb_gstring_string(sb)->str);
+      g_free(sb);
+      current_size--;
+    }
+
+  return current_size;
+}
+
 void
 sb_gstring_release_buffer(GTrashStack *s)
 {
   SBGString *sb = (SBGString *) s;
-
   g_trash_stack_push(&local_sb_gstrings, sb);
+
+  local_sb_size++;
+
+  if (local_sb_size >= SB_BUFFER_THROW_AWAY_THRESHOLD)
+    {
+      local_sb_size = _throw_away_entries(&local_sb_gstrings, local_sb_size);
+    }
 }
 
 void
@@ -107,6 +136,12 @@ void
 sb_th_gstring_release_buffer(GTrashStack *s)
 {
   g_trash_stack_push(&local_sb_th_gstrings, s);
+  local_sb_th_size++;
+
+  if (local_sb_th_size >= SB_BUFFER_THROW_AWAY_THRESHOLD)
+    {
+      local_sb_th_size = _throw_away_entries(&local_sb_th_gstrings, local_sb_th_size);
+    }
 }
 
 void
@@ -141,6 +176,8 @@ void
 scratch_buffers_init(void)
 {
   local_sb_registry = NULL;
+  local_sb_size = 0;
+  local_sb_th_size = 0;
   scratch_buffers_register(&SBGStringStack);
   scratch_buffers_register(&SBTHGStringStack);
 }
