@@ -71,6 +71,8 @@ if test "x$exec_prefix" = "xNONE"; then
 fi
 pidfiledir='${localstatedir}'
 moduledir='${exec_prefix}/lib/syslog-ng'
+rustmoduledir='${exec_prefix}/lib/syslog-ng/rust-modules'
+rustmoduledepsdir='${exec_prefix}/lib/syslog-ng/rust-modules/deps'
 
 AC_CONFIG_HEADERS(config.h)
 
@@ -209,6 +211,10 @@ AC_ARG_ENABLE(systemd,
               [  --enable-systemd        Enable systemd support (default: auto)]
               ,,enable_systemd="auto")
 
+AC_ARG_ENABLE(rust,
+              [  --enable-rust        Enable Rust bindings (default: auto)]
+              ,,enable_rust="auto")
+
 AC_ARG_ENABLE(geoip,
               [  --enable-geoip          Enable GeoIP support (default: auto)]
               ,,enable_geoip="auto")
@@ -248,7 +254,7 @@ if test "x$enable_all_modules" != "xauto"; then
    state="$enable_all_modules"
 
    MODULES="spoof_source sun_streams sql pacct mongodb json amqp stomp \
-            redis systemd geoip riemann ipv6 smtp"
+            redis systemd geoip riemann ipv6 smtp rust"
    for mod in ${MODULES}; do
        modstate=$(eval echo \$enable_${mod})
        if test "x$modstate" = "xauto"; then
@@ -1144,6 +1150,38 @@ if test "x$enable_linux_caps" = "xyes" -o "x$enable_linux_caps" = "xauto"; then
         fi
 fi
 
+if test "x$enable_rust" = "xyes" -o "x$enable_rust" = "xauto"; then
+    AC_CHECK_PROG(HAVE_RUSTC, rustc, 1, 0)
+    AC_CHECK_PROG(HAVE_CARGO, rustc, 1, 0)
+    if test ${HAVE_RUSTC} = 0; then
+        AC_MSG_WARN([Was about to enable Rust bindings, which need rustc, which you don't seem to have, disabling Rust bindings])
+        enable_rust=no
+    fi
+    if test ${HAVE_CARGO} = 0; then
+        AC_MSG_WARN([Was about to enable Rust bindings, which need Cargo, which you don't seem to have, disabling Rust bindings])
+        enable_rust=no
+    fi
+
+    if test "x$enable_rust" = "xyes"; then
+
+        rust_cargo_build_dir="target/debug"
+
+        if test "x$enable_debug" = "xno"; then
+            rust_cargo_build_options=" --release"
+            rust_cargo_build_dir="target/release"
+            # TODO: cargo puts the release build in target/release
+            AC_SUBST(rust_cargo_build_options)
+        fi
+
+        AC_SUBST(rust_cargo_build_dir)
+        rust_modules_builddir="\$(top_srcdir)/modules/rust-modules/target"
+        rust_modules_deps_builddir="\$(top_srcdir)/modules/rust-modules/target/deps"
+        LIBRUST_MODULES_LIBS="-lrust_modules -L\$(top_builddir)/modules/rust-modules/ -L\$(top_builddir)/modules/rust-modules/deps "
+        AC_SUBST(rust_modules_builddir)
+        AC_SUBST(LIBRUST_MODULES_LIBS)
+    fi
+fi
+
 if test "x$enable_mongodb" = "xauto"; then
 	AC_MSG_CHECKING(whether to enable mongodb destination support)
 	if test "x$with_mongo_client" != "no"; then
@@ -1281,7 +1319,7 @@ fi
 MODULE_DEPS_LIBS="\$(top_builddir)/lib/libsyslog-ng.la"
 
 if test "x$linking_mode" = "xdynamic"; then
-	SYSLOGNG_DEPS_LIBS="$LIBS $BASE_LIBS $GLIB_LIBS $EVTLOG_LIBS $RESOLV_LIBS $LIBCAP_LIBS $PCRE_LIBS $REGEX_LIBS $DL_LIBS"
+	SYSLOGNG_DEPS_LIBS="$LIBS $BASE_LIBS $GLIB_LIBS $EVTLOG_LIBS $RESOLV_LIBS $LIBCAP_LIBS $PCRE_LIBS $REGEX_LIBS $DL_LIBS "
 
 	if test "x$with_ivykis" = "xinternal"; then
 		# when using the internal ivykis, we're linking it statically into libsyslog-ng.so
@@ -1301,7 +1339,7 @@ if test "x$linking_mode" = "xdynamic"; then
 	SYSLOGNG_LINK='$(LINK)'
 else
 	SYSLOGNG_DEPS_LIBS="$LIBS $BASE_LIBS $RESOLV_LIBS $LD_START_STATIC -Wl,--whole-archive $GLIB_LIBS $EVTLOG_LIBS $PCRE_LIBS $REGEX_LIBS -Wl,--no-whole-archive $IVYKIS_NO_LIBTOOL_LIBS $LD_END_STATIC $LIBCAP_LIBS $DL_LIBS "
-	TOOL_DEPS_LIBS="$LIBS $BASE_LIBS $GLIB_LIBS $EVTLOG_LIBS $RESOLV_LIBS $LIBCAP_LIBS $PCRE_LIBS $REGEX_LIBS $IVYKIS_LIBS $DL_LIBS"
+	TOOL_DEPS_LIBS="$LIBS $BASE_LIBS $GLIB_LIBS $EVTLOG_LIBS $RESOLV_LIBS $LIBCAP_LIBS $PCRE_LIBS $REGEX_LIBS $IVYKIS_LIBS $DL_LIBS "
 	CORE_DEPS_LIBS=""
 
 	# bypass libtool in case we want to do mixed linking because it
@@ -1390,6 +1428,7 @@ AM_CONDITIONAL(JSON_INTERNAL, [test "x$JSON_SUBDIRS" != "x"])
 AM_CONDITIONAL(LIBMONGO_INTERNAL, [test "x$LIBMONGO_SUBDIRS" != "x"])
 AM_CONDITIONAL(LIBRABBITMQ_INTERNAL, [test "x$LIBRABBITMQ_SUBDIRS" != "x"])
 AM_CONDITIONAL(ENABLE_RIEMANN, [test "$enable_riemann" != "no"])
+AM_CONDITIONAL(ENABLE_RUST, [test "$enable_rust" = "yes"])
 AM_CONDITIONAL(ENABLE_JOURNALD, [test "$with_systemd_journal" != "no"])
 AM_CONDITIONAL(ENABLE_PYTHON, [test "$enable_python" != "no"])
 AM_CONDITIONAL(ENABLE_JAVA, [test "$enable_java" = "yes"])
@@ -1398,12 +1437,17 @@ AM_CONDITIONAL(ENABLE_MANPAGES, [test "$enable_manpages" != "no"])
 # substitution into manual pages
 expanded_sysconfdir=[`patheval $sysconfdir | sed -e 's/-/\\\\-/g'`]
 expanded_moduledir=[`patheval $moduledir`]
+expanded_rustmoduledir=[`patheval $rustmoduledir`]
+expanded_rustmoduledepsdir=[`patheval $rustmoduledepsdir`]
 
 AC_SUBST(timezonedir)
 AC_SUBST(pidfiledir)
 AC_SUBST(moduledir)
+AC_SUBST(rustmoduledir)
+AC_SUBST(rustmoduledepsdir)
 AC_SUBST(expanded_sysconfdir)
 AC_SUBST(expanded_moduledir)
+AC_SUBST(expanded_rustmoduledir)
 AC_SUBST(systemdsystemunitdir)
 AC_SUBST(SYSLOGNG_LINK)
 AC_SUBST(SYSLOGNG_DEPS_LIBS)
@@ -1499,3 +1543,4 @@ echo "  Redis support (module)      : ${enable_redis:=no}"
 echo "  Riemann destination (module): ${enable_riemann:=no}"
 echo "  python                      : ${enable_python:-yes} (${with_python})"
 echo "  java                        : ${enable_java:=no}"
+echo "  Rust bindings (module)      : ${enable_rust:=no}"
