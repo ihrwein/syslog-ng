@@ -140,7 +140,7 @@ filter_simple_expr
           }
 	| filter_re					{ $$ = &last_re_filter->super; }
 	| filter_plugin
-	| filter_comparison
+/*	| filter_comparison */
 	;
 
 
