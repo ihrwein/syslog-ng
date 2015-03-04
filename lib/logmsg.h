@@ -224,24 +224,11 @@ log_msg_is_handle_settable_with_an_indirect_value(NVHandle handle)
 
 const gchar *log_msg_get_macro_value(LogMessage *self, gint id, gssize *value_len);
 
-static inline const gchar *
-log_msg_get_value(LogMessage *self, NVHandle handle, gssize *value_len)
-{
-  guint16 flags;
+const gchar *
+log_msg_get_value(LogMessage *self, NVHandle handle, gssize *value_len);
 
-  flags = nv_registry_get_handle_flags(logmsg_registry, handle);
-  if ((flags & LM_VF_MACRO) == 0)
-    return __nv_table_get_value(self->payload, handle, LM_V_MAX, value_len);
-  else
-    return log_msg_get_macro_value(self, flags >> 8, value_len);
-}
-
-static inline const gchar *
-log_msg_get_value_by_name(LogMessage *self, const gchar *name, gssize *value_len)
-{
-  NVHandle handle = log_msg_get_value_handle(name);
-  return log_msg_get_value(self, handle, value_len);
-}
+const gchar *
+log_msg_get_value_by_name(LogMessage *self, const gchar *name, gssize *value_len);
 
 typedef gboolean (*LogMessageTagsForeachFunc)(LogMessage *self, LogTagId tag_id, const gchar *name, gpointer user_data);
 

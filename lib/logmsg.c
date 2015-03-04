@@ -1668,3 +1668,22 @@ log_msg_global_deinit(void)
 {
   log_msg_registry_deinit();
 }
+
+const gchar *
+log_msg_get_value(LogMessage *self, NVHandle handle, gssize *value_len)
+{
+  guint16 flags;
+
+  flags = nv_registry_get_handle_flags(logmsg_registry, handle);
+  if ((flags & LM_VF_MACRO) == 0)
+    return __nv_table_get_value(self->payload, handle, LM_V_MAX, value_len);
+  else
+    return log_msg_get_macro_value(self, flags >> 8, value_len);
+}
+
+const gchar *
+log_msg_get_value_by_name(LogMessage *self, const gchar *name, gssize *value_len)
+{
+  NVHandle handle = log_msg_get_value_handle(name);
+  return log_msg_get_value(self, handle, value_len);
+}
