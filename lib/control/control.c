@@ -130,10 +130,13 @@ ControlCommand default_commands[] = {
 static void
 register_default_commands()
 {
-  control_register_command("STATS", NULL, control_connection_send_stats);
-  control_register_command("LOG", NULL, control_connection_message_log);
-  control_register_command("STOP", NULL, control_connection_stop_process);
-  control_register_command("RELOAD", NULL, control_connection_reload);
+  int i;
+  ControlCommand *elem;
+
+  for (i = 0; default_commands[i].command_name != NULL; i++) {
+    elem = &default_commands[i];
+    control_register_command(elem->command_name, elem->description, elem->func);
+  }
 }
 
 void
