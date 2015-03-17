@@ -40,7 +40,7 @@ static ControlServer *control_server;
 static GList *command_list = NULL;
 
 void
-control_register_command(gchar *command_name, gchar *description, CommandFunction function)
+control_register_command(const gchar *command_name, const gchar *description, CommandFunction function)
 {
   ControlCommand *new_command = g_new0(ControlCommand, 1);
   new_command->command_name = command_name;
