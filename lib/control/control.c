@@ -61,7 +61,7 @@ control_connection_send_stats(GString *command)
 static GString *
 control_connection_reset_stats(GString *command)
 {
-  GString *result = g_string_new("Stats has been reset.");
+  GString *result = g_string_new("The statistics of syslog-ng have been reset to 0.");
   stats_reset();
   return result;
 }
