@@ -85,6 +85,14 @@ slng_verbose(int argc, char *argv[], const gchar *mode)
   return ret;
 }
 
+static gboolean stats_options_reset_is_set = FALSE;
+
+static GOptionEntry stats_options[] =
+{
+  { "reset", 'r', 0, G_OPTION_ARG_NONE, &stats_options_reset_is_set, "reset counters", NULL },
+  { NULL, 0, 0, G_OPTION_ARG_NONE, NULL, NULL }
+};
+
 static GOptionEntry verbose_options[] =
 {
   { "set", 's', 0, G_OPTION_ARG_STRING, &verbose_set,
@@ -97,8 +105,16 @@ slng_stats(int argc, char *argv[], const gchar *mode)
 {
   GString *rsp = NULL;
 
-  if (!(slng_send_cmd("STATS\n") && ((rsp = control_client_read_reply(control_client)) != NULL)))
-    return 1;
+  if (stats_options_reset_is_set)
+    {
+      if (!(slng_send_cmd("RESET_STATS\n") && ((rsp = control_client_read_reply(control_client)) != NULL)))
+        return 1;
+    }
+  else
+    {
+      if (!(slng_send_cmd("STATS\n") && ((rsp = control_client_read_reply(control_client)) != NULL)))
+        return 1;
+    }
 
   printf("%s\n", rsp->str);
 
@@ -176,7 +192,7 @@ static struct
   gint (*main)(gint argc, gchar *argv[], const gchar *mode);
 } modes[] =
 {
-  { "stats", no_options, "Dump syslog-ng statistics", slng_stats },
+  { "stats", stats_options, "Query/reset syslog-ng statistics", slng_stats },
   { "verbose", verbose_options, "Enable/query verbose messages", slng_verbose },
   { "debug", verbose_options, "Enable/query debug messages", slng_verbose },
   { "trace", verbose_options, "Enable/query trace messages", slng_verbose },

@@ -27,5 +27,6 @@
 #include "syslog-ng.h"
 
 gchar *stats_generate_csv(void);
+void   stats_reset(void);
 
 #endif
