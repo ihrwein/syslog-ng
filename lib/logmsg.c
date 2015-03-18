@@ -822,7 +822,7 @@ log_msg_append_format_sdata(LogMessage *self, GString *result,  guint32 seq_num)
   if (!meta_seqid)
     meta_seqid = log_msg_get_value_handle(".SDATA.meta.sequenceId");
 
-  seqid = log_msg_get_value(self, meta_seqid, &seqid_length);
+  seqid = __log_msg_get_value(self, meta_seqid, &seqid_length);
   APPEND_ZERO(seqid, seqid, seqid_length);
   if (seqid[0])
     /* Message stores sequenceId */
@@ -917,7 +917,7 @@ log_msg_append_format_sdata(LogMessage *self, GString *result,  guint32 seq_num)
           g_string_append_c(result, ' ');
           g_string_append_len(result, sdata_param, sdata_param_len);
           g_string_append(result, "=\"");
-          value = log_msg_get_value(self, handle, &len);
+          value = __log_msg_get_value(self, handle, &len);
           log_msg_sdata_append_escaped(result, value, len);
           g_string_append_c(result, '"');
         }
@@ -1667,4 +1667,16 @@ void
 log_msg_global_deinit(void)
 {
   log_msg_registry_deinit();
+}
+
+const gchar *
+log_msg_get_value(LogMessage *self, NVHandle handle, gssize *value_len)
+{
+  return __log_msg_get_value(self, handle, value_len);
+}
+
+const gchar *
+log_msg_get_value_by_name(LogMessage *self, const gchar *name, gssize *value_len)
+{
+  return __log_msg_get_value_by_name(self, name, value_len);
 }

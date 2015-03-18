@@ -61,7 +61,7 @@ Java_org_syslog_1ng_LogMessage_getValue(JNIEnv *env, jobject obj, jlong handle, 
       return NULL;
     }
 
-  value = log_msg_get_value_by_name(msg, name_str, NULL);
+  value = __log_msg_get_value_by_name(msg, name_str, NULL);
 
   (*env)->ReleaseStringUTFChars(env, name, name_str);
 

@@ -147,7 +147,7 @@ log_source_mangle_hostname(LogSource *self, LogMessage *msg)
   resolved_name = resolve_sockaddr_to_hostname(&resolved_name_len, msg->saddr, &self->options->host_resolve_options);
   log_msg_set_value(msg, LM_V_HOST_FROM, resolved_name, resolved_name_len);
 
-  orig_host = log_msg_get_value(msg, LM_V_HOST, NULL);
+  orig_host = __log_msg_get_value(msg, LM_V_HOST, NULL);
   if (!self->options->keep_hostname || !orig_host || !orig_host[0])
     {
       gchar host[256];
@@ -286,11 +286,11 @@ log_source_queue(LogPipe *s, LogMessage *msg, const LogPathOptions *path_options
     {
       stats_lock();
 
-      stats_register_and_increment_dynamic_counter(2, SCS_HOST | SCS_SOURCE, NULL, log_msg_get_value(msg, LM_V_HOST, NULL), msg->timestamps[LM_TS_RECVD].tv_sec);
+      stats_register_and_increment_dynamic_counter(2, SCS_HOST | SCS_SOURCE, NULL, __log_msg_get_value(msg, LM_V_HOST, NULL), msg->timestamps[LM_TS_RECVD].tv_sec);
       if (stats_check_level(3))
         {
-          stats_register_and_increment_dynamic_counter(3, SCS_SENDER | SCS_SOURCE, NULL, log_msg_get_value(msg, LM_V_HOST_FROM, NULL), msg->timestamps[LM_TS_RECVD].tv_sec);
-          stats_register_and_increment_dynamic_counter(3, SCS_PROGRAM | SCS_SOURCE, NULL, log_msg_get_value(msg, LM_V_PROGRAM, NULL), msg->timestamps[LM_TS_RECVD].tv_sec);
+          stats_register_and_increment_dynamic_counter(3, SCS_SENDER | SCS_SOURCE, NULL, __log_msg_get_value(msg, LM_V_HOST_FROM, NULL), msg->timestamps[LM_TS_RECVD].tv_sec);
+          stats_register_and_increment_dynamic_counter(3, SCS_PROGRAM | SCS_SOURCE, NULL, __log_msg_get_value(msg, LM_V_PROGRAM, NULL), msg->timestamps[LM_TS_RECVD].tv_sec);
         }
 
       stats_unlock();

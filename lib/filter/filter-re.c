@@ -46,7 +46,7 @@ filter_re_eval(FilterExprNode *s, LogMessage **msgs, gint num_msg)
   LogMessage *msg = msgs[0];
   gssize len = 0;
 
-  value = log_msg_get_value(msg, self->value_handle, &len);
+  value = __log_msg_get_value(msg, self->value_handle, &len);
 
   APPEND_ZERO(value, value, len);
   return filter_re_eval_string(s, msg, self->value_handle, value, len);
@@ -125,15 +125,15 @@ filter_match_eval(FilterExprNode *s, LogMessage **msgs, gint num_msg)
       const gchar *pid;
       gssize pid_len;
 
-      pid = log_msg_get_value(msg, LM_V_PID, &pid_len);
+      pid = __log_msg_get_value(msg, LM_V_PID, &pid_len);
 
       /* compatibility mode */
       str = g_strdup_printf("%s%s%s%s: %s",
-                            log_msg_get_value(msg, LM_V_PROGRAM, NULL),
+                            __log_msg_get_value(msg, LM_V_PROGRAM, NULL),
                             pid_len > 0 ? "[" : "",
                             pid,
                             pid_len > 0 ? "]" : "",
-                            log_msg_get_value(msg, LM_V_MESSAGE, NULL));
+                            __log_msg_get_value(msg, LM_V_MESSAGE, NULL));
       res = filter_re_eval_string(s, msg, LM_V_NONE, str, -1);
       g_free(str);
     }

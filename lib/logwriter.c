@@ -576,13 +576,13 @@ log_writer_emit_suppress_summary(LogWriter *self)
   m->pri = self->last_msg->pri;
   m->flags = LF_INTERNAL | LF_LOCAL;
 
-  p = log_msg_get_value(self->last_msg, LM_V_HOST, &len);
+  p = __log_msg_get_value(self->last_msg, LM_V_HOST, &len);
   log_msg_set_value(m, LM_V_HOST, p, len);
-  p = log_msg_get_value(self->last_msg, LM_V_PROGRAM, &len);
+  p = __log_msg_get_value(self->last_msg, LM_V_PROGRAM, &len);
   log_msg_set_value(m, LM_V_PROGRAM, p, len);
 
   len = g_snprintf(buf, sizeof(buf), "Last message '%.20s' repeated %d times, suppressed by syslog-ng on %s",
-                   log_msg_get_value(self->last_msg, LM_V_MESSAGE, NULL),
+                   __log_msg_get_value(self->last_msg, LM_V_MESSAGE, NULL),
                    self->last_msg_count,
                    get_local_hostname_fqdn());
   log_msg_set_value(m, LM_V_MESSAGE, buf, len);
@@ -624,11 +624,11 @@ log_writer_is_msg_suppressed(LogWriter *self, LogMessage *lm)
   if (self->last_msg)
     {
       if (self->last_msg->timestamps[LM_TS_RECVD].tv_sec >= lm->timestamps[LM_TS_RECVD].tv_sec - self->options->suppress &&
-          strcmp(log_msg_get_value(self->last_msg, LM_V_MESSAGE, NULL), log_msg_get_value(lm, LM_V_MESSAGE, NULL)) == 0 &&
-          strcmp(log_msg_get_value(self->last_msg, LM_V_HOST, NULL), log_msg_get_value(lm, LM_V_HOST, NULL)) == 0 &&
-          strcmp(log_msg_get_value(self->last_msg, LM_V_PROGRAM, NULL), log_msg_get_value(lm, LM_V_PROGRAM, NULL)) == 0 &&
-          strcmp(log_msg_get_value(self->last_msg, LM_V_PID, NULL), log_msg_get_value(lm, LM_V_PID, NULL)) == 0 &&
-          strcmp(log_msg_get_value(lm, LM_V_MESSAGE, NULL), "-- MARK --") != 0)
+          strcmp(__log_msg_get_value(self->last_msg, LM_V_MESSAGE, NULL), __log_msg_get_value(lm, LM_V_MESSAGE, NULL)) == 0 &&
+          strcmp(__log_msg_get_value(self->last_msg, LM_V_HOST, NULL), __log_msg_get_value(lm, LM_V_HOST, NULL)) == 0 &&
+          strcmp(__log_msg_get_value(self->last_msg, LM_V_PROGRAM, NULL), __log_msg_get_value(lm, LM_V_PROGRAM, NULL)) == 0 &&
+          strcmp(__log_msg_get_value(self->last_msg, LM_V_PID, NULL), __log_msg_get_value(lm, LM_V_PID, NULL)) == 0 &&
+          strcmp(__log_msg_get_value(lm, LM_V_MESSAGE, NULL), "-- MARK --") != 0)
         {
           stats_counter_inc(self->suppressed_messages);
           self->last_msg_count++;
@@ -642,8 +642,8 @@ log_writer_is_msg_suppressed(LogWriter *self, LogMessage *lm)
           g_static_mutex_unlock(&self->suppress_lock);
 
           msg_debug("Suppressing duplicate message",
-                    evt_tag_str("host", log_msg_get_value(lm, LM_V_HOST, NULL)),
-                    evt_tag_str("msg", log_msg_get_value(lm, LM_V_MESSAGE, NULL)),
+                    evt_tag_str("host", __log_msg_get_value(lm, LM_V_HOST, NULL)),
+                    evt_tag_str("msg", __log_msg_get_value(lm, LM_V_MESSAGE, NULL)),
                     NULL);
           return TRUE;
         }
@@ -754,7 +754,7 @@ log_writer_append_value(GString *result, LogMessage *lm, NVHandle handle, gboole
   const gchar *value;
   gssize value_len;
 
-  value = log_msg_get_value(lm, handle, &value_len);
+  value = __log_msg_get_value(lm, handle, &value_len);
   if (use_nil && value_len == 0)
     g_string_append_c(result, '-');
   else
@@ -815,7 +815,7 @@ log_writer_format_log(LogWriter *self, LogMessage *lm, GString *result)
       const gchar *seqid;
       gssize seqid_length;
 
-      seqid = log_msg_get_value(lm, meta_seqid, &seqid_length);
+      seqid = __log_msg_get_value(lm, meta_seqid, &seqid_length);
       APPEND_ZERO(seqid, seqid, seqid_length);
       if (seqid[0])
         seq_num = strtol(seqid, NULL, 10);
@@ -873,7 +873,7 @@ log_writer_format_log(LogWriter *self, LogMessage *lm, GString *result)
           const gchar *p;
           gssize len;
 
-          p = log_msg_get_value(lm, LM_V_MESSAGE, &len);
+          p = __log_msg_get_value(lm, LM_V_MESSAGE, &len);
           g_string_append_c(result, ' ');
           if (len != 0)
             {
@@ -935,22 +935,22 @@ log_writer_format_log(LogWriter *self, LogMessage *lm, GString *result)
             }
           g_string_append_c(result, ' ');
 
-          p = log_msg_get_value(lm, LM_V_HOST, &len);
+          p = __log_msg_get_value(lm, LM_V_HOST, &len);
           g_string_append_len(result, p, len);
           g_string_append_c(result, ' ');
 
           if ((lm->flags & LF_LEGACY_MSGHDR))
             {
-              p = log_msg_get_value(lm, LM_V_LEGACY_MSGHDR, &len);
+              p = __log_msg_get_value(lm, LM_V_LEGACY_MSGHDR, &len);
               g_string_append_len(result, p, len);
             }
           else
             {
-              p = log_msg_get_value(lm, LM_V_PROGRAM, &len);
+              p = __log_msg_get_value(lm, LM_V_PROGRAM, &len);
               if (len > 0)
                 {
                   g_string_append_len(result, p, len);
-                  p = log_msg_get_value(lm, LM_V_PID, &len);
+                  p = __log_msg_get_value(lm, LM_V_PID, &len);
                   if (len > 0)
                     {
                       g_string_append_c(result, '[');
@@ -960,7 +960,7 @@ log_writer_format_log(LogWriter *self, LogMessage *lm, GString *result)
                   g_string_append_len(result, ": ", 2);
                 }
             }
-          p = log_msg_get_value(lm, LM_V_MESSAGE, &len);
+          p = __log_msg_get_value(lm, LM_V_MESSAGE, &len);
           g_string_append_len(result, p, len);
           g_string_append_c(result, '\n');
           log_writer_do_padding(self, result);

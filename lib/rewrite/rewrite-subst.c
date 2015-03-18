@@ -55,7 +55,7 @@ log_rewrite_subst_process(LogRewrite *s, LogMessage **pmsg, const LogPathOptions
   gssize length;
   gssize new_length = -1;
 
-  value = log_msg_get_value(*pmsg, self->super.value_handle, &length);
+  value = __log_msg_get_value(*pmsg, self->super.value_handle, &length);
 
   log_msg_make_writable(pmsg, path_options);
   new_value = log_matcher_replace(self->matcher, *pmsg, self->super.value_handle, value, length, self->replacement, &new_length);

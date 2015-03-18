@@ -666,7 +666,7 @@ pdbtool_test_value(LogMessage *msg, const gchar *name, const gchar *test_value)
   gssize value_len;
   gboolean ret = TRUE;
 
-  value = log_msg_get_value_by_name(msg, name, &value_len);
+  value = __log_msg_get_value_by_name(msg, name, &value_len);
   if (!(value && strncmp(value, test_value, value_len) == 0 && value_len == strlen(test_value)))
     {
       if (value)

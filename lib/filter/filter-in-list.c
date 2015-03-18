@@ -45,7 +45,7 @@ filter_in_list_eval(FilterExprNode *s, LogMessage **msgs, gint num_msg)
   const gchar *value;
   gssize len = 0;
 
-  value = log_msg_get_value(msg, self->value_handle, &len);
+  value = __log_msg_get_value(msg, self->value_handle, &len);
   APPEND_ZERO(value, value, len);
 
   return (g_tree_lookup(self->tree, value) != NULL) ^ s->comp;

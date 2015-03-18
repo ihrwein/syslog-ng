@@ -51,7 +51,7 @@ log_rewrite_queue(LogPipe *s, LogMessage *msg, const LogPathOptions *path_option
     }
   if (G_UNLIKELY(debug_flag))
     {
-      value = log_msg_get_value(msg, self->value_handle, &length);
+      value = __log_msg_get_value(msg, self->value_handle, &length);
       msg_debug("Rewrite expression evaluation result",
                 evt_tag_str("value", log_msg_get_value_name(self->value_handle, NULL)),
                 evt_tag_printf("new_value", "%.*s", (gint) length, value),

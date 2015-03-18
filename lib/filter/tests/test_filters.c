@@ -156,7 +156,7 @@ testcase_with_backref_chk(gchar *msg,
   logmsg->saddr = g_sockaddr_inet_new("10.10.0.1", 5000);
 
   /* NOTE: we test how our filters cope with non-zero terminated values. We don't change message_len, only the value */
-  g_snprintf(buf, sizeof(buf), "%sAAAAAAAAAAAA", log_msg_get_value(logmsg, LM_V_MESSAGE, &msglen));
+  g_snprintf(buf, sizeof(buf), "%sAAAAAAAAAAAA", __log_msg_get_value(logmsg, LM_V_MESSAGE, &msglen));
   log_msg_set_value_by_name(logmsg, "MESSAGE2", buf, -1);
 
   /* add a non-zero terminated indirect value which contains the whole message */
@@ -180,7 +180,7 @@ testcase_with_backref_chk(gchar *msg,
       exit(1);
     }
 
-  value_msg = log_msg_get_value_by_name(logmsg, name, &length);
+  value_msg = __log_msg_get_value_by_name(logmsg, name, &length);
   nv_table_unref(nv_table);
   if(value == NULL || value[0] == 0)
      {

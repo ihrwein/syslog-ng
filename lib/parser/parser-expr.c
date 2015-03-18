@@ -58,7 +58,7 @@ log_parser_queue(LogPipe *s, LogMessage *msg, const LogPathOptions *path_options
        * LM_V_MESSAGE pointer we pass to process() go stale.
        */
 
-      value = log_msg_get_value(msg, LM_V_MESSAGE, &value_len);
+      value = __log_msg_get_value(msg, LM_V_MESSAGE, &value_len);
       success = self->process(self, &msg, path_options, value, value_len);
       nv_table_unref(payload);
     }
