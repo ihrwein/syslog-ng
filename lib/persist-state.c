@@ -191,9 +191,19 @@ _grow_store(PersistState *self, guint32 new_size)
       gchar zero = 0;
 
       if (lseek(self->fd, new_size - 1, SEEK_SET) < 0)
-        goto exit;
+        {
+          msg_error("Error seek in persist file",
+                    evt_tag_str("filename", self->temp_filename),
+                    NULL);
+          goto exit;
+        }
       if (write(self->fd, &zero, 1) != 1)
-        goto exit;
+        {
+          msg_error("Error writing persist file, cannot grow it",
+                    evt_tag_str("filename", self->temp_filename),
+                    NULL);
+          goto exit;
+        }
       if (self->current_map)
         munmap(self->current_map, self->current_size);
       self->current_size = new_size;
