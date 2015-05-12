@@ -47,7 +47,7 @@ TLS_BLOCK_END;
 static inline void
 tf_geoip_init(void)
 {
-  if (!local_state)
+  if (!local_state->gi)
     {
       local_state = g_new0(TFGeoIPState, 1);
       local_state->gi = GeoIP_new(GEOIP_MMAP_CACHE);
