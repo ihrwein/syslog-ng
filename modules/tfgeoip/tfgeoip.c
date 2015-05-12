@@ -71,9 +71,15 @@ tf_geoip(LogMessage *msg, gint argc, GString *argv[], GString *result)
 
   country = GeoIP_country_code_by_name(local_state->gi, argv[0]->str);
   if (country)
-    g_string_append(result, country);
+    {
+      g_string_append(result, country);
+      return TRUE;
+    }
 
-  return TRUE;
+  msg_debug("tfgeoip received a NULL country",
+            evt_tag_str("query", argv[0]->str),
+            NULL);
+  return FALSE;
 }
 TEMPLATE_FUNCTION_SIMPLE(tf_geoip);
 
