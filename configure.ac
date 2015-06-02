@@ -1202,8 +1202,10 @@ if test "x$enable_systemd" = "xyes"; then
                 PKG_CHECK_MODULES(LIBSYSTEMD_JOURNAL, libsystemd-journal >= $JOURNALD_MIN_VERSION,
                                   with_systemd_journal=system, with_systemd_journal=optional)
             elif test "x$with_systemd_journal" = "xsystem"; then
-                PKG_CHECK_MODULES(LIBSYSTEMD_JOURNAL, libsystemd-journal >= $JOURNALD_MIN_VERSION,,
-                AC_MSG_ERROR[Detecting system releted systemd-journal library failed])
+                PKG_CHECK_MODULES(LIBSYSTEMD_JOURNAL, libsystemd-journal >= $JOURNALD_MIN_VERSION,has_systemd_journal="yes",has_systemd_journal="no")
+                if test "$has_systemd_journal" = "no"; then
+                    AC_MSG_ERROR([Detecting system related systemd-journal library failed])
+                fi
             fi
             libsystemd_CFLAGS="${LIBSYSTEMD_JOURNAL_CFLAGS} ${libsystemd_daemon_CFLAGS}"
             libsystemd_LIBS="${LIBSYSTEMD_JOURNAL_LIBS} ${libsystemd_daemon_LIBS}"
