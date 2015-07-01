@@ -87,7 +87,7 @@ log_parser_queue(LogPipe *s, LogMessage *msg, const LogPathOptions *path_options
     }
 }
 
-static gboolean
+gboolean
 log_parser_init(LogPipe *s)
 {
   LogParser *self = (LogParser *) s;

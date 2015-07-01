@@ -45,6 +45,7 @@ struct _LogParser
 void log_parser_set_template(LogParser *self, LogTemplate *template);
 void log_parser_init_instance(LogParser *self, GlobalConfig *cfg);
 void log_parser_free_method(LogPipe *self);
+gboolean log_parser_init(LogPipe *s);
 
 static inline gboolean
 log_parser_process(LogParser *self, LogMessage **pmsg, const LogPathOptions *path_options, const gchar *input, gssize input_len)
