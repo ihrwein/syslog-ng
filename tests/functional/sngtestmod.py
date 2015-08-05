@@ -1,6 +1,6 @@
 class DestTest(object):
 
-    def init(self):
+    def init(self, args=None):
         return True
 
     def deinit(self):
