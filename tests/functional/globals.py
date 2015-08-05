@@ -7,6 +7,8 @@ def is_premium():
     return False
 
 def has_module(module):
+    print(os.listdir("../../syslog-ng"))
+    print(os.listdir("../../"))
     avail_mods = os.popen('../../syslog-ng/syslog-ng -V | grep ^Available-Modules: ', 'r').read()
     if avail_mods.find(module) != -1:
         return True

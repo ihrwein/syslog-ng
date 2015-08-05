@@ -25,8 +25,8 @@ def get_source_dir():
 
 def check_env():
 
-#    if not has_module('mod-python'):
-#        print 'Python module is not available, skipping Python test'
+    if not has_module('mod-python'):
+        print 'Python module is not available, skipping Python test'
 #        return False
 
     src_dir = get_source_dir()
