@@ -50,8 +50,6 @@
 
 /* INCLUDE_DECLS */
 
-%token KW_CSV_PARSER
-
 %type	<ptr> parser_expr_csv
 %type   <num> parser_csv_flags
 
@@ -64,7 +62,7 @@ start
 
 
 parser_expr_csv
-        : KW_CSV_PARSER '('
+        : LL_IDENTIFIER '('
           {
             last_parser = *instance = (LogParser *) log_csv_parser_new(configuration);
           }
