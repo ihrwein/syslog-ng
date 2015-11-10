@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2002-2011 BalaBit IT Ltd, Budapest, Hungary
- * Copyright (c) 1998-2011 Balázs Scheidler
+ * Copyright (c) 2002-2014 BalaBit S.a.r.l.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -22,86 +21,83 @@
  */
 
 %code top {
-#include "afstreams-parser.h"
+#include "filter-rust-parser.h"
 
 }
 
 
 %code {
 
-#include "afstreams.h"
 #include "cfg-parser.h"
-#include "afstreams-grammar.h"
+#include "filter-rust.h"
+#include "filter-rust-grammar.h"
+#include "syslog-names.h"
 #include "messages.h"
+#include "plugin.h"
+#include "cfg-grammar.h"
 
-extern LogDriver *last_driver;
+#include <string.h>
 
 }
 
-%name-prefix "afstreams_"
+%name-prefix "filter_rust_"
 
 /* this parameter is needed in order to instruct bison to use a complete
  * argument list for yylex/yyerror */
 
 %lex-param {CfgLexer *lexer}
 %parse-param {CfgLexer *lexer}
-%parse-param {LogDriver **instance}
+%parse-param {FilterExprNode **instance}
 %parse-param {gpointer arg}
-
 
 /* INCLUDE_DECLS */
 
-%token KW_DOOR                        10020
-%token KW_SUN_STREAMS                 10021
-
-
-%type	<ptr> source_afstreams
-%type	<ptr> source_afstreams_params
+%token KW_RUST
+%token KW_OPTION
+%token KW_FILTER_SUBTYPE
 
 %%
 
 start
-        : LL_CONTEXT_SOURCE source_afstreams                        { YYACCEPT; }
-        ;
+  : LL_CONTEXT_FILTER KW_RUST
+    {
+      *instance = filter_rust_new(configuration);
+    }
+    '(' filter_rust_params ')' { YYACCEPT; }
+  ;
 
+filter_rust_params 
+  : filter_rust_subtype filter_rust_options
+  ;
 
-source_afstreams
-	: KW_IFDEF {
-#if SYSLOG_NG_ENABLE_SUN_STREAMS
-}
-        | KW_SUN_STREAMS '(' source_afstreams_params ')'	{ $$ = $3; }
-        | KW_ENDIF {
-#endif
-}
-	;
+filter_rust_subtype
+  : string
+    {
+      filter_rust_set_name(*instance, $1);
+      free($1);
+    }
+  | KW_FILTER_SUBTYPE '(' string ')'
+    {
+      filter_rust_set_name(*instance, $3);
+      free($3);
+    }
+  ;
 
-source_afstreams_params
-	: string
-	  {
-#if SYSLOG_NG_ENABLE_SUN_STREAMS
-	    last_driver = *instance = afstreams_sd_new($1, configuration);
-	    free($1);
-#endif
-	  }
-	  source_afstreams_options		{ $$ = last_driver; }
-	;
+filter_rust_options
+  : filter_rust_option filter_rust_options
+  |
+  ;
 
-source_afstreams_options
-	: source_afstreams_option source_afstreams_options
-	|
-	;
-
-source_afstreams_option
-	: KW_IFDEF {
-#if SYSLOG_NG_ENABLE_SUN_STREAMS
-}
-	| KW_DOOR '(' string ')'		{ afstreams_sd_set_sundoor(last_driver, $3); free($3); }
-	| KW_ENDIF {
-#endif
-}
-	;
-
+filter_rust_option
+  : KW_OPTION '(' string string ')'
+    {
+      filter_rust_set_option(*instance, $3, $4);
+      free($3);
+      free($4);
+    }
+    ;
 
 /* INCLUDE_RULES */
 
 %%
+

@@ -37,7 +37,7 @@ static CfgLexerKeyword csvparser_keywords[] =
 
 CfgParser csvparser_parser =
 {
-#if ENABLE_DEBUG
+#if SYSLOG_NG_ENABLE_DEBUG
   .debug_flag = &csvparser_debug,
 #endif
   .name = "csvparser",

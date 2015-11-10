@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2013 BalaBit IT Ltd, Budapest, Hungary
- * Copyright (c) 2013 Tihamer Petrovics <tihameri@gmail.com>
+ * Copyright (c) 2002-2014 BalaBit S.a.r.l.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -21,30 +20,35 @@
  *
  */
 
-#include "redis.h"
 #include "cfg-parser.h"
-#include "redis-grammar.h"
+#include "plugin.h"
+#include "plugin-types.h"
 
-extern int redis_debug;
-int redis_parse(CfgLexer *lexer, LogDriver **instance, gpointer arg);
+extern CfgParser filter_rust_parser;
 
-static CfgLexerKeyword redis_keywords[] = {
-  { "redis",			KW_REDIS },
-  { "command",			KW_COMMAND },
-  { "host",			KW_HOST },
-  { "port",			KW_PORT },
-  { NULL }
-};
-
-CfgParser redis_parser =
+static Plugin filter_rust_plugins[] =
 {
-#if SYSLOG_NG_ENABLE_DEBUG
-  .debug_flag = &redis_debug,
-#endif
-  .name = "redis",
-  .keywords = redis_keywords,
-  .parse = (int (*)(CfgLexer *lexer, gpointer *instance, gpointer)) redis_parse,
-  .cleanup = (void (*)(gpointer)) log_pipe_unref,
+  {
+    .type = LL_CONTEXT_FILTER,
+    .name = "rust",
+    .parser = &filter_rust_parser,
+  },
 };
 
-CFG_PARSER_IMPLEMENT_LEXER_BINDING(redis_, LogDriver **)
+gboolean
+filter_rust_module_init(GlobalConfig *cfg, CfgArgs *args)
+{
+  plugin_register(cfg, filter_rust_plugins, G_N_ELEMENTS(filter_rust_plugins));
+  return TRUE;
+}
+
+const ModuleInfo module_info =
+{
+  .canonical_name = "filter_rust",
+  .version = VERSION,
+  .description = "Please fill this description",
+  .core_revision = SOURCE_REVISION,
+  .plugins = filter_rust_plugins,
+  .plugins_len = G_N_ELEMENTS(filter_rust_plugins),
+};
+

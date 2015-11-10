@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2013 BalaBit IT Ltd, Budapest, Hungary
- * Copyright (c) 2013 Tihamer Petrovics <tihameri@gmail.com>
+ * Copyright (c) 2002-2014 BalaBit S.a.r.l.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -21,30 +20,16 @@
  *
  */
 
-#include "redis.h"
+#ifndef FILTER_RUST_PARSER_H_INCLUDED
+#define FILTER_RUST_PARSER_H_INCLUDED
+
 #include "cfg-parser.h"
-#include "redis-grammar.h"
+#include "cfg-lexer.h"
+#include "filter/filter-expr.h"
 
-extern int redis_debug;
-int redis_parse(CfgLexer *lexer, LogDriver **instance, gpointer arg);
+extern CfgParser filter_rust_parser;
 
-static CfgLexerKeyword redis_keywords[] = {
-  { "redis",			KW_REDIS },
-  { "command",			KW_COMMAND },
-  { "host",			KW_HOST },
-  { "port",			KW_PORT },
-  { NULL }
-};
+CFG_PARSER_DECLARE_LEXER_BINDING(filter_rust_, FilterExprNode **)
 
-CfgParser redis_parser =
-{
-#if SYSLOG_NG_ENABLE_DEBUG
-  .debug_flag = &redis_debug,
 #endif
-  .name = "redis",
-  .keywords = redis_keywords,
-  .parse = (int (*)(CfgLexer *lexer, gpointer *instance, gpointer)) redis_parse,
-  .cleanup = (void (*)(gpointer)) log_pipe_unref,
-};
 
-CFG_PARSER_IMPLEMENT_LEXER_BINDING(redis_, LogDriver **)
