@@ -28,8 +28,8 @@
 #include <syslog-ng-config.h>
 
 #if SYSLOG_NG_ENABLE_DEBUG
-#undef SYSLOG_NG_YYDEBUG
-#define SYSLOG_NG_YYDEBUG 1
+#undef YYDEBUG
+#define YYDEBUG 1
 #endif
 
 #include "compat/glib.h"
