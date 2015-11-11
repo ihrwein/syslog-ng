@@ -47,7 +47,7 @@ const ModuleInfo module_info =
   .canonical_name = "filter_rust",
   .version = SYSLOG_NG_VERSION,
   .description = "Please fill this description",
-  .core_revision = SOURCE_REVISION,
+  .core_revision = SYSLOG_NG_SOURCE_REVISION,
   .plugins = filter_rust_plugins,
   .plugins_len = G_N_ELEMENTS(filter_rust_plugins),
 };
