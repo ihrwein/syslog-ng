@@ -1090,7 +1090,9 @@ if test "x$enable_python" != "xno"; then
           ;;
     esac
     PKG_CHECK_MODULES(PYTHON, $with_python >= 2.6, enable_python="yes", enable_python="no")
-    if test "x$enable_python" = "xno"; then
+echo "python CFLAGS=$PYTHON_CFLAGS"
+    AC_CHECK_HEADER(Python.h, [python_h_found=yes], [python_h_found=no])
+    if test "x$enable_python" = "xno" -o "x$python_h_found" = "xno" ; then
       AC_MSG_ERROR([Could not find the requested Python development libraries])
     fi
   else
