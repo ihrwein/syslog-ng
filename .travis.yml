@@ -26,6 +26,7 @@ after_success:
   - lcov --remove coverage.info "lib/cfg-lex.l" -o coverage.info
   - lcov --remove coverage.info "lib/pragma-grammar.y" -o coverage.info
   - lcov --remove coverage.info "modules/afsocket/afsocket-grammar.y" -o coverage.info
+  - lcov --remove coverage.info "lib/parser-expr-grammar.y" -o coverage.info
   - lcov --remove coverage.info "lib/compat/tests/*" -o coverage.info
   - lcov --remove coverage.info "lib/filter/tests/*" -o coverage.info
   - lcov --remove coverage.info "lib/logproto/tests/*" -o coverage.info
