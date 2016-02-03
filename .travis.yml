@@ -24,6 +24,7 @@ compiler:
   - gcc
   - clang
 after_success:
+  - rm libtest/*.gc* # HACK, otherwise lcov/gcov reports Out of memory! error
   - lcov -c --config-file=.lcovrc --directory . --output-file coverage.info
   - lcov --config-file=.lcovrc --remove coverage.info "lib/cfg-lex.l" -o coverage.info
   - lcov --config-file=.lcovrc --remove coverage.info "lib/pragma-grammar.y" -o coverage.info
