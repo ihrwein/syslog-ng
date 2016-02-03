@@ -19,7 +19,7 @@ before_script:
   - make -j || make V=1 # to make error messages more readable on error
   - make check
 script:
-  - lcov --config-file=.lcovrc --ignore-errors --directory . --capture --output-file coverage.info
+  - lcov -c --config-file=.lcovrc --directory . --output-file coverage.info
   - lcov --config-file=.lcovrc --remove coverage.info "lib/cfg-lex.l" -o coverage.info
   - lcov --config-file=.lcovrc --remove coverage.info "lib/pragma-grammar.y" -o coverage.info
   - lcov --config-file=.lcovrc --remove coverage.info "modules/afsocket/afsocket-grammar.y" -o coverage.info
