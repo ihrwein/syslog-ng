@@ -157,6 +157,8 @@ set(SOURCES
     utf8utils.c
     host-id.c)
 
+bison_target(cfg-grammar cfg-grammar.y cfg-grammar.h)
+
 add_subdirectory(compat)
 add_subdirectory(control)
 add_subdirectory(filter)
