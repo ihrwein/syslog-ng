@@ -24,8 +24,9 @@ set(FILTER_SOURCES
 	filter-re.c
 	filter-pri.c
 	filter-pipe.c
-	filter-expr-parser.c
-	filter-expr-grammar.y)
+	filter-expr-parser.c)
+
+bison_target(filter-expr-grammar filter-expr-grammar.y filter-expr-grammar.c)
 
 add_library(filter OBJECT ${FILTER_SOURCES} ${FILTER_HEADERS})
 
