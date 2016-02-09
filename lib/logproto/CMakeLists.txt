@@ -1,7 +1,7 @@
 set(LOGPROTO_HEADERS
     logproto-client.h
     logproto-server.h
-    logproto-buffered-server.h 
+    logproto-buffered-server.h
     logproto-dgram-server.h
     logproto-framed-client.h
     logproto-framed-server.h
@@ -20,11 +20,11 @@ set(LOGPROTO_SOURCES
     logproto-dgram-server.c
     logproto-framed-client.c
     logproto-framed-server.c
-    logproto-text-client.c 
+    logproto-text-client.c
     logproto-text-server.c
     logproto-indented-multiline-server.c
-    logproto-regexp-multiline-server.c 
-    logproto-record-server.c 
+    logproto-regexp-multiline-server.c
+    logproto-record-server.c
     logproto-builtins.c)
 
-add_library(syslog-ng ${LOGMSG_SOURCES} ${LOGMSG_HEADERS})
+add_library(logproto OBJECT ${LOGMSG_SOURCES} ${LOGMSG_HEADERS})

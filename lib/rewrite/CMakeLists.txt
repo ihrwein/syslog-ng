@@ -14,7 +14,7 @@ set(REWRITE_SOURCES
 	rewrite-expr-parser.c
 	rewrite-groupset.c)
 
-add_library(syslog-ng ${REWRITE_SOURCES} ${REWRITE_HEADERS})
+add_library(rewrite OBJECT ${REWRITE_SOURCES} ${REWRITE_HEADERS})
 
 #BUILT_SOURCES += 				\
 #	lib/rewrite/rewrite-expr-grammar.y	\

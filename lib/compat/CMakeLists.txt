@@ -16,4 +16,4 @@ set(COMPAT_SOURCES
 	strcasestr.c
 	strtok_r.c)
 
-add_library(syslog-ng ${COMPAT_SOURCES} ${COMPAT_HEADERS})
+add_library(compat OBJECT ${COMPAT_SOURCES} ${COMPAT_HEADERS})

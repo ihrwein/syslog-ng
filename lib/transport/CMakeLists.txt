@@ -16,4 +16,4 @@ set(TRANSPORT_SOURCES
 	transport-socket.c
 	transport-tls.c)
 
-add_library(syslog-ng ${TRANSPORT_SOURCES} ${TRANSPORT_HEADERS})
+add_library(transport OBJECT ${TRANSPORT_SOURCES} ${TRANSPORT_HEADERS})

@@ -169,6 +169,19 @@ add_subdirectory(template)
 add_subdirectory(transport)
 add_subdirectory(value-pairs)
 
-add_library(syslog-ng ${SOURCES} ${HEADERS})
+set(OBJECTS
+    $<TARGET_OBJECTS:compat>
+    $<TARGET_OBJECTS:control>
+    $<TARGET_OBJECTS:filter>
+    $<TARGET_OBJECTS:logmsg>
+    $<TARGET_OBJECTS:logproto>
+    $<TARGET_OBJECTS:parser>
+    $<TARGET_OBJECTS:rewrite>
+    $<TARGET_OBJECTS:stats>
+    $<TARGET_OBJECTS:template>
+    $<TARGET_OBJECTS:transport>
+    $<TARGET_OBJECTS:value-pairs>)
+
+add_library(syslog-ng ${SOURCES} ${HEADERS} ${OBJECTS})
 
 target_include_directories(syslog-ng PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
