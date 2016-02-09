@@ -27,7 +27,7 @@ set(FILTER_SOURCES
 	filter-expr-parser.c
 	filter-expr-grammar.y)
 
-add_library(syslog-ng ${FILTER_SOURCES} ${FILTER_HEADERS})
+add_library(filter OBJECT ${FILTER_SOURCES} ${FILTER_HEADERS})
 
 #BUILT_SOURCES += 				\
 #	lib/filter/filter-expr-grammar.y	\

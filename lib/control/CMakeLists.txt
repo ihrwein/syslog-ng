@@ -8,4 +8,4 @@ set(CONTROL_SOURCES
   control-server-unix.c
 )
 
-add_library(syslog-ng ${CONTROL_SOURCES} ${CONTROL_HEADERS})
+add_library(control OBJECT ${CONTROL_SOURCES} ${CONTROL_HEADERS})
