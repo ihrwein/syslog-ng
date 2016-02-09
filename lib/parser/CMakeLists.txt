@@ -4,8 +4,9 @@ set(PARSER_HEADERS
 
 set(PARSER_SOURCES
     parser-expr.c
-    parser-expr-parser.c
-    parser-expr-grammar.y)
+    parser-expr-parser.c)
+
+bison_target(parser-expr-grammar parser-expr-grammar.y parser-expr-grammar.c)
 
 add_library(parser OBJECT ${PARSER_HEADERS} ${PARSER_SOURCES})
 
