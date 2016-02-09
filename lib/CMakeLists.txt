@@ -1,0 +1,174 @@
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+set (HEADERS
+    afinter.h
+    alarms.h
+    apphook.h
+    atomic.h
+    block-ref-parser.h
+    cache.h
+    cfg.h
+    cfg-grammar.h
+    cfg-lexer.h
+    cfg-lexer-subst.h
+    cfg-args.h
+    cfg-parser.h
+    cfg-tree.h
+    children.h
+    crypto.h
+    dnscache.h
+    driver.h
+    fdhelpers.h
+    file-perms.h
+    find-crlf.h
+    gprocess.h
+    gsockaddr.h
+    gsocket.h
+    hostname.h
+    host-resolve.h
+    logmatcher.h
+    logmpx.h
+    logpipe.h
+    logqueue-fifo.h
+    logqueue.h
+    logreader.h
+    logsource.h
+    logstamp.h
+    logthrdestdrv.h
+    logwriter.h
+    mainloop.h
+    mainloop-call.h
+    mainloop-worker.h
+    mainloop-io-worker.h
+    module-config.h
+    memtrace.h
+    messages.h
+    ml-batched-timer.h
+    msg-format.h
+    parse-number.h
+    pathutils.h
+    persist-state.h
+    persistable-state-header.h
+    persistable-state-presenter.h
+    plugin.h
+    plugin-types.h
+    poll-events.h
+    poll-fd-events.h
+    pragma-parser.h
+    presented-persistable-state.h
+    reloc.h
+    rcptid.h
+    run-id.h
+    scratch-buffers.h
+    serialize.h
+    service-management.h
+    seqnum.h
+    str-format.h
+    str-utils.h
+    syslog-names.h
+    syslog-ng.h
+    string-list.h
+    tags.h
+    timeutils.h
+    tls-support.h
+    thread-utils.h
+    tlscontext.h
+    type-hinting.h
+    uuid.h
+    userdb.h
+    utf8utils.h
+    versioning.h
+    bookmark.h
+    ringbuffer.h
+    ack_tracker.h
+    host-id.h)
+
+set(SOURCES
+    afinter.c
+    alarms.c
+    apphook.c
+    block-ref-parser.c
+    cache.c
+    cfg.c
+    cfg-args.c
+    cfg-lexer.c
+    cfg-lexer-subst.c
+    cfg-parser.c
+    cfg-tree.c
+    children.c
+    dnscache.c
+    driver.c
+    fdhelpers.c
+    file-perms.c
+    find-crlf.c
+    globals.c
+    gprocess.c
+    gsockaddr.c
+    gsocket.c
+    hostname.c
+    host-resolve.c
+    logmatcher.c
+    logmpx.c
+    logpipe.c
+    logqueue.c
+    logqueue-fifo.c
+    logreader.c
+    logsource.c
+    logstamp.c
+    logthrdestdrv.c
+    logwriter.c
+    mainloop.c
+    mainloop-call.c
+    mainloop-worker.c
+    mainloop-io-worker.c
+    module-config.c
+    memtrace.c
+    messages.c
+    ml-batched-timer.c
+    msg-format.c
+    parse-number.c
+    pathutils.c
+    persist-state.c
+    plugin.c
+    poll-events.c
+    poll-fd-events.c
+    pragma-parser.c
+    persistable-state-presenter.c
+    rcptid.c
+    reloc.c
+    run-id.c
+    scratch-buffers.c
+    serialize.c
+    service-management.c
+    str-format.c
+    str-utils.c
+    syslog-names.c
+    string-list.c
+    tags.c
+    timeutils.c
+    type-hinting.c
+    ringbuffer.c
+    late_ack_tracker.c
+    early_ack_tracker.c
+    crypto.c
+    tlscontext.c
+    uuid.c
+    userdb.c
+    utf8utils.c
+    host-id.c)
+
+add_subdirectory(compat)
+add_subdirectory(control)
+add_subdirectory(filter)
+add_subdirectory(logmsg)
+add_subdirectory(logproto)
+add_subdirectory(parser)
+add_subdirectory(rewrite)
+add_subdirectory(stats)
+add_subdirectory(template)
+add_subdirectory(transport)
+add_subdirectory(value-pairs)
+
+add_library(syslog-ng ${SOURCES} ${HEADERS})
+
+target_include_directories(syslog-ng PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
