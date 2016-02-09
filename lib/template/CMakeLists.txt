@@ -1,0 +1,21 @@
+set(TEMPLATE_HEADERS
+    templates.h
+    macros.h
+    function.h
+    simple-function.h
+    repr.h
+    compiler.h
+    user-function.h
+    escaping.h
+    common-template-typedefs.h)
+
+set(TEMPLATE_SOURCES
+    templates.c
+    macros.c
+    simple-function.c
+    repr.c
+    compiler.c
+    user-function.c
+    escaping.c)
+
+add_library(syslog-ng ${TEMPLATE_SOURCES} ${TEMPLATE_HEADERS})
