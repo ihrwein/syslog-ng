@@ -10,4 +10,4 @@ set(VALUE_PAIRS_SOURCES
     cmdline.c
     evttag.c)
 
-add_library(syslog-ng ${VALUE_PAIRS_SOURCES} ${VALUE_PAIRS_HEADERS})
+add_library(value-pairs OBJECT ${VALUE_PAIRS_SOURCES} ${VALUE_PAIRS_HEADERS})

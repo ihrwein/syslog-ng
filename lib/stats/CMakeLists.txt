@@ -16,4 +16,4 @@ set(STATS_SOURCES
     stats-registry.c
     stats-syslog.c)
 
-add_library(syslog-ng ${STATS_SOURCES} ${STATS_HEADERS})
+add_library(stats OBJECT ${STATS_SOURCES} ${STATS_HEADERS})

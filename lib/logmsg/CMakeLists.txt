@@ -19,4 +19,4 @@ set(LOGMSG_SOURCES
     tags-serialize.c
     timestamp-serialize.c)
 
-add_library(syslog-ng ${LOGMSG_SOURCES} ${LOGMSG_HEADERS})
+add_library(logmsg OBJECT ${LOGMSG_SOURCES} ${LOGMSG_HEADERS})

@@ -7,7 +7,7 @@ set(PARSER_SOURCES
     parser-expr-parser.c
     parser-expr-grammar.y)
 
-add_library(syslog-ng ${PARSER_HEADERS} ${PARSER_SOURCES})
+add_library(parser OBJECT ${PARSER_HEADERS} ${PARSER_SOURCES})
 
 #BUILT_SOURCES +=                 \
 #    lib/parser/parser-expr-grammar.y    \

@@ -18,4 +18,4 @@ set(TEMPLATE_SOURCES
     user-function.c
     escaping.c)
 
-add_library(syslog-ng ${TEMPLATE_SOURCES} ${TEMPLATE_HEADERS})
+add_library(template OBJECT ${TEMPLATE_SOURCES} ${TEMPLATE_HEADERS})
