@@ -11,5 +11,3 @@ set(VALUE_PAIRS_SOURCES
     lib/value-pairs/cmdline.c
     lib/value-pairs/evttag.c
     PARENT_SCOPE)
-
-add_library(value-pairs OBJECT ${VALUE_PAIRS_SOURCES} ${VALUE_PAIRS_HEADERS})
