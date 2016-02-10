@@ -10,11 +10,13 @@ find_package(BISON 2.4 REQUIRED)
 
 find_package(Glib 2.10.1 REQUIRED)
 include_directories (SYSTEM ${Glib_INCLUDE_DIRS})
+pkg_check_modules(IVYKIS REQUIRED ivykis)
+include_directories (SYSTEM ${IVYKIS_INCLUDE_DIRS})
 
 add_subdirectory(lib)
 
 add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
-target_link_libraries (syslog-ng ${Glib_LIBRARIES})
+target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES})
 
 include (CheckIncludeFiles)
 
