@@ -172,6 +172,3 @@ set(LIB_SOURCES
     PARENT_SCOPE)
 
 bison_target(cfg-grammar cfg-grammar.y cfg-grammar.h)
-
-
-include_directories (${CMAKE_CURRENT_SOURCE_DIR})
