@@ -10,4 +10,9 @@ find_package(BISON 2.4 REQUIRED)
 add_subdirectory(lib)
 
 add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
+
+include (CheckIncludeFiles)
+
+include_directories (SYSTEM ${CMAKE_CURRENT_BINARY_DIR})
 include_directories (SYSTEM "${CMAKE_SOURCE_DIR}/lib")
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/syslog-ng-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/syslog-ng-config.h)
