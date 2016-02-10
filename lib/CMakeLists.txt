@@ -1,3 +1,15 @@
+add_subdirectory(compat)
+add_subdirectory(control)
+add_subdirectory(filter)
+add_subdirectory(logmsg)
+add_subdirectory(logproto)
+add_subdirectory(parser)
+add_subdirectory(rewrite)
+add_subdirectory(stats)
+add_subdirectory(template)
+add_subdirectory(transport)
+add_subdirectory(value-pairs)
+
 set (LIB_HEADERS
     lib/afinter.h
     lib/alarms.h
@@ -159,16 +171,5 @@ set(LIB_SOURCES
 
 bison_target(cfg-grammar cfg-grammar.y cfg-grammar.h)
 
-add_subdirectory(compat)
-add_subdirectory(control)
-add_subdirectory(filter)
-add_subdirectory(logmsg)
-add_subdirectory(logproto)
-add_subdirectory(parser)
-add_subdirectory(rewrite)
-add_subdirectory(stats)
-add_subdirectory(template)
-add_subdirectory(transport)
-add_subdirectory(value-pairs)
 
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
