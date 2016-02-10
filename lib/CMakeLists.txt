@@ -92,6 +92,7 @@ set (LIB_HEADERS
     lib/ringbuffer.h
     lib/ack_tracker.h
     lib/host-id.h
+    ${COMPAT_HEADERS}
     PARENT_SCOPE)
 
 set(LIB_SOURCES
@@ -167,6 +168,7 @@ set(LIB_SOURCES
     lib/userdb.c
     lib/utf8utils.c
     lib/host-id.c
+    ${COMPAT_SOURCES}
     PARENT_SCOPE)
 
 bison_target(cfg-grammar cfg-grammar.y cfg-grammar.h)
