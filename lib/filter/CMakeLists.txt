@@ -1,30 +1,32 @@
 set(FILTER_HEADERS
-	filter-expr.h
-	filter-op.h
-	filter-cmp.h
-	filter-in-list.h
-	filter-tags.h
-	filter-netmask.h
-	filter-netmask6.h
-	filter-call.h
-	filter-re.h
-	filter-pri.h
-	filter-pipe.h
-	filter-expr-parser.h)
+	lib/filter/filter-expr.h
+	lib/filter/filter-op.h
+	lib/filter/filter-cmp.h
+	lib/filter/filter-in-list.h
+	lib/filter/filter-tags.h
+	lib/filter/filter-netmask.h
+	lib/filter/filter-netmask6.h
+	lib/filter/filter-call.h
+	lib/filter/filter-re.h
+	lib/filter/filter-pri.h
+	lib/filter/filter-pipe.h
+	lib/filter/filter-expr-parser.h
+	PARENT_SCOPE)
 
 set(FILTER_SOURCES
-	filter-expr.c
-	filter-op.c
-	filter-cmp.c
-	filter-in-list.c
-	filter-tags.c
-	filter-netmask.c
-	filter-netmask6.c
-	filter-call.c
-	filter-re.c
-	filter-pri.c
-	filter-pipe.c
-	filter-expr-parser.c)
+	lib/filter/filter-expr.c
+	lib/filter/filter-op.c
+	lib/filter/filter-cmp.c
+	lib/filter/filter-in-list.c
+	lib/filter/filter-tags.c
+	lib/filter/filter-netmask.c
+	lib/filter/filter-netmask6.c
+	lib/filter/filter-call.c
+	lib/filter/filter-re.c
+	lib/filter/filter-pri.c
+	lib/filter/filter-pipe.c
+	lib/filter/filter-expr-parser.c
+	PARENT_SCOPE)
 
 bison_target(filter-expr-grammar filter-expr-grammar.y filter-expr-grammar.c)
 

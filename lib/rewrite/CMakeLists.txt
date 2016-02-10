@@ -1,18 +1,20 @@
 set(REWRITE_HEADERS
-	rewrite-expr.h
-	rewrite-set-tag.h
-	rewrite-set.h
-	rewrite-subst.h
-	rewrite-expr-parser.h
-	rewrite-groupset.h)
+	lib/rewrite/rewrite-expr.h
+	lib/rewrite/rewrite-set-tag.h
+	lib/rewrite/rewrite-set.h
+	lib/rewrite/rewrite-subst.h
+	lib/rewrite/rewrite-expr-parser.h
+	lib/rewrite/rewrite-groupset.h
+	PARENT_SCOPE)
 
 set(REWRITE_SOURCES
-	rewrite-expr.c
-	rewrite-set-tag.c
-	rewrite-set.c
-	rewrite-subst.c
-	rewrite-expr-parser.c
-	rewrite-groupset.c)
+	lib/rewrite/rewrite-expr.c
+	lib/rewrite/rewrite-set-tag.c
+	lib/rewrite/rewrite-set.c
+	lib/rewrite/rewrite-subst.c
+	lib/rewrite/rewrite-expr-parser.c
+	lib/rewrite/rewrite-groupset.c
+	PARENT_SCOPE)
 
 #BUILT_SOURCES += 				\
 #	lib/rewrite/rewrite-expr-grammar.y	\

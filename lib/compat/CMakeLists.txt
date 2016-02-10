@@ -6,7 +6,8 @@ set(COMPAT_HEADERS
 	lib/compat/pio.h
 	lib/compat/socket.h
 	lib/compat/string.h
-  lib/compat/time.h)
+  lib/compat/time.h
+	PARENT_SCOPE)
 
 set(COMPAT_SOURCES
 	lib/compat/getutent.c
@@ -14,4 +15,5 @@ set(COMPAT_SOURCES
 	lib/compat/memrchr.c
 	lib/compat/pio.c
 	lib/compat/strcasestr.c
-  lib/compat/strtok_r.c)
+  lib/compat/strtok_r.c
+	PARENT_SCOPE)
