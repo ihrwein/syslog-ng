@@ -18,5 +18,3 @@ set(LOGMSG_SOURCES
     sdata-serialize.c
     tags-serialize.c
     timestamp-serialize.c)
-
-add_library(logmsg OBJECT ${LOGMSG_SOURCES} ${LOGMSG_HEADERS})

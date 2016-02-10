@@ -15,5 +15,3 @@ set(TRANSPORT_SOURCES
 	transport-device.c
 	transport-socket.c
 	transport-tls.c)
-
-add_library(transport OBJECT ${TRANSPORT_SOURCES} ${TRANSPORT_HEADERS})

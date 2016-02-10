@@ -15,5 +15,3 @@ set(COMPAT_SOURCES
 	pio.c
 	strcasestr.c
 	strtok_r.c)
-
-add_library(compat OBJECT ${COMPAT_SOURCES} ${COMPAT_HEADERS})

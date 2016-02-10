@@ -8,8 +8,6 @@ set(PARSER_SOURCES
 
 bison_target(parser-expr-grammar parser-expr-grammar.y parser-expr-grammar.c)
 
-add_library(parser OBJECT ${PARSER_HEADERS} ${PARSER_SOURCES})
-
 #BUILT_SOURCES +=                 \
 #    lib/parser/parser-expr-grammar.y    \
 #    lib/parser/parser-expr-grammar.c    \

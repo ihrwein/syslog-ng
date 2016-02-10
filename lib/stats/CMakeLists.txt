@@ -15,5 +15,3 @@ set(STATS_SOURCES
     stats-log.c
     stats-registry.c
     stats-syslog.c)
-
-add_library(stats OBJECT ${STATS_SOURCES} ${STATS_HEADERS})

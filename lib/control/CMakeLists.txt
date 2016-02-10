@@ -7,5 +7,3 @@ set(CONTROL_SOURCES
 	control-server.c
   control-server-unix.c
 )
-
-add_library(control OBJECT ${CONTROL_SOURCES} ${CONTROL_HEADERS})
