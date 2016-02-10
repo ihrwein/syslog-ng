@@ -8,4 +8,6 @@ set (SYSLOG_NG_VERSION_PATH alpha0)
 find_package(BISON 2.4 REQUIRED)
 
 add_subdirectory(lib)
+
+add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
 include_directories (SYSTEM "${CMAKE_SOURCE_DIR}/lib")
