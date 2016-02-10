@@ -1,20 +1,22 @@
 set(LOGMSG_HEADERS
-    gsockaddr-serialize.h
-    logmsg.h
-    logmsg-serialize.h
-    nvtable.h
-    nvtable-serialize.h
-    nvtable-serialize-endianutils.h
-    sdata-serialize.h
-    tags-serialize.h
-    timestamp-serialize.h)
+    lib/logmsg/gsockaddr-serialize.h
+    lib/logmsg/logmsg.h
+    lib/logmsg/logmsg-serialize.h
+    lib/logmsg/nvtable.h
+    lib/logmsg/nvtable-serialize.h
+    lib/logmsg/nvtable-serialize-endianutils.h
+    lib/logmsg/sdata-serialize.h
+    lib/logmsg/tags-serialize.h
+    lib/logmsg/timestamp-serialize.h
+    PARENT_SCOPE)
 
 set(LOGMSG_SOURCES
-    gsockaddr-serialize.c
-    logmsg.c
-    logmsg-serialize.c
-    nvtable.c
-    nvtable-serialize.c
-    sdata-serialize.c
-    tags-serialize.c
-    timestamp-serialize.c)
+    lib/logmsg/gsockaddr-serialize.c
+    lib/logmsg/logmsg.c
+    lib/logmsg/logmsg-serialize.c
+    lib/logmsg/nvtable.c
+    lib/logmsg/nvtable-serialize.c
+    lib/logmsg/sdata-serialize.c
+    lib/logmsg/tags-serialize.c
+    lib/logmsg/timestamp-serialize.c
+    PARENT_SCOPE)

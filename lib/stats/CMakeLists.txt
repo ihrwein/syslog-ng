@@ -1,17 +1,19 @@
 set(STATS_HEADERS
-    stats.h
-    stats-counter.h
-    stats-cluster.h
-    stats-csv.h
-    stats-log.h
-    stats-registry.h
-    stats-syslog.h)
+    lib/stats/stats.h
+    lib/stats/stats-counter.h
+    lib/stats/stats-cluster.h
+    lib/stats/stats-csv.h
+    lib/stats/stats-log.h
+    lib/stats/stats-registry.h
+    lib/stats/stats-syslog.h
+    PARENT_SCOPE)
 
 set(STATS_SOURCES
-    stats.c
-    stats-counter.c
-    stats-cluster.c
-    stats-csv.c
-    stats-log.c
-    stats-registry.c
-    stats-syslog.c)
+    lib/stats/stats.c
+    lib/stats/stats-counter.c
+    lib/stats/stats-cluster.c
+    lib/stats/stats-csv.c
+    lib/stats/stats-log.c
+    lib/stats/stats-registry.c
+    lib/stats/stats-syslog.c
+    PARENT_SCOPE)

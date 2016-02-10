@@ -1,10 +1,12 @@
 set(PARSER_HEADERS
-    parser-expr.h
-    parser-expr-parser.h)
+    lib/parser/parser-expr.h
+    lib/parser/parser-expr-parser.h
+    PARENT_SCOPE)
 
 set(PARSER_SOURCES
-    parser-expr.c
-    parser-expr-parser.c)
+    lib/parser/parser-expr.c
+    lib/parser/parser-expr-parser.c
+    PARENT_SCOPE)
 
 bison_target(parser-expr-grammar parser-expr-grammar.y parser-expr-grammar.c)
 

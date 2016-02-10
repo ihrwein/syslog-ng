@@ -1,19 +1,21 @@
 set(TEMPLATE_HEADERS
-    templates.h
-    macros.h
-    function.h
-    simple-function.h
-    repr.h
-    compiler.h
-    user-function.h
-    escaping.h
-    common-template-typedefs.h)
+    lib/template/templates.h
+    lib/template/macros.h
+    lib/template/function.h
+    lib/template/simple-function.h
+    lib/template/repr.h
+    lib/template/compiler.h
+    lib/template/user-function.h
+    lib/template/escaping.h
+    lib/template/common-template-typedefs.h
+    PARENT_SCOPE)
 
 set(TEMPLATE_SOURCES
-    templates.c
-    macros.c
-    simple-function.c
-    repr.c
-    compiler.c
-    user-function.c
-    escaping.c)
+    lib/template/templates.c
+    lib/template/macros.c
+    lib/template/simple-function.c
+    lib/template/repr.c
+    lib/template/compiler.c
+    lib/template/user-function.c
+    lib/template/escaping.c
+    PARENT_SCOPE)
