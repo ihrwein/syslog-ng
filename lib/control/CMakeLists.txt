@@ -1,9 +1,10 @@
 set(CONTROL_HEADERS
-	control.h
-	control-server.h)
+	lib/control/control.h
+	lib/control/control-server.h
+	PARENT_SCOPE)
 
 set(CONTROL_SOURCES
-	control.c
-	control-server.c
-  control-server-unix.c
-)
+	lib/control/control.c
+	lib/control/control-server.c
+  lib/control/control-server-unix.c
+	PARENT_SCOPE)
