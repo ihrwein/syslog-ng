@@ -14,6 +14,7 @@ include_directories (SYSTEM ${Glib_INCLUDE_DIRS})
 add_subdirectory(lib)
 
 add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
+target_link_libraries (syslog-ng ${Glib_LIBRARIES})
 
 include (CheckIncludeFiles)
 
