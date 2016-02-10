@@ -1,17 +1,17 @@
 set(COMPAT_HEADERS
-	compat.h
-	getutent.h
-	glib.h
-	lfs.h
-	pio.h
-	socket.h
-	string.h
-	time.h)
+	lib/compat/compat.h
+	lib/compat/getutent.h
+	lib/compat/glib.h
+	lib/compat/lfs.h
+	lib/compat/pio.h
+	lib/compat/socket.h
+	lib/compat/string.h
+  lib/compat/time.h)
 
 set(COMPAT_SOURCES
-	getutent.c
-	inet_aton.c
-	memrchr.c
-	pio.c
-	strcasestr.c
-	strtok_r.c)
+	lib/compat/getutent.c
+	lib/compat/inet_aton.c
+	lib/compat/memrchr.c
+	lib/compat/pio.c
+	lib/compat/strcasestr.c
+  lib/compat/strtok_r.c)
