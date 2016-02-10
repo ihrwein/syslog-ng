@@ -171,19 +171,29 @@ add_subdirectory(template)
 add_subdirectory(transport)
 add_subdirectory(value-pairs)
 
-set(OBJECTS
-    $<TARGET_OBJECTS:compat>
-    $<TARGET_OBJECTS:control>
-    $<TARGET_OBJECTS:filter>
-    $<TARGET_OBJECTS:logmsg>
-    $<TARGET_OBJECTS:logproto>
-    $<TARGET_OBJECTS:parser>
-    $<TARGET_OBJECTS:rewrite>
-    $<TARGET_OBJECTS:stats>
-    $<TARGET_OBJECTS:template>
-    $<TARGET_OBJECTS:transport>
-    $<TARGET_OBJECTS:value-pairs>)
-
-add_library(syslog-ng ${SOURCES} ${HEADERS} ${OBJECTS})
+add_library(syslog-ng
+    ${SOURCES} ${HEADERS}
+    ${COMPAT_SOURCES}
+    ${COMPAT_HEADERS}
+    ${CONTROL_SOURCES}
+    ${CONTROL_HEADERS}
+    ${FILTER_SOURCES}
+    ${FILTER_HEADERS}
+    ${LOGMSG_SOURCES}
+    ${LOGMSG_HEADERS}
+    ${LOGPROTO_SOURCES}
+    ${LOGPROTO_HEADERS}
+    ${PARSER_SOURCES}
+    ${PARSER_HEADERS}
+    ${REWRITE_SOURCES}
+    ${REWRITE_HEADERS}
+    ${STATS_SOURCES}
+    ${STATS_HEADERS}
+    ${TEMPLATE_SOURCES}
+    ${TEMPLATE_HEADERS}
+    ${TRANSPORT_SOURCES}
+    ${TRANSPORT_HEADERS}
+    ${VALUE_PAIRS_SOURCES}
+    ${VALUE_PAIRS_HEADERS})
 
 target_include_directories(syslog-ng PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -26,5 +26,3 @@ set(LOGPROTO_SOURCES
     logproto-regexp-multiline-server.c
     logproto-record-server.c
     logproto-builtins.c)
-
-add_library(logproto OBJECT ${LOGMSG_SOURCES} ${LOGMSG_HEADERS})

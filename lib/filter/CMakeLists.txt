@@ -28,8 +28,6 @@ set(FILTER_SOURCES
 
 bison_target(filter-expr-grammar filter-expr-grammar.y filter-expr-grammar.c)
 
-add_library(filter OBJECT ${FILTER_SOURCES} ${FILTER_HEADERS})
-
 #BUILT_SOURCES += 				\
 #	lib/filter/filter-expr-grammar.y	\
 #	lib/filter/filter-expr-grammar.c	\
