@@ -93,6 +93,15 @@ set (LIB_HEADERS
     lib/ack_tracker.h
     lib/host-id.h
     ${COMPAT_HEADERS}
+    ${CONTROL_HEADERS}
+    ${FILTER_HEADERS}
+    ${LOGMSG_HEADERS}
+    ${LOGPROTO_HEADERS}
+    ${PARSER_HEADERS}
+    ${REWRITE_HEADERS}
+    ${STATS_HEADERS}
+    ${TEMPLATE_HEADERS}
+    ${VALUE_PAIRS_HEADERS}
     PARENT_SCOPE)
 
 set(LIB_SOURCES
@@ -169,6 +178,15 @@ set(LIB_SOURCES
     lib/utf8utils.c
     lib/host-id.c
     ${COMPAT_SOURCES}
+    ${CONTROL_SOURCES}
+    ${FILTER_SOURCES}
+    ${LOGMSG_SOURCES}
+    ${LOGPROTO_SOURCES}
+    ${PARSER_SOURCES}
+    ${REWRITE_SOURCES}
+    ${STATS_SOURCES}
+    ${TEMPLATE_SOURCES}
+    ${VALUE_PAIRS_SOURCES}
     PARENT_SCOPE)
 
 bison_target(cfg-grammar cfg-grammar.y cfg-grammar.h)
