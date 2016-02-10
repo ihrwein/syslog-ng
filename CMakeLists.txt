@@ -7,6 +7,7 @@ set (SYSLOG_NG_VERSION_MINOR 8)
 set (SYSLOG_NG_VERSION_PATH alpha0)
 
 find_package(BISON 2.4 REQUIRED)
+find_package(Glib 2.10.1 REQUIRED)
 
 add_subdirectory(lib)
 
