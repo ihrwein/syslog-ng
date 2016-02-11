@@ -102,6 +102,8 @@ set (LIB_HEADERS
     ${STATS_HEADERS}
     ${TEMPLATE_HEADERS}
     ${VALUE_PAIRS_HEADERS}
+    ${BISON_BlockRefGrammar_OUTPUT_HEADER}
+    ${BISON_CfgGrammar_OUTPUT_HEADER}
     PARENT_SCOPE)
 
 set(LIB_SOURCES
@@ -187,6 +189,15 @@ set(LIB_SOURCES
     ${STATS_SOURCES}
     ${TEMPLATE_SOURCES}
     ${VALUE_PAIRS_SOURCES}
+    ${BISON_BlockRefGrammar_OUTPUT_SOURCE}
+    ${BISON_CfgGrammar_OUTPUT_SOURCE}
+    ${FLEX_CfgLexer_OUTPUTS}
     PARENT_SCOPE)
 
-bison_target(cfg-grammar cfg-grammar.y cfg-grammar.h)
+flex_target(CfgLexer lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/cfg-lex.c)
+
+bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.c)
+add_flex_bison_dependency(CfgLexer CfgGrammar)
+
+bison_target(BlockRefGrammar lib/block-ref-grammar.ym ${CMAKE_CURRENT_BINARY_DIR}/block-ref-grammar.c)
+add_flex_bison_dependency(CfgLexer BlockRefGrammar)
