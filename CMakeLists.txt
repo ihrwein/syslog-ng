@@ -14,14 +14,16 @@ pkg_check_modules(IVYKIS REQUIRED ivykis)
 include_directories (SYSTEM ${IVYKIS_INCLUDE_DIRS})
 pkg_check_modules(EVENTLOG REQUIRED eventlog)
 include_directories (SYSTEM ${EVENTLOG_INCLUDE_DIRS})
+find_package(FLEX REQUIRED)
 
 add_subdirectory(lib)
 
 add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
-target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES} ${EVENTLOG_LIBRARIES})
+target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES} ${EVENTLOG_LIBRARIES} ${FLEX_LIBRARIES} ${BISON_LIBRARIES})
 
 include (CheckIncludeFiles)
 
 include_directories (SYSTEM ${CMAKE_CURRENT_BINARY_DIR})
+include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (SYSTEM "${CMAKE_SOURCE_DIR}/lib")
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/syslog-ng-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/syslog-ng-config.h)
