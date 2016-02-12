@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 2.8.12)
 project (syslog-ng)
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+set (BISON_FLAGS "-Wno-other")
 
 set (SYSLOG_NG_VERSION_MAJOR 3)
 set (SYSLOG_NG_VERSION_MINOR 8)
@@ -23,10 +24,10 @@ find_package(FLEX REQUIRED)
 flex_target(CfgLexer lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c COMPILE_FLAGS --header-file=${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h GENERATED)
 
-bison_target(BlockRefGrammar lib/block-ref-grammar.ym ${CMAKE_CURRENT_BINARY_DIR}/lib/block-ref-grammar.c)
+bison_target(BlockRefGrammar lib/block-ref-grammar.ym ${CMAKE_CURRENT_BINARY_DIR}/lib/block-ref-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer BlockRefGrammar)
 
-bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-grammar.c)
+bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer CfgGrammar)
 
 add_subdirectory(lib)
