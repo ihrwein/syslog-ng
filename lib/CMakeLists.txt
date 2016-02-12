@@ -18,7 +18,6 @@ set (LIB_HEADERS
     lib/block-ref-parser.h
     lib/cache.h
     lib/cfg.h
-    lib/cfg-grammar.h
     lib/cfg-lexer.h
     lib/cfg-lexer-subst.h
     lib/cfg-args.h
@@ -194,10 +193,3 @@ set(LIB_SOURCES
     ${FLEX_CfgLexer_OUTPUTS}
     PARENT_SCOPE)
 
-flex_target(CfgLexer lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/cfg-lex.c)
-
-bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.c)
-add_flex_bison_dependency(CfgLexer CfgGrammar)
-
-bison_target(BlockRefGrammar lib/block-ref-grammar.ym ${CMAKE_CURRENT_BINARY_DIR}/block-ref-grammar.c)
-add_flex_bison_dependency(CfgLexer BlockRefGrammar)
