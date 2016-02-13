@@ -38,10 +38,13 @@ pkg_check_modules(EVENTLOG REQUIRED eventlog)
 include_directories (SYSTEM ${EVENTLOG_INCLUDE_DIRS})
 find_package(FLEX REQUIRED)
 
-add_custom_command (OUTPUT ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.y
-    COMMAND ${CMAKE_SOURCE_DIR}/lib/merge-grammar.pl ${CMAKE_SOURCE_DIR}/lib/block-ref-grammar.ym > ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.y
-    DEPENDS ${CMAKE_SOURCE_DIR}/lib/cfg-grammar.y)
+function(generate_y_from_ym FileWoExt)
+    add_custom_command (OUTPUT ${CMAKE_BINARY_DIR}/${FileWoExt}.y
+        COMMAND ${CMAKE_SOURCE_DIR}/lib/merge-grammar.pl ${CMAKE_SOURCE_DIR}/${FileWoExt}.ym > ${CMAKE_BINARY_DIR}/${FileWoExt}.y
+        DEPENDS ${CMAKE_SOURCE_DIR}/lib/cfg-grammar.y)
+endfunction()
 
+generate_y_from_ym (lib/block-ref-grammar)
 flex_target(CfgLexer ${CMAKE_CURRENT_SOURCE_DIR}/lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
 
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h GENERATED)
