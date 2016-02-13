@@ -105,27 +105,29 @@ if(FLEX_EXECUTABLE)
   # FLEX_TARGET (public macro)
   #============================================================
   #
-  macro(FLEX_TARGET Name Input Output)
-    set(FLEX_TARGET_usage "FLEX_TARGET(<Name> <Input> <Output> [COMPILE_FLAGS <string>]")
+  macro(FLEX_TARGET Name Input Output OutputHeader)
+    set(FLEX_TARGET_usage "FLEX_TARGET(<Name> <Input> <Output> <OutputHeader> [COMPILE_FLAGS <string>]")
     if(${ARGC} GREATER 3)
-      if(${ARGC} EQUAL 5)
-        if("${ARGV3}" STREQUAL "COMPILE_FLAGS")
-          set(FLEX_EXECUTABLE_opts  "${ARGV4}")
+      if(${ARGC} EQUAL 6)
+        if("${ARGV4}" STREQUAL "COMPILE_FLAGS")
+          set(FLEX_EXECUTABLE_opts  "${ARGV5}")
           separate_arguments(FLEX_EXECUTABLE_opts)
         else()
           message(SEND_ERROR ${FLEX_TARGET_usage})
         endif()
-      else()
-        message(SEND_ERROR ${FLEX_TARGET_usage})
       endif()
     endif()
 
-    add_custom_command(OUTPUT ${Output}
+    add_custom_command(
+      OUTPUT ${Output}
+             ${OutputHeader}
       COMMAND ${FLEX_EXECUTABLE}
-      ARGS ${FLEX_EXECUTABLE_opts} -o${Output} ${Input}
+          ARGS ${FLEX_EXECUTABLE_opts} -o${Output} --header-file=${OutputHeader} ${Input}
+      COMMAND mv lex.yy.c ${Output}
+      COMMAND mv lex.yy.h ${OutputHeader}
       DEPENDS ${Input}
       COMMENT "[FLEX][${Name}] Building scanner with flex ${FLEX_VERSION}"
-      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
     set(FLEX_${Name}_DEFINED TRUE)
     set(FLEX_${Name}_OUTPUTS ${Output})
