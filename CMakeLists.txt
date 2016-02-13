@@ -13,6 +13,7 @@ set (SYSLOG_NG_PATH_SYSCONFDIR "\${prefix}/etc")
 set (SYSLOG_NG_PATH_DATADIR "\${prefix}/etc")
 set (SYSLOG_NG_PATH_PIDFILEDIR "\${localstatedir}")
 set (SYSLOG_NG_PATH_LOCALSTATEDIR "\${prefix}/var")
+set (SYSLOG_NG_MODULE_PATH "\${exec_prefix}/lib/syslog-ng")
 
 include (CheckTypeSize)
 
