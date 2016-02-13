@@ -1,3 +1,11 @@
+flex_target(CfgLexer
+    ${CMAKE_SOURCE_DIR}/lib/cfg-lex.l
+    ${CMAKE_BINARY_DIR}/lib/cfg-lex.c
+    ${CMAKE_BINARY_DIR}/lib/cfg-lex.h)
+
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.h GENERATED)
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.c GENERATED)
+
 add_subdirectory(compat)
 add_subdirectory(control)
 add_subdirectory(filter)
@@ -105,7 +113,6 @@ set (LIB_HEADERS
     #${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h
     ${CMAKE_BINARY_DIR}/lib/cfg-lex.h
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.h
-    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.h
     ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.h)
 
 set(LIB_SOURCES
@@ -195,17 +202,8 @@ set(LIB_SOURCES
     #${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c
     ${CMAKE_BINARY_DIR}/lib/cfg-lex.c
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.c
-    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.c
     ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.c
     )
-
-flex_target(CfgLexer
-    ${CMAKE_SOURCE_DIR}/lib/cfg-lex.l
-    ${CMAKE_BINARY_DIR}/lib/cfg-lex.c
-    ${CMAKE_BINARY_DIR}/lib/cfg-lex.h)
-
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.h GENERATED)
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.c GENERATED)
 
 bison_target(CfgGrammar
     ${CMAKE_SOURCE_DIR}/lib/cfg-grammar.y
@@ -221,7 +219,6 @@ bison_target(BlockRefGrammar
 add_flex_bison_dependency(CfgLexer BlockRefGrammar)
 
 generate_y_from_ym (lib/pragma-grammar)
-generate_y_from_ym (lib/filter/filter-expr-grammar)
 generate_y_from_ym (lib/parser/parser-expr-grammar)
 generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
 
@@ -235,12 +232,6 @@ bison_target(PragmaGrammar
 
 add_flex_bison_dependency(CfgLexer PragmaGrammar)
 
-bison_target(FilterExprGrammar
-    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.y
-    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.c
-    COMPILE_FLAGS ${BISON_FLAGS})
-
-add_flex_bison_dependency(CfgLexer FilterExprGrammar)
 
 bison_target(ParserExprGrammar
     ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.y
