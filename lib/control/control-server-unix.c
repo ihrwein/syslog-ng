@@ -22,6 +22,7 @@
  */
 
 #include "gsocket.h"
+#include "control/control-server.h"
  
 #include <iv.h>
 

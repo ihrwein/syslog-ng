@@ -48,47 +48,13 @@ function(generate_y_from_ym FileWoExt)
                 ${CMAKE_SOURCE_DIR}/${FileWoExt}.ym)
 endfunction()
 
-generate_y_from_ym (lib/block-ref-grammar)
-generate_y_from_ym (lib/pragma-grammar)
-generate_y_from_ym (lib/filter/filter-expr-grammar)
-generate_y_from_ym (lib/parser/parser-expr-grammar)
-generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
-
-flex_target(CfgLexer ${CMAKE_CURRENT_SOURCE_DIR}/lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
-
-set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h GENERATED)
-set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c GENERATED)
-
-bison_target(BlockRefGrammar ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/block-ref-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
-add_flex_bison_dependency(CfgLexer BlockRefGrammar)
-
-
-bison_target(PragmaGrammar ${CMAKE_BINARY_DIR}/lib/pragma-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/pragma-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
-add_flex_bison_dependency(CfgLexer PragmaGrammar)
-
-bison_target(FilterExprGrammar ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/filter/filter-expr-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
-add_flex_bison_dependency(CfgLexer FilterExprGrammar)
-
-bison_target(ParserExprGrammar ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/parser/parser-expr-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
-add_flex_bison_dependency(CfgLexer ParserExprGrammar)
-
-bison_target(RewriteExprGrammar ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
-add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
-
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.h GENERATED)
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.c GENERATED)
-
-add_subdirectory(lib)
-
-add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
-target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES} ${EVENTLOG_LIBRARIES} ${FLEX_LIBRARIES} ${BISON_LIBRARIES})
-
-include (CheckIncludeFiles)
-
-include_directories (${CMAKE_CURRENT_BINARY_DIR})
-include_directories (${CMAKE_CURRENT_BINARY_DIR}/lib)
+include_directories (${CMAKE_BINARY_DIR}/lib)
+include_directories (${CMAKE_BINARY_DIR})
 include_directories (${CMAKE_SOURCE_DIR}/lib)
 include_directories (${CMAKE_SOURCE_DIR})
+add_subdirectory(lib)
+
+include (CheckIncludeFiles)
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/syslog-ng-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/syslog-ng-config.h)
 
