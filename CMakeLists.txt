@@ -75,6 +75,9 @@ add_flex_bison_dependency(CfgLexer ParserExprGrammar)
 bison_target(RewriteExprGrammar ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
 
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.h GENERATED)
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.c GENERATED)
+
 add_subdirectory(lib)
 
 add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
