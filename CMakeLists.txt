@@ -62,8 +62,6 @@ set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c GENERATED)
 bison_target(BlockRefGrammar ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/block-ref-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer BlockRefGrammar)
 
-bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
-add_flex_bison_dependency(CfgLexer CfgGrammar)
 
 bison_target(PragmaGrammar ${CMAKE_BINARY_DIR}/lib/pragma-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/pragma-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer PragmaGrammar)
