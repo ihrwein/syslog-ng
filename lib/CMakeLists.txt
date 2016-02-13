@@ -106,10 +106,7 @@ set (LIB_HEADERS
     ${CMAKE_BINARY_DIR}/lib/cfg-lex.h
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.h
     ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.h
-    ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.h
-    #${BISON_BlockRefGrammar_OUTPUT_HEADER}
-    #${BISON_CfgGrammar_OUTPUT_HEADER}
-    )
+    ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.h)
 
 set(LIB_SOURCES
     afinter.c
@@ -200,9 +197,6 @@ set(LIB_SOURCES
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.c
     ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.c
     ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.c
-    #${BISON_BlockRefGrammar_OUTPUT_SOURCE}
-    #${BISON_CfgGrammar_OUTPUT_SOURCE}
-    #${FLEX_CfgLexer_OUTPUTS}
     )
 
 flex_target(CfgLexer
