@@ -45,6 +45,8 @@ function(generate_y_from_ym FileWoExt)
 endfunction()
 
 generate_y_from_ym (lib/block-ref-grammar)
+generate_y_from_ym (lib/pragma-grammar)
+
 flex_target(CfgLexer ${CMAKE_CURRENT_SOURCE_DIR}/lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
 
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h GENERATED)
@@ -55,6 +57,9 @@ add_flex_bison_dependency(CfgLexer BlockRefGrammar)
 
 bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer CfgGrammar)
+
+bison_target(PragmaGrammar ${CMAKE_BINARY_DIR}/lib/pragma-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/pragma-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
+add_flex_bison_dependency(CfgLexer PragmaGrammar)
 
 add_subdirectory(lib)
 
