@@ -16,6 +16,7 @@ set (SYSLOG_NG_PATH_LOCALSTATEDIR "\${prefix}/var")
 set (SYSLOG_NG_MODULE_PATH "\${exec_prefix}/lib/syslog-ng")
 set (SYSLOG_NG_PATH_EXECPREFIX "\${prefix}")
 set (SYSLOG_NG_PATH_LIBEXECDIR "\${exec_prefix}/libexec")
+set (SYSLOG_NG_PATH_DATAROOTDIR "\${prefix}/share")
 
 include (CheckTypeSize)
 
