@@ -16,6 +16,14 @@ set(REWRITE_SOURCES
     rewrite/rewrite-groupset.c
     PARENT_SCOPE)
 
+generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
+
+bison_target(RewriteExprGrammar
+    ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.y
+    ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
 #BUILT_SOURCES +=                 \
 #    lib/rewrite/rewrite-expr-grammar.y    \
 #    lib/rewrite/rewrite-expr-grammar.c    \
