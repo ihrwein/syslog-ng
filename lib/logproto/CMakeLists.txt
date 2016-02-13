@@ -1,30 +1,30 @@
 set(LOGPROTO_HEADERS
-    lib/logproto/logproto-client.h
-    lib/logproto/logproto-server.h
-    lib/logproto/logproto-buffered-server.h
-    lib/logproto/logproto-dgram-server.h
-    lib/logproto/logproto-framed-client.h
-    lib/logproto/logproto-framed-server.h
-    lib/logproto/logproto-text-client.h
-    lib/logproto/logproto-text-server.h
-    lib/logproto/logproto-indented-multiline-server.h
-    lib/logproto/logproto-regexp-multiline-server.h
-    lib/logproto/logproto-record-server.h
-    lib/logproto/logproto-builtins.h
-    lib/logproto/logproto.h
+    logproto/logproto-client.h
+    logproto/logproto-server.h
+    logproto/logproto-buffered-server.h
+    logproto/logproto-dgram-server.h
+    logproto/logproto-framed-client.h
+    logproto/logproto-framed-server.h
+    logproto/logproto-text-client.h
+    logproto/logproto-text-server.h
+    logproto/logproto-indented-multiline-server.h
+    logproto/logproto-regexp-multiline-server.h
+    logproto/logproto-record-server.h
+    logproto/logproto-builtins.h
+    logproto/logproto.h
     PARENT_SCOPE)
 
 set(LOGPROTO_SOURCES
-    lib/logproto/logproto-client.c
-    lib/logproto/logproto-server.c
-    lib/logproto/logproto-buffered-server.c
-    lib/logproto/logproto-dgram-server.c
-    lib/logproto/logproto-framed-client.c
-    lib/logproto/logproto-framed-server.c
-    lib/logproto/logproto-text-client.c
-    lib/logproto/logproto-text-server.c
-    lib/logproto/logproto-indented-multiline-server.c
-    lib/logproto/logproto-regexp-multiline-server.c
-    lib/logproto/logproto-record-server.c
-    lib/logproto/logproto-builtins.c
+    logproto/logproto-client.c
+    logproto/logproto-server.c
+    logproto/logproto-buffered-server.c
+    logproto/logproto-dgram-server.c
+    logproto/logproto-framed-client.c
+    logproto/logproto-framed-server.c
+    logproto/logproto-text-client.c
+    logproto/logproto-text-server.c
+    logproto/logproto-indented-multiline-server.c
+    logproto/logproto-regexp-multiline-server.c
+    logproto/logproto-record-server.c
+    logproto/logproto-builtins.c
     PARENT_SCOPE)

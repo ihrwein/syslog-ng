@@ -11,86 +11,86 @@ add_subdirectory(transport)
 add_subdirectory(value-pairs)
 
 set (LIB_HEADERS
-    lib/afinter.h
-    lib/alarms.h
-    lib/apphook.h
-    lib/atomic.h
-    lib/block-ref-parser.h
-    lib/cache.h
-    lib/cfg.h
-    lib/cfg-lexer.h
-    lib/cfg-lexer-subst.h
-    lib/cfg-args.h
-    lib/cfg-parser.h
-    lib/cfg-tree.h
-    lib/children.h
-    lib/crypto.h
-    lib/dnscache.h
-    lib/driver.h
-    lib/fdhelpers.h
-    lib/file-perms.h
-    lib/find-crlf.h
-    lib/gprocess.h
-    lib/gsockaddr.h
-    lib/gsocket.h
-    lib/hostname.h
-    lib/host-resolve.h
-    lib/logmatcher.h
-    lib/logmpx.h
-    lib/logpipe.h
-    lib/logqueue-fifo.h
-    lib/logqueue.h
-    lib/logreader.h
-    lib/logsource.h
-    lib/logstamp.h
-    lib/logthrdestdrv.h
-    lib/logwriter.h
-    lib/mainloop.h
-    lib/mainloop-call.h
-    lib/mainloop-worker.h
-    lib/mainloop-io-worker.h
-    lib/module-config.h
-    lib/memtrace.h
-    lib/messages.h
-    lib/ml-batched-timer.h
-    lib/msg-format.h
-    lib/parse-number.h
-    lib/pathutils.h
-    lib/persist-state.h
-    lib/persistable-state-header.h
-    lib/persistable-state-presenter.h
-    lib/plugin.h
-    lib/plugin-types.h
-    lib/poll-events.h
-    lib/poll-fd-events.h
-    lib/pragma-parser.h
-    lib/presented-persistable-state.h
-    lib/reloc.h
-    lib/rcptid.h
-    lib/run-id.h
-    lib/scratch-buffers.h
-    lib/serialize.h
-    lib/service-management.h
-    lib/seqnum.h
-    lib/str-format.h
-    lib/str-utils.h
-    lib/syslog-names.h
-    lib/syslog-ng.h
-    lib/string-list.h
-    lib/tags.h
-    lib/timeutils.h
-    lib/tls-support.h
-    lib/thread-utils.h
-    lib/tlscontext.h
-    lib/type-hinting.h
-    lib/uuid.h
-    lib/userdb.h
-    lib/utf8utils.h
-    lib/versioning.h
-    lib/bookmark.h
-    lib/ringbuffer.h
-    lib/ack_tracker.h
-    lib/host-id.h
+    afinter.h
+    alarms.h
+    apphook.h
+    atomic.h
+    block-ref-parser.h
+    cache.h
+    cfg.h
+    cfg-lexer.h
+    cfg-lexer-subst.h
+    cfg-args.h
+    cfg-parser.h
+    cfg-tree.h
+    children.h
+    crypto.h
+    dnscache.h
+    driver.h
+    fdhelpers.h
+    file-perms.h
+    find-crlf.h
+    gprocess.h
+    gsockaddr.h
+    gsocket.h
+    hostname.h
+    host-resolve.h
+    logmatcher.h
+    logmpx.h
+    logpipe.h
+    logqueue-fifo.h
+    logqueue.h
+    logreader.h
+    logsource.h
+    logstamp.h
+    logthrdestdrv.h
+    logwriter.h
+    mainloop.h
+    mainloop-call.h
+    mainloop-worker.h
+    mainloop-io-worker.h
+    module-config.h
+    memtrace.h
+    messages.h
+    ml-batched-timer.h
+    msg-format.h
+    parse-number.h
+    pathutils.h
+    persist-state.h
+    persistable-state-header.h
+    persistable-state-presenter.h
+    plugin.h
+    plugin-types.h
+    poll-events.h
+    poll-fd-events.h
+    pragma-parser.h
+    presented-persistable-state.h
+    reloc.h
+    rcptid.h
+    run-id.h
+    scratch-buffers.h
+    serialize.h
+    service-management.h
+    seqnum.h
+    str-format.h
+    str-utils.h
+    syslog-names.h
+    syslog-ng.h
+    string-list.h
+    tags.h
+    timeutils.h
+    tls-support.h
+    thread-utils.h
+    tlscontext.h
+    type-hinting.h
+    uuid.h
+    userdb.h
+    utf8utils.h
+    versioning.h
+    bookmark.h
+    ringbuffer.h
+    ack_tracker.h
+    host-id.h
     ${COMPAT_HEADERS}
     ${CONTROL_HEADERS}
     ${FILTER_HEADERS}
@@ -101,83 +101,89 @@ set (LIB_HEADERS
     ${STATS_HEADERS}
     ${TEMPLATE_HEADERS}
     ${VALUE_PAIRS_HEADERS}
-    ${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.h
-    ${BISON_BlockRefGrammar_OUTPUT_HEADER}
-    PARENT_SCOPE)
+    ${CMAKE_BINARY_DIR}/lib/cfg-grammar.h
+    #${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h
+    ${CMAKE_BINARY_DIR}/lib/cfg-lex.h
+    ${CMAKE_BINARY_DIR}/lib/pragma-grammar.h
+    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.h
+    ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.h
+    #${BISON_BlockRefGrammar_OUTPUT_HEADER}
+    #${BISON_CfgGrammar_OUTPUT_HEADER}
+    )
 
 set(LIB_SOURCES
-    lib/afinter.c
-    lib/alarms.c
-    lib/apphook.c
-    lib/block-ref-parser.c
-    lib/cache.c
-    lib/cfg.c
-    lib/cfg-args.c
-    lib/cfg-lexer.c
-    lib/cfg-lexer-subst.c
-    lib/cfg-parser.c
-    lib/cfg-tree.c
-    lib/children.c
-    lib/dnscache.c
-    lib/driver.c
-    lib/fdhelpers.c
-    lib/file-perms.c
-    lib/find-crlf.c
-    lib/globals.c
-    lib/gprocess.c
-    lib/gsockaddr.c
-    lib/gsocket.c
-    lib/hostname.c
-    lib/host-resolve.c
-    lib/logmatcher.c
-    lib/logmpx.c
-    lib/logpipe.c
-    lib/logqueue.c
-    lib/logqueue-fifo.c
-    lib/logreader.c
-    lib/logsource.c
-    lib/logstamp.c
-    lib/logthrdestdrv.c
-    lib/logwriter.c
-    lib/mainloop.c
-    lib/mainloop-call.c
-    lib/mainloop-worker.c
-    lib/mainloop-io-worker.c
-    lib/module-config.c
-    lib/memtrace.c
-    lib/messages.c
-    lib/ml-batched-timer.c
-    lib/msg-format.c
-    lib/parse-number.c
-    lib/pathutils.c
-    lib/persist-state.c
-    lib/plugin.c
-    lib/poll-events.c
-    lib/poll-fd-events.c
-    lib/pragma-parser.c
-    lib/persistable-state-presenter.c
-    lib/rcptid.c
-    lib/reloc.c
-    lib/run-id.c
-    lib/scratch-buffers.c
-    lib/serialize.c
-    lib/service-management.c
-    lib/str-format.c
-    lib/str-utils.c
-    lib/syslog-names.c
-    lib/string-list.c
-    lib/tags.c
-    lib/timeutils.c
-    lib/type-hinting.c
-    lib/ringbuffer.c
-    lib/late_ack_tracker.c
-    lib/early_ack_tracker.c
-    lib/crypto.c
-    lib/tlscontext.c
-    lib/uuid.c
-    lib/userdb.c
-    lib/utf8utils.c
-    lib/host-id.c
+    afinter.c
+    alarms.c
+    apphook.c
+    block-ref-parser.c
+    cache.c
+    cfg.c
+    cfg-args.c
+    cfg-lexer.c
+    cfg-lexer-subst.c
+    cfg-parser.c
+    cfg-tree.c
+    children.c
+    dnscache.c
+    driver.c
+    fdhelpers.c
+    file-perms.c
+    find-crlf.c
+    globals.c
+    gprocess.c
+    gsockaddr.c
+    gsocket.c
+    hostname.c
+    host-resolve.c
+    logmatcher.c
+    logmpx.c
+    logpipe.c
+    logqueue.c
+    logqueue-fifo.c
+    logreader.c
+    logsource.c
+    logstamp.c
+    logthrdestdrv.c
+    logwriter.c
+    mainloop.c
+    mainloop-call.c
+    mainloop-worker.c
+    mainloop-io-worker.c
+    module-config.c
+    memtrace.c
+    messages.c
+    ml-batched-timer.c
+    msg-format.c
+    parse-number.c
+    pathutils.c
+    persist-state.c
+    plugin.c
+    poll-events.c
+    poll-fd-events.c
+    pragma-parser.c
+    persistable-state-presenter.c
+    rcptid.c
+    reloc.c
+    run-id.c
+    scratch-buffers.c
+    serialize.c
+    service-management.c
+    str-format.c
+    str-utils.c
+    syslog-names.c
+    string-list.c
+    tags.c
+    timeutils.c
+    type-hinting.c
+    ringbuffer.c
+    late_ack_tracker.c
+    early_ack_tracker.c
+    crypto.c
+    tlscontext.c
+    uuid.c
+    userdb.c
+    utf8utils.c
+    host-id.c
     ${COMPAT_SOURCES}
     ${CONTROL_SOURCES}
     ${FILTER_SOURCES}
@@ -188,13 +194,78 @@ set(LIB_SOURCES
     ${STATS_SOURCES}
     ${TEMPLATE_SOURCES}
     ${VALUE_PAIRS_SOURCES}
-    ${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.c
-    ${BISON_BlockRefGrammar_OUTPUT_SOURCE}
-    ${FLEX_CfgLexer_OUTPUTS}
-    PARENT_SCOPE)
+    ${CMAKE_BINARY_DIR}/lib/cfg-grammar.c
+    #${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c
+    ${CMAKE_BINARY_DIR}/lib/cfg-lex.c
+    ${CMAKE_BINARY_DIR}/lib/pragma-grammar.c
+    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.c
+    ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.c
+    #${BISON_BlockRefGrammar_OUTPUT_SOURCE}
+    #${BISON_CfgGrammar_OUTPUT_SOURCE}
+    #${FLEX_CfgLexer_OUTPUTS}
+    )
 
-set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.h GENERATED)
-set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.c GENERATED)
+flex_target(CfgLexer
+    ${CMAKE_SOURCE_DIR}/lib/cfg-lex.l
+    ${CMAKE_BINARY_DIR}/lib/cfg-lex.c
+    ${CMAKE_BINARY_DIR}/lib/cfg-lex.h)
 
-bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.h GENERATED)
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.c GENERATED)
+
+bison_target(CfgGrammar
+    ${CMAKE_SOURCE_DIR}/lib/cfg-grammar.y
+    ${CMAKE_BINARY_DIR}/lib/cfg-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer CfgGrammar)
+
+generate_y_from_ym (lib/block-ref-grammar)
+bison_target(BlockRefGrammar
+    ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.y
+    ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+add_flex_bison_dependency(CfgLexer BlockRefGrammar)
+
+generate_y_from_ym (lib/pragma-grammar)
+generate_y_from_ym (lib/filter/filter-expr-grammar)
+generate_y_from_ym (lib/parser/parser-expr-grammar)
+generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
+
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h GENERATED)
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c GENERATED)
+
+bison_target(PragmaGrammar
+    ${CMAKE_BINARY_DIR}/lib/pragma-grammar.y
+    ${CMAKE_BINARY_DIR}/lib/pragma-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+add_flex_bison_dependency(CfgLexer PragmaGrammar)
+
+bison_target(FilterExprGrammar
+    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.y
+    ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+add_flex_bison_dependency(CfgLexer FilterExprGrammar)
+
+bison_target(ParserExprGrammar
+    ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.y
+    ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+add_flex_bison_dependency(CfgLexer ParserExprGrammar)
+
+bison_target(RewriteExprGrammar
+    ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.y
+    ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
+
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.h GENERATED)
+set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.c GENERATED)
+
+add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
+
+target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES} ${EVENTLOG_LIBRARIES} ${FLEX_LIBRARIES} ${BISON_LIBRARIES})
+

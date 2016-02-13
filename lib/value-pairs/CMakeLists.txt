@@ -1,13 +1,13 @@
 set(VALUE_PAIRS_HEADERS
-    lib/value-pairs/value-pairs.h
-    lib/value-pairs/transforms.h
-    lib/value-pairs/cmdline.h
-    lib/value-pairs/evttag.h
+    value-pairs/value-pairs.h
+    value-pairs/transforms.h
+    value-pairs/cmdline.h
+    value-pairs/evttag.h
     PARENT_SCOPE)
 
 set(VALUE_PAIRS_SOURCES
-    lib/value-pairs/value-pairs.c
-    lib/value-pairs/transforms.c
-    lib/value-pairs/cmdline.c
-    lib/value-pairs/evttag.c
+    value-pairs/value-pairs.c
+    value-pairs/transforms.c
+    value-pairs/cmdline.c
+    value-pairs/evttag.c
     PARENT_SCOPE)
