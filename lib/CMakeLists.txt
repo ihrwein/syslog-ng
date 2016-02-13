@@ -110,7 +110,7 @@ set (LIB_HEADERS
     ${TEMPLATE_HEADERS}
     ${VALUE_PAIRS_HEADERS}
     ${CMAKE_BINARY_DIR}/lib/cfg-grammar.h
-    #${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h
+    ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h
     ${CMAKE_BINARY_DIR}/lib/cfg-lex.h
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.h
     ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.h)
