@@ -10,6 +10,7 @@ set (SYSLOG_NG_VERSION_PATH alpha0)
 set (SYSLOG_NG_PATH_PREFIX "/usr/local")
 set (SYSLOG_NG_PATH_SYSCONFDIR "\${prefix}/etc")
 set (SYSLOG_NG_PATH_DATADIR "\${prefix}/etc")
+set (SYSLOG_NG_PATH_PIDFILEDIR "\${localstatedir}")
 
 find_package(BISON 2.4 REQUIRED)
 
