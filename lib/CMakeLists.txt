@@ -195,3 +195,6 @@ set(LIB_SOURCES
 
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.h GENERATED)
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.c GENERATED)
+
+bison_target(CfgGrammar lib/cfg-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
+add_flex_bison_dependency(CfgLexer CfgGrammar)
