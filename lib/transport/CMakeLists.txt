@@ -1,19 +1,19 @@
 set(TRANSPORT_HEADERS
-	lib/transport/logtransport.h
-	lib/transport/transport-aux-data.h
-	lib/transport/transport-tls.h
-	lib/transport/transport-file.h
-	lib/transport/transport-pipe.h
-	lib/transport/transport-device.h
-	lib/transport/transport-socket.h
-	PARENT_SCOPE)
+    transport/logtransport.h
+    transport/transport-aux-data.h
+    transport/transport-tls.h
+    transport/transport-file.h
+    transport/transport-pipe.h
+    transport/transport-device.h
+    transport/transport-socket.h
+    PARENT_SCOPE)
 
 set(TRANSPORT_SOURCES
-	lib/transport/logtransport.c
-	lib/transport/transport-aux-data.c
-	lib/transport/transport-file.c
-	lib/transport/transport-pipe.c
-	lib/transport/transport-device.c
-	lib/transport/transport-socket.c
-	lib/transport/transport-tls.c
-	PARENT_SCOPE)
+    transport/logtransport.c
+    transport/transport-aux-data.c
+    transport/transport-file.c
+    transport/transport-pipe.c
+    transport/transport-device.c
+    transport/transport-socket.c
+    transport/transport-tls.c
+    PARENT_SCOPE)

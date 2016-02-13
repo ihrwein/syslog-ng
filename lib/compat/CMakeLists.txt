@@ -1,19 +1,19 @@
 set(COMPAT_HEADERS
-	lib/compat/compat.h
-	lib/compat/getutent.h
-	lib/compat/glib.h
-	lib/compat/lfs.h
-	lib/compat/pio.h
-	lib/compat/socket.h
-	lib/compat/string.h
-  lib/compat/time.h
-	PARENT_SCOPE)
+    compat/compat.h
+    compat/getutent.h
+    compat/glib.h
+    compat/lfs.h
+    compat/pio.h
+    compat/socket.h
+    compat/string.h
+    compat/time.h
+    PARENT_SCOPE)
 
 set(COMPAT_SOURCES
-	lib/compat/getutent.c
-	lib/compat/inet_aton.c
-	lib/compat/memrchr.c
-	lib/compat/pio.c
-	lib/compat/strcasestr.c
-  lib/compat/strtok_r.c
-	PARENT_SCOPE)
+    compat/getutent.c
+    compat/inet_aton.c
+    compat/memrchr.c
+    compat/pio.c
+    compat/strcasestr.c
+    compat/strtok_r.c
+    PARENT_SCOPE)

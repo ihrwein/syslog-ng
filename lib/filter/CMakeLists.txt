@@ -1,39 +1,37 @@
 set(FILTER_HEADERS
-	lib/filter/filter-expr.h
-	lib/filter/filter-op.h
-	lib/filter/filter-cmp.h
-	lib/filter/filter-in-list.h
-	lib/filter/filter-tags.h
-	lib/filter/filter-netmask.h
-	lib/filter/filter-netmask6.h
-	lib/filter/filter-call.h
-	lib/filter/filter-re.h
-	lib/filter/filter-pri.h
-	lib/filter/filter-pipe.h
-	lib/filter/filter-expr-parser.h
-	PARENT_SCOPE)
+    filter/filter-expr.h
+    filter/filter-op.h
+    filter/filter-cmp.h
+    filter/filter-in-list.h
+    filter/filter-tags.h
+    filter/filter-netmask.h
+    filter/filter-netmask6.h
+    filter/filter-call.h
+    filter/filter-re.h
+    filter/filter-pri.h
+    filter/filter-pipe.h
+    filter/filter-expr-parser.h
+    PARENT_SCOPE)
 
 set(FILTER_SOURCES
-	lib/filter/filter-expr.c
-	lib/filter/filter-op.c
-	lib/filter/filter-cmp.c
-	lib/filter/filter-in-list.c
-	lib/filter/filter-tags.c
-	lib/filter/filter-netmask.c
-	lib/filter/filter-netmask6.c
-	lib/filter/filter-call.c
-	lib/filter/filter-re.c
-	lib/filter/filter-pri.c
-	lib/filter/filter-pipe.c
-	lib/filter/filter-expr-parser.c
-	PARENT_SCOPE)
+    filter/filter-expr.c
+    filter/filter-op.c
+    filter/filter-cmp.c
+    filter/filter-in-list.c
+    filter/filter-tags.c
+    filter/filter-netmask.c
+    filter/filter-netmask6.c
+    filter/filter-call.c
+    filter/filter-re.c
+    filter/filter-pri.c
+    filter/filter-pipe.c
+    filter/filter-expr-parser.c
+    PARENT_SCOPE)
 
-bison_target(filter-expr-grammar filter-expr-grammar.y filter-expr-grammar.c)
-
-#BUILT_SOURCES += 				\
-#	lib/filter/filter-expr-grammar.y	\
-#	lib/filter/filter-expr-grammar.c	\
-#	lib/filter/filter-expr-grammar.h
+#BUILT_SOURCES +=                 \
+#    lib/filter/filter-expr-grammar.y    \
+#    lib/filter/filter-expr-grammar.c    \
+#    lib/filter/filter-expr-grammar.h
 #
 #EXTRA_DIST += lib/filter/filter-expr-grammar.ym
 #

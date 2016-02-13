@@ -6,7 +6,8 @@ controlinclude_HEADERS = \
 
 control_sources = \
 	lib/control/control.c			\
-	lib/control/control-server.c
+	lib/control/control-server.c			\
+	lib/control/control-server-unix.c
 
 EXTRA_DIST += lib/control/control-server-unix.c
 
