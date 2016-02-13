@@ -11,6 +11,7 @@ set(FILTER_HEADERS
     filter/filter-pri.h
     filter/filter-pipe.h
     filter/filter-expr-parser.h
+    ${CMAKE_CURRENT_BINARY_DIR}/filter-expr-grammar.h
     PARENT_SCOPE)
 
 set(FILTER_SOURCES
@@ -26,7 +27,20 @@ set(FILTER_SOURCES
     filter/filter-pri.c
     filter/filter-pipe.c
     filter/filter-expr-parser.c
+    ${CMAKE_CURRENT_BINARY_DIR}/filter-expr-grammar.c
     PARENT_SCOPE)
+
+generate_y_from_ym (lib/filter/filter-expr-grammar)
+
+bison_target(FilterExprGrammar
+    ${CMAKE_CURRENT_BINARY_DIR}/filter-expr-grammar.y
+    ${CMAKE_CURRENT_BINARY_DIR}/filter-expr-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+add_flex_bison_dependency(CfgLexer FilterExprGrammar)
+
+set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/filter-expr-grammar.c GENERATED)
+set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/filter-expr-grammar.h GENERATED)
 
 #BUILT_SOURCES +=                 \
 #    lib/filter/filter-expr-grammar.y    \
