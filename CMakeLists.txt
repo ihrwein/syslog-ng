@@ -19,6 +19,10 @@ check_type_size ("struct sockaddr_storage" STRUCT_SOCKADDR_STORAGE)
 set (SYSLOG_NG_HAVE_STRUCT_SOCKADDR_STORAGE ${HAVE_STRUCT_SOCKADDR_STORAGE})
 set (CMAKE_EXTRA_INCLUDE_FILES)
 
+include (CheckSymbolExists)
+
+check_symbol_exists (strtoll stdlib.h SYSLOG_NG_HAVE_STRTOLL)
+
 find_package(BISON 2.4 REQUIRED)
 
 find_package(Glib 2.10.1 REQUIRED)
