@@ -220,7 +220,6 @@ add_flex_bison_dependency(CfgLexer BlockRefGrammar)
 
 generate_y_from_ym (lib/pragma-grammar)
 generate_y_from_ym (lib/parser/parser-expr-grammar)
-generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
 
 set_source_files_properties(${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h GENERATED)
 set_source_files_properties(${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c GENERATED)
@@ -239,13 +238,6 @@ bison_target(ParserExprGrammar
     COMPILE_FLAGS ${BISON_FLAGS})
 
 add_flex_bison_dependency(CfgLexer ParserExprGrammar)
-
-bison_target(RewriteExprGrammar
-    ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.y
-    ${CMAKE_BINARY_DIR}/lib/rewrite/rewrite-expr-grammar.c
-    COMPILE_FLAGS ${BISON_FLAGS})
-
-add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
 
 set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.h GENERATED)
 set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.c GENERATED)
