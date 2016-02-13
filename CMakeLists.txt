@@ -44,7 +44,8 @@ find_package(FLEX REQUIRED)
 function(generate_y_from_ym FileWoExt)
     add_custom_command (OUTPUT ${CMAKE_BINARY_DIR}/${FileWoExt}.y
         COMMAND ${CMAKE_SOURCE_DIR}/lib/merge-grammar.pl ${CMAKE_SOURCE_DIR}/${FileWoExt}.ym > ${CMAKE_BINARY_DIR}/${FileWoExt}.y
-        DEPENDS ${CMAKE_SOURCE_DIR}/lib/cfg-grammar.y)
+        DEPENDS ${CMAKE_SOURCE_DIR}/lib/cfg-grammar.y
+                ${CMAKE_SOURCE_DIR}/${FileWoExt}.ym)
 endfunction()
 
 generate_y_from_ym (lib/block-ref-grammar)
