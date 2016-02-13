@@ -5,6 +5,7 @@ set(REWRITE_HEADERS
     rewrite/rewrite-subst.h
     rewrite/rewrite-expr-parser.h
     rewrite/rewrite-groupset.h
+    ${CMAKE_CURRENT_BINARY_DIR}/rewrite-expr-grammar.h
     PARENT_SCOPE)
 
 set(REWRITE_SOURCES
@@ -14,6 +15,7 @@ set(REWRITE_SOURCES
     rewrite/rewrite-subst.c
     rewrite/rewrite-expr-parser.c
     rewrite/rewrite-groupset.c
+    ${CMAKE_CURRENT_BINARY_DIR}/rewrite-expr-grammar.c
     PARENT_SCOPE)
 
 generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
