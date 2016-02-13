@@ -5,7 +5,7 @@ set (BISON_FLAGS "-Wno-other")
 
 set (SYSLOG_NG_VERSION_MAJOR 3)
 set (SYSLOG_NG_VERSION_MINOR 8)
-set (SYSLOG_NG_VERSION_PATH alpha0)
+set (SYSLOG_NG_VERSION_PATCH alpha0)
 
 set (SYSLOG_NG_PATH_PREFIX "/usr/local")
 set (SYSLOG_NG_PATH_SYSCONFDIR "\${prefix}/etc")
