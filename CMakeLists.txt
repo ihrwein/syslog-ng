@@ -50,6 +50,7 @@ endfunction()
 generate_y_from_ym (lib/block-ref-grammar)
 generate_y_from_ym (lib/pragma-grammar)
 generate_y_from_ym (lib/filter/filter-expr-grammar)
+generate_y_from_ym (lib/parser/parser-expr-grammar)
 
 flex_target(CfgLexer ${CMAKE_CURRENT_SOURCE_DIR}/lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
 
@@ -67,6 +68,9 @@ add_flex_bison_dependency(CfgLexer PragmaGrammar)
 
 bison_target(FilterExprGrammar ${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/filter/filter-expr-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer FilterExprGrammar)
+
+bison_target(ParserExprGrammar ${CMAKE_BINARY_DIR}/lib/parser/parser-expr-grammar.y ${CMAKE_CURRENT_BINARY_DIR}/lib/parser/parser-expr-grammar.c COMPILE_FLAGS ${BISON_FLAGS})
+add_flex_bison_dependency(CfgLexer ParserExprGrammar)
 
 add_subdirectory(lib)
 
