@@ -77,7 +77,7 @@ add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
 
 add_subdirectory(lib)
 
-add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
+add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
 target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES} ${EVENTLOG_LIBRARIES} ${FLEX_LIBRARIES} ${BISON_LIBRARIES})
 
 include (CheckIncludeFiles)
