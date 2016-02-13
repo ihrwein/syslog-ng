@@ -265,7 +265,10 @@ add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
 set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.h GENERATED)
 set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.c GENERATED)
 
-add_library(syslog-ng ${LIB_SOURCES} ${LIB_HEADERS})
+add_library(syslog-ng
+    SHARED
+    ${LIB_SOURCES}
+    ${LIB_HEADERS})
 
 target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES} ${EVENTLOG_LIBRARIES} ${FLEX_LIBRARIES} ${BISON_LIBRARIES})
 
