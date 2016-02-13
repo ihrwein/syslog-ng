@@ -101,8 +101,8 @@ set (LIB_HEADERS
     ${STATS_HEADERS}
     ${TEMPLATE_HEADERS}
     ${VALUE_PAIRS_HEADERS}
+    ${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.h
     ${BISON_BlockRefGrammar_OUTPUT_HEADER}
-    ${BISON_CfgGrammar_OUTPUT_HEADER}
     PARENT_SCOPE)
 
 set(LIB_SOURCES
@@ -188,8 +188,10 @@ set(LIB_SOURCES
     ${STATS_SOURCES}
     ${TEMPLATE_SOURCES}
     ${VALUE_PAIRS_SOURCES}
+    ${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.c
     ${BISON_BlockRefGrammar_OUTPUT_SOURCE}
-    ${BISON_CfgGrammar_OUTPUT_SOURCE}
     ${FLEX_CfgLexer_OUTPUTS}
     PARENT_SCOPE)
 
+set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.h GENERATED)
+set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/cfg-grammar.c GENERATED)
