@@ -21,7 +21,8 @@ pkg_check_modules(EVENTLOG REQUIRED eventlog)
 include_directories (SYSTEM ${EVENTLOG_INCLUDE_DIRS})
 find_package(FLEX REQUIRED)
 
-flex_target(CfgLexer lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c COMPILE_FLAGS --header-file=${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
+flex_target(CfgLexer ${CMAKE_CURRENT_SOURCE_DIR}/lib/cfg-lex.l ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c ${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h)
+
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.h GENERATED)
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/lib/cfg-lex.c GENERATED)
 
