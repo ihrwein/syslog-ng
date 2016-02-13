@@ -22,6 +22,7 @@ set (CMAKE_EXTRA_INCLUDE_FILES)
 include (CheckSymbolExists)
 
 check_symbol_exists (strtoll stdlib.h SYSLOG_NG_HAVE_STRTOLL)
+check_symbol_exists (strtoimax inttypes.h SYSLOG_NG_HAVE_STRTOIMAX)
 
 find_package(BISON 2.4 REQUIRED)
 
