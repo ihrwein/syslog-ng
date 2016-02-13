@@ -23,6 +23,7 @@ include (CheckSymbolExists)
 
 check_symbol_exists (strtoll stdlib.h SYSLOG_NG_HAVE_STRTOLL)
 check_symbol_exists (strtoimax inttypes.h SYSLOG_NG_HAVE_STRTOIMAX)
+check_symbol_exists (inet_aton sys/socket.h SYSLOG_NG_HAVE_INET_ATON)
 
 find_package(BISON 2.4 REQUIRED)
 
