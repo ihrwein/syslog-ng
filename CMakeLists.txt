@@ -12,6 +12,13 @@ set (SYSLOG_NG_PATH_SYSCONFDIR "\${prefix}/etc")
 set (SYSLOG_NG_PATH_DATADIR "\${prefix}/etc")
 set (SYSLOG_NG_PATH_PIDFILEDIR "\${localstatedir}")
 
+include (CheckTypeSize)
+
+set (CMAKE_EXTRA_INCLUDE_FILES sys/socket.h)
+check_type_size ("struct sockaddr_storage" STRUCT_SOCKADDR_STORAGE)
+set (SYSLOG_NG_HAVE_STRUCT_SOCKADDR_STORAGE ${HAVE_STRUCT_SOCKADDR_STORAGE})
+set (CMAKE_EXTRA_INCLUDE_FILES)
+
 find_package(BISON 2.4 REQUIRED)
 
 find_package(Glib 2.10.1 REQUIRED)
