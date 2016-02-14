@@ -219,40 +219,31 @@ bison_target(BlockRefGrammar
 add_flex_bison_dependency(CfgLexer BlockRefGrammar)
 
 generate_y_from_ym (lib/pragma-grammar)
-
-
 bison_target(PragmaGrammar
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.y
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.c
     COMPILE_FLAGS ${BISON_FLAGS})
-
 add_flex_bison_dependency(CfgLexer PragmaGrammar)
 
 generate_y_from_ym (lib/filter/filter-expr-grammar)
-
 bison_target(FilterExprGrammar
     ${CMAKE_CURRENT_BINARY_DIR}/filter/filter-expr-grammar.y
     ${CMAKE_CURRENT_BINARY_DIR}/filter/filter-expr-grammar.c
     COMPILE_FLAGS ${BISON_FLAGS})
-
 add_flex_bison_dependency(CfgLexer FilterExprGrammar)
 
 generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
-
 bison_target(RewriteExprGrammar
     ${CMAKE_CURRENT_BINARY_DIR}/rewrite/rewrite-expr-grammar.y
     ${CMAKE_CURRENT_BINARY_DIR}/rewrite/rewrite-expr-grammar.c
     COMPILE_FLAGS ${BISON_FLAGS})
-
 add_flex_bison_dependency(CfgLexer RewriteExprGrammar)
 
 generate_y_from_ym (lib/parser/parser-expr-grammar)
-
 bison_target(ParserExprGrammar
     ${CMAKE_CURRENT_BINARY_DIR}/parser/parser-expr-grammar.y
     ${CMAKE_CURRENT_BINARY_DIR}/parser/parser-expr-grammar.c
     COMPILE_FLAGS ${BISON_FLAGS})
-
 add_flex_bison_dependency(CfgLexer ParserExprGrammar)
 
 add_library(syslog-ng
@@ -260,5 +251,10 @@ add_library(syslog-ng
     ${LIB_SOURCES}
     ${LIB_HEADERS})
 
-target_link_libraries (syslog-ng ${Glib_LIBRARIES} ${IVYKIS_LIBRARIES} ${EVENTLOG_LIBRARIES} ${FLEX_LIBRARIES} ${BISON_LIBRARIES})
-
+target_link_libraries(
+    syslog-ng
+    ${Glib_LIBRARIES}
+    ${IVYKIS_LIBRARIES}
+    ${EVENTLOG_LIBRARIES}
+    ${FLEX_LIBRARIES}
+    ${BISON_LIBRARIES})
