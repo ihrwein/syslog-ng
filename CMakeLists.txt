@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 2.8.12)
 project (syslog-ng)
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+set (CMAKE_POSITION_INDEPENDENT_CODE 1)
 set (BISON_FLAGS "-Wno-other")
 
 set (SYSLOG_NG_VERSION_MAJOR 3)
