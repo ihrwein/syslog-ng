@@ -3,9 +3,6 @@ flex_target(CfgLexer
     ${CMAKE_BINARY_DIR}/lib/cfg-lex.c
     ${CMAKE_BINARY_DIR}/lib/cfg-lex.h)
 
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.h GENERATED)
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-lex.c GENERATED)
-
 bison_target(CfgGrammar
     ${CMAKE_SOURCE_DIR}/lib/cfg-grammar.y
     ${CMAKE_BINARY_DIR}/lib/cfg-grammar.c
@@ -223,8 +220,6 @@ add_flex_bison_dependency(CfgLexer BlockRefGrammar)
 
 generate_y_from_ym (lib/pragma-grammar)
 
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h GENERATED)
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c GENERATED)
 
 bison_target(PragmaGrammar
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.y
@@ -241,8 +236,6 @@ bison_target(FilterExprGrammar
     COMPILE_FLAGS ${BISON_FLAGS})
 
 add_flex_bison_dependency(CfgLexer FilterExprGrammar)
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.h GENERATED)
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/filter/filter-expr-grammar.c GENERATED)
 
 generate_y_from_ym (lib/rewrite/rewrite-expr-grammar)
 
@@ -261,9 +254,6 @@ bison_target(ParserExprGrammar
     COMPILE_FLAGS ${BISON_FLAGS})
 
 add_flex_bison_dependency(CfgLexer ParserExprGrammar)
-
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.h GENERATED)
-set_source_files_properties(${CMAKE_BINARY_DIR}/lib/cfg-grammar.c GENERATED)
 
 add_library(syslog-ng
     SHARED
