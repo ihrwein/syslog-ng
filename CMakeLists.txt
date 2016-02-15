@@ -54,6 +54,7 @@ include_directories (${CMAKE_BINARY_DIR})
 include_directories (${CMAKE_SOURCE_DIR}/lib)
 include_directories (${CMAKE_SOURCE_DIR})
 add_subdirectory(lib)
+add_subdirectory(modules)
 
 include (CheckIncludeFiles)
 
