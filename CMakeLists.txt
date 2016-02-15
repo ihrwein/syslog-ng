@@ -37,17 +37,20 @@ find_package(BISON 2.4 REQUIRED)
 find_package(Glib 2.10.1 REQUIRED)
 pkg_check_modules(IVYKIS REQUIRED ivykis)
 pkg_check_modules(EVENTLOG REQUIRED eventlog)
+pkg_check_modules(OPENSSL REQUIRED openssl)
 find_package(FLEX REQUIRED)
 
 set(CORE_INCLUDE_DIRS
     ${EVENTLOG_INCLUDE_DIRS}
     ${IVYKIS_INCLUDE_DIRS}
-    ${Glib_INCLUDE_DIRS})
+    ${Glib_INCLUDE_DIRS}
+    ${OPENSSL_INCLUDE_DIRS}})
 
 set(CORE_LIBRARIES
     ${EVENTLOG_LIBRARIES}
     ${IVYKIS_LIBRARIES}
     ${Glib_LIBRARIES}
+    ${OPENSSL_LIBRARIES}
     ${FLEX_LIBRARIES}
     ${BISON_LIBRARIES})
 
