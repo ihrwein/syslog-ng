@@ -17,6 +17,12 @@ bison_target(NativeGrammar
     COMPILE_FLAGS ${BISON_FLAGS})
 #add_flex_bison_dependency(CfgLexer NativeGrammar)
 
+set(PKG_CONFIG_EXEC_PREFIX "\${prefix}")
+set(PKG_CONFIG_LIBDIR "\${exec_prefix}/lib")
+set(PKG_CONFIG_LIBS "-L\${libdir} -lsyslog-ng-native-connector")
+
+configure_file (${CMAKE_SOURCE_DIR}/syslog-ng-native-connector.pc.cmake ${CMAKE_BINARY_DIR}/syslog-ng-native-connector.pc)
+
 add_library(syslog-ng-native-connector STATIC ${NATIVE_SOURCES} ${NATIVE_HEADERS})
 target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
