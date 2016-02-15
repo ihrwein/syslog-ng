@@ -35,12 +35,23 @@ check_symbol_exists (inet_aton "sys/socket.h;netinet/in.h;arpa/inet.h" SYSLOG_NG
 find_package(BISON 2.4 REQUIRED)
 
 find_package(Glib 2.10.1 REQUIRED)
-include_directories (SYSTEM ${Glib_INCLUDE_DIRS})
 pkg_check_modules(IVYKIS REQUIRED ivykis)
-include_directories (SYSTEM ${IVYKIS_INCLUDE_DIRS})
 pkg_check_modules(EVENTLOG REQUIRED eventlog)
-include_directories (SYSTEM ${EVENTLOG_INCLUDE_DIRS})
 find_package(FLEX REQUIRED)
+
+set(CORE_INCLUDE_DIRS
+    ${EVENTLOG_INCLUDE_DIRS}
+    ${IVYKIS_INCLUDE_DIRS}
+    ${Glib_INCLUDE_DIRS})
+
+set(CORE_LIBRARIES
+    ${EVENTLOG_LIBRARIES}
+    ${IVYKIS_LIBRARIES}
+    ${Glib_LIBRARIES}
+    ${FLEX_LIBRARIES}
+    ${BISON_LIBRARIES})
+
+include_directories(SYSTEM ${CORE_INCLUDE_DIRS})
 
 function(generate_y_from_ym FileWoExt)
     add_custom_command (OUTPUT ${CMAKE_BINARY_DIR}/${FileWoExt}.y
