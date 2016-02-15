@@ -246,15 +246,17 @@ bison_target(ParserExprGrammar
     COMPILE_FLAGS ${BISON_FLAGS})
 add_flex_bison_dependency(CfgLexer ParserExprGrammar)
 
+include_directories(SYSTEM ${CORE_INCLUDE_DIRS})
+
 add_library(syslog-ng
     SHARED
     ${LIB_SOURCES}
     ${LIB_HEADERS})
 
+target_include_directories(syslog-ng
+    SYSTEM INTERFACE
+    ${CORE_INCLUDE_DIRS})
+
 target_link_libraries(
     syslog-ng
-    ${Glib_LIBRARIES}
-    ${IVYKIS_LIBRARIES}
-    ${EVENTLOG_LIBRARIES}
-    ${FLEX_LIBRARIES}
-    ${BISON_LIBRARIES})
+    ${CORE_LIBRARIES})
