@@ -1,30 +1,34 @@
-set (NATIVE_SOURCES
-    native-parser.c
-    parser.c
-    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
-    )
+option(ENABLE_NATIVE "Enable to build native bindings (for Rust, C++)" ON)
 
-set (NATIVE_HEADERS
-    native-parser.h
-    parser.h
-    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.h
-    )
+if (ENABLE_NATIVE)
+  set (NATIVE_SOURCES
+      native-parser.c
+      parser.c
+      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
+      )
 
-generate_y_from_ym (modules/native/native-grammar)
-bison_target(NativeGrammar
-    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.y
-    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
-    COMPILE_FLAGS ${BISON_FLAGS})
-#add_flex_bison_dependency(CfgLexer NativeGrammar)
+  set (NATIVE_HEADERS
+      native-parser.h
+      parser.h
+      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.h
+      )
 
-set(PKG_CONFIG_EXEC_PREFIX "\${prefix}")
-set(PKG_CONFIG_LIBDIR "\${exec_prefix}/lib")
-set(PKG_CONFIG_LIBS "-L\${libdir} -lsyslog-ng-native-connector")
+  generate_y_from_ym (modules/native/native-grammar)
+  bison_target(NativeGrammar
+      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.y
+      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
+      COMPILE_FLAGS ${BISON_FLAGS})
+  #add_flex_bison_dependency(CfgLexer NativeGrammar)
 
-configure_file (${CMAKE_SOURCE_DIR}/syslog-ng-native-connector.pc.cmake ${CMAKE_BINARY_DIR}/syslog-ng-native-connector.pc)
+  set(PKG_CONFIG_EXEC_PREFIX "\${prefix}")
+  set(PKG_CONFIG_LIBDIR "\${exec_prefix}/lib")
+  set(PKG_CONFIG_LIBS "-L\${libdir} -lsyslog-ng-native-connector")
 
-add_library(syslog-ng-native-connector STATIC ${NATIVE_SOURCES} ${NATIVE_HEADERS})
-target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
-target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  configure_file (${CMAKE_SOURCE_DIR}/syslog-ng-native-connector.pc.cmake ${CMAKE_BINARY_DIR}/syslog-ng-native-connector.pc)
 
-add_dependencies(syslog-ng-native-connector syslog-ng)
+  add_library(syslog-ng-native-connector STATIC ${NATIVE_SOURCES} ${NATIVE_HEADERS})
+  target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+  target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+  add_dependencies(syslog-ng-native-connector syslog-ng)
+endif()
