@@ -1,5 +1,5 @@
 bin_PROGRAMS += modules/diskq/dqtool
-noinst_LTLIBRARIES += modules/diskq/libsyslog-ng-disk-buffer.la
+lib_LTLIBRARIES += modules/diskq/libsyslog-ng-disk-buffer.la
 module_LTLIBRARIES += modules/diskq/libdisk-buffer.la
 
 modules_diskq_libsyslog_ng_disk_buffer_la_SOURCES = \
@@ -14,8 +14,9 @@ modules_diskq_libsyslog_ng_disk_buffer_la_SOURCES = \
   modules/diskq/qdisk.h \
   modules/diskq/qdisk.c
 
-modules_diskq_libsyslog_ng_disk_buffer_la_CFLAGS	=	\
-	$(AM_CFLAGS) -fPIC
+modules_diskq_libsyslog_ng_disk_buffer_la_CPPFLAGS = \
+  $(AM_CPPFLAGS) \
+  -I$(top_srcdir)/modules/diskq
 modules_diskq_libsyslog_ng_disk_buffer_la_LIBADD	=	\
 	$(MODULE_DEPS_LIBS)
 modules_diskq_libsyslog_ng_disk_buffer_la_DEPENDENCIES	=	\
@@ -27,8 +28,7 @@ modules_diskq_libdisk_buffer_la_SOURCES = \
   modules/diskq/diskq-grammar.y \
   modules/diskq/diskq-parser.c \
   modules/diskq/diskq-parser.h \
-  modules/diskq/diskq-plugin.c \
-  $(modules_diskq_libsyslog_ng_disk_buffer_la_SOURCES)
+  modules/diskq/diskq-plugin.c
 
 BUILT_SOURCES += \
   modules/diskq/diskq-grammar.y \
@@ -37,10 +37,10 @@ BUILT_SOURCES += \
 
 EXTRA_DIST += $(BUILT_SOURCES) modules/diskq/diskq-grammar.ym
 
-modules_diskq_libdisk_buffer_la_CFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/modules/diskq -I$(top_builddir)/modules/diskq -I$(top_srcdir)/lib -I../../lib
-modules_diskq_libdisk_buffer_la_LIBADD = $(MODULE_DEPS_LIBS)
+modules_diskq_libdisk_buffer_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/modules/diskq -I$(top_builddir)/modules/diskq
+modules_diskq_libdisk_buffer_la_LIBADD = $(MODULE_DEPS_LIBS) $(top_builddir)/modules/diskq/libsyslog-ng-disk-buffer.la
 modules_diskq_libdisk_buffer_la_LDFLAGS = $(MODULE_LDFLAGS)
-modules_diskq_libdisk_buffer_la_DEPENDENCIES= $(MODULE_DEPS_LIBS)
+modules_diskq_libdisk_buffer_la_DEPENDENCIES = $(MODULE_DEPS_LIBS) $(top_builddir)/modules/diskq/libsyslog-ng-disk-buffer.la
 
 modules_diskq_dqtool_SOURCES = modules/diskq/dqtool.c
 modules_diskq_dqtool_LDADD = \
