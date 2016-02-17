@@ -35,20 +35,20 @@ check_symbol_exists (inet_aton "sys/socket.h;netinet/in.h;arpa/inet.h" SYSLOG_NG
 find_package(BISON 2.4 REQUIRED)
 
 find_package(Glib 2.10.1 REQUIRED)
-pkg_check_modules(IVYKIS REQUIRED ivykis)
+find_package(Ivykis REQUIRED)
 pkg_check_modules(EVENTLOG REQUIRED eventlog)
 find_package(OpenSSL REQUIRED)
 find_package(FLEX REQUIRED)
 
 set(CORE_INCLUDE_DIRS
     ${EVENTLOG_INCLUDE_DIRS}
-    ${IVYKIS_INCLUDE_DIRS}
+    ${Ivykis_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
     ${OpenSSL_INCLUDE_DIRS}})
 
 set(CORE_LIBRARIES
     ${EVENTLOG_LIBRARIES}
-    ${IVYKIS_LIBRARIES}
+    ${Ivykis_LIBRARIES}
     ${GLIB_LIBRARIES}
     ${OpenSSL_LIBRARIES}
     ${FLEX_LIBRARIES}
