@@ -1,3 +1,5 @@
+bin_PROGRAMS += modules/diskq/dqtool
+
 module_LTLIBRARIES += modules/diskq/libdisk-buffer.la
 
 modules_diskq_libdisk_buffer_la_SOURCES = \
