@@ -1,16 +1,10 @@
 bin_PROGRAMS += modules/diskq/dqtool
-
+noinst_LTLIBRARIES += modules/diskq/libsyslog-ng-disk-buffer.la
 module_LTLIBRARIES += modules/diskq/libdisk-buffer.la
 
-modules_diskq_libdisk_buffer_la_SOURCES = \
-  modules/diskq/diskq.c \
-  modules/diskq/diskq.h \
-  modules/diskq/diskq-grammar.y \
+modules_diskq_libsyslog_ng_disk_buffer_la_SOURCES = \
   modules/diskq/diskq-options.h \
   modules/diskq/diskq-options.c \
-  modules/diskq/diskq-parser.c \
-  modules/diskq/diskq-parser.h \
-  modules/diskq/diskq-plugin.c \
   modules/diskq/logqueue-disk.c \
   modules/diskq/logqueue-disk.h \
   modules/diskq/logqueue-disk-non-reliable.c \
@@ -19,6 +13,22 @@ modules_diskq_libdisk_buffer_la_SOURCES = \
   modules/diskq/logqueue-disk-reliable.h \
   modules/diskq/qdisk.h \
   modules/diskq/qdisk.c
+
+modules_diskq_libsyslog_ng_disk_buffer_la_CFLAGS	=	\
+	$(AM_CFLAGS) -fPIC
+modules_diskq_libsyslog_ng_disk_buffer_la_LIBADD	=	\
+	$(MODULE_DEPS_LIBS)
+modules_diskq_libsyslog_ng_disk_buffer_la_DEPENDENCIES	=	\
+	$(MODULE_DEPS_LIBS)
+
+modules_diskq_libdisk_buffer_la_SOURCES = \
+  modules/diskq/diskq.c \
+  modules/diskq/diskq.h \
+  modules/diskq/diskq-grammar.y \
+  modules/diskq/diskq-parser.c \
+  modules/diskq/diskq-parser.h \
+  modules/diskq/diskq-plugin.c \
+  $(modules_diskq_libsyslog_ng_disk_buffer_la_SOURCES)
 
 BUILT_SOURCES += \
   modules/diskq/diskq-grammar.y \
@@ -34,10 +44,9 @@ modules_diskq_libdisk_buffer_la_DEPENDENCIES= $(MODULE_DEPS_LIBS)
 
 modules_diskq_dqtool_SOURCES = modules/diskq/dqtool.c
 modules_diskq_dqtool_LDADD = \
-  $(top_builddir)/modules/diskq/libdisk-buffer.la \
   $(TOOL_DEPS_LIBS) \
   $(top_builddir)/lib/libsyslog-ng.la \
-  -dlpreopen $(top_builddir)/modules/diskq/libdisk-buffer.la
+  $(top_builddir)/modules/diskq/libsyslog-ng-disk-buffer.la
 
 modules/diskq modules/diskq/ mod-diskq: modules/diskq/libdisk-buffer.la \
 	modules/diskq/dqtool
