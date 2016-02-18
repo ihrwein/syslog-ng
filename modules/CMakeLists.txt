@@ -1,4 +1,4 @@
-add_subdirectory(afamqp)
+# add_subdirectory(afamqp)
 add_subdirectory(affile)
 add_subdirectory(afprog)
 add_subdirectory(afsmtp)
