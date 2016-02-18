@@ -46,7 +46,7 @@ set(CORE_INCLUDE_DIRS
     ${Ivykis_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
     ${OpenSSL_INCLUDE_DIRS}}
-    ${GETTEXT_INCLUDE_DIR}
+    ${Gettext_INCLUDE_DIR}
 )
 
 set(CORE_LIBRARIES
@@ -56,7 +56,7 @@ set(CORE_LIBRARIES
     ${OpenSSL_LIBRARIES}
     ${FLEX_LIBRARIES}
     ${BISON_LIBRARIES}
-    ${GETTEXT_LIBRARIES}
+    ${Gettext_LIBRARIES}
 )
 
 include_directories(SYSTEM ${CORE_INCLUDE_DIRS})
