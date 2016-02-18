@@ -34,8 +34,7 @@ check_symbol_exists (strtoimax inttypes.h SYSLOG_NG_HAVE_STRTOIMAX)
 check_symbol_exists (inet_aton "sys/socket.h;netinet/in.h;arpa/inet.h" SYSLOG_NG_HAVE_INET_ATON)
 
 find_package(BISON 2.4 REQUIRED)
-
-find_package(Glib 2.10.1 REQUIRED)
+find_package(GLIB 2.10.1 REQUIRED)
 find_package(Ivykis REQUIRED)
 find_package(Eventlog REQUIRED)
 find_package(OpenSSL REQUIRED)
