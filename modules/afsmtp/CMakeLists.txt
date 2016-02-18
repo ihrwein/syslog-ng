@@ -25,11 +25,10 @@ if (BUILD_AFSMTP)
         ${CMAKE_CURRENT_BINARY_DIR}/afsmtp-grammar.c
         COMPILE_FLAGS ${BISON_FLAGS})
 
-    include_directories (${CMAKE_CURRENT_BINARY_DIR})
-    include_directories (${CMAKE_CURRENT_SOURCE_DIR})
-    include_directories (${ESMTP_INCLUDE_DIR})
     add_library(afsmtp MODULE ${AFSMTP_SOURCES})
     target_link_libraries (afsmtp ${ESMTP_LIBRARIES})
+    target_include_directories (afsmtp SYSTEM PRIVATE ${ESMTP_INCLUDE_DIR})
+    target_include_directories (afsmtp PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
     add_dependencies(afsmtp syslog-ng)
 endif()
