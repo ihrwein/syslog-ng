@@ -1,4 +1,3 @@
-
 set(AFSMTP_SOURCES
     afsmtp.c
     afsmtp.h
@@ -8,16 +7,29 @@ set(AFSMTP_SOURCES
     ${CMAKE_CURRENT_BINARY_DIR}/afsmtp-grammar.c
 )
 
-generate_y_from_ym(modules/afsmtp/afsmtp-grammar)
+option(ENABLE_AFSMTP "Enable SMTP destination" ON)
 
-bison_target(AfsmtpGrammar
-    ${CMAKE_CURRENT_BINARY_DIR}/afsmtp-grammar.y
-    ${CMAKE_CURRENT_BINARY_DIR}/afsmtp-grammar.c
-    COMPILE_FLAGS ${BISON_FLAGS})
-#add_flex_bison_dependency(CfgLexer AffileGrammar)
+find_package(ESMTP)
 
-include_directories (${CMAKE_CURRENT_BINARY_DIR})
-include_directories (${CMAKE_CURRENT_SOURCE_DIR})
-add_library(afsmtp MODULE ${AFSMTP_SOURCES})
+if(ESMTP_FOUND AND ENABLE_AFSMTP)
+    set(BUILD_AFSMTP ON)
+else()
+    set(BUILD_AFSMTP OFF)
+endif()
 
-add_dependencies(afsmtp syslog-ng)
+if (BUILD_AFSMTP)
+    generate_y_from_ym(modules/afsmtp/afsmtp-grammar)
+
+    bison_target(AfsmtpGrammar
+        ${CMAKE_CURRENT_BINARY_DIR}/afsmtp-grammar.y
+        ${CMAKE_CURRENT_BINARY_DIR}/afsmtp-grammar.c
+        COMPILE_FLAGS ${BISON_FLAGS})
+
+    include_directories (${CMAKE_CURRENT_BINARY_DIR})
+    include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+    include_directories (${ESMTP_INCLUDE_DIR})
+    add_library(afsmtp MODULE ${AFSMTP_SOURCES})
+    target_link_libraries (afsmtp ${ESMTP_LIBRARIES})
+
+    add_dependencies(afsmtp syslog-ng)
+endif()
