@@ -203,7 +203,7 @@ set(LIB_SOURCES
     ${TEMPLATE_SOURCES}
     ${VALUE_PAIRS_SOURCES}
     ${CMAKE_BINARY_DIR}/lib/cfg-grammar.c
-    #${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c
+    ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c
     ${CMAKE_BINARY_DIR}/lib/cfg-lex.c
     ${CMAKE_BINARY_DIR}/lib/pragma-grammar.c
     ${CMAKE_CURRENT_BINARY_DIR}/filter/filter-expr-grammar.c
