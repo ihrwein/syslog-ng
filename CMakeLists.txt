@@ -39,12 +39,15 @@ find_package(Ivykis REQUIRED)
 find_package(Eventlog REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(FLEX REQUIRED)
+find_package(Gettext REQUIRED QUIET)
 
 set(CORE_INCLUDE_DIRS
     ${Eventlog_INCLUDE_DIRS}
     ${Ivykis_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
-    ${OpenSSL_INCLUDE_DIRS}})
+    ${OpenSSL_INCLUDE_DIRS}}
+    ${GETTEXT_INCLUDE_DIR}
+)
 
 set(CORE_LIBRARIES
     ${Eventlog_LIBRARIES}
@@ -52,7 +55,9 @@ set(CORE_LIBRARIES
     ${GLIB_LIBRARIES}
     ${OpenSSL_LIBRARIES}
     ${FLEX_LIBRARIES}
-    ${BISON_LIBRARIES})
+    ${BISON_LIBRARIES}
+    ${GETTEXT_LIBRARIES}
+)
 
 include_directories(SYSTEM ${CORE_INCLUDE_DIRS})
 
