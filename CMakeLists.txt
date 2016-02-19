@@ -19,6 +19,15 @@ set (SYSLOG_NG_MODULE_PATH "\${exec_prefix}/lib/syslog-ng")
 set (SYSLOG_NG_PATH_EXECPREFIX "\${prefix}")
 set (SYSLOG_NG_PATH_LIBEXECDIR "\${exec_prefix}/libexec")
 set (SYSLOG_NG_PATH_DATAROOTDIR "\${prefix}/share")
+set (SYSLOG_NG_ENABLE_LINUX_CAPS 0)
+set (SYSLOG_NG_ENABLE_TCP_WRAPPER 0)
+set (SYSLOG_NG_ENABLE_DEBUG 0)
+set (SYSLOG_NG_ENABLE_GPROF 0)
+set (SYSLOG_NG_ENABLE_SPOOF_SOURCE 0)
+set (SYSLOG_NG_ENABLE_IPV6 0)
+set (SYSLOG_NG_ENABLE_MEMTRACE 0)
+set (SYSLOG_NG_PATH_MODULEDIR "modulestuff")
+set (SYSLOG_NG_PACKAGE "packagestuff")
 
 include (CheckTypeSize)
 
@@ -52,21 +61,23 @@ endif()
 
 set(CORE_INCLUDE_DIRS
     ${Eventlog_INCLUDE_DIRS}
-    ${Ivykis_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
-    ${OpenSSL_INCLUDE_DIRS}}
     ${Gettext_INCLUDE_DIR}
+    ${Ivykis_INCLUDE_DIRS}
+    ${OPENSSL_INCLUDE_DIRS}
 )
 
 set(CORE_LIBRARIES
-    ${Eventlog_LIBRARIES}
-    ${Ivykis_LIBRARIES}
-    ${GLIB_LIBRARIES}
-    ${OpenSSL_LIBRARIES}
-    ${FLEX_LIBRARIES}
     ${BISON_LIBRARIES}
+    ${Eventlog_LIBRARIES}
+    ${FLEX_LIBRARIES}
+    ${GLIB_GMODULE_LIBRARIES}
+    ${GLIB_GTHREAD_LIBRARIES}
+    ${GLIB_LIBRARIES}
     ${Gettext_LIBRARIES}
-)
+    ${Ivykis_LIBRARIES}
+    ${OPENSSL_LIBRARIES}
+    ${RESOLV_LIBRARIES})
 
 include_directories(SYSTEM ${CORE_INCLUDE_DIRS})
 
@@ -83,9 +94,8 @@ include_directories (${CMAKE_SOURCE_DIR}/lib)
 include_directories (${CMAKE_SOURCE_DIR})
 add_subdirectory(lib)
 add_subdirectory(modules)
+add_subdirectory(syslog-ng)
 
 include (CheckIncludeFiles)
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/syslog-ng-config.h.in ${CMAKE_CURRENT_BINARY_DIR}/syslog-ng-config.h)
-
-MESSAGE(STATUS "${FLEX_CfgLexer_OUTPUT_HEADERS}")

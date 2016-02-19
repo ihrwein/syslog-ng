@@ -4,13 +4,12 @@ pkg_search_module(LIBRABBITMQ REQUIRED librabbitmq>=0.5.3)
 if(LIBRABBITMQ_FOUND)
 
     set(AFAMQP_SOURCES
-        afamqp.c
-        afamqp.h
+        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
+        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.h
         afamqp-parser.c
         afamqp-parser.h
-        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.h
-        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
-        )
+        afamqp.c
+        afamqp.h)
 
     generate_y_from_ym(modules/afamqp/afamqp-grammar)
 
@@ -18,7 +17,6 @@ if(LIBRABBITMQ_FOUND)
         ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.y
         ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
         COMPILE_FLAGS ${BISON_FLAGS})
-    #add_flex_bison_dependency(CfgLexer AffileGrammar)
 
     include_directories (${CMAKE_CURRENT_BINARY_DIR})
     include_directories (${CMAKE_CURRENT_SOURCE_DIR})
