@@ -1,4 +1,9 @@
-# add_subdirectory(afamqp)
+
+option(ENABLE_AMQP "Enable AMQP module" ON)
+if(ENABLE_AMQP)
+    add_subdirectory(afamqp)
+endif(ENABLE_AMQP)
+
 add_subdirectory(affile)
 add_subdirectory(afprog)
 add_subdirectory(afsmtp)
