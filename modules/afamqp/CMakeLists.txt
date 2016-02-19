@@ -1,29 +1,33 @@
 FIND_PACKAGE(PkgConfig REQUIRED)
 pkg_search_module(LIBRABBITMQ REQUIRED librabbitmq>=0.5.3)
 
-set(AFAMQP_SOURCES
-    afamqp.c
-    afamqp.h
-    afamqp-parser.c
-    afamqp-parser.h
-    ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.h
-    ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
-)
+if(LIBRABBITMQ_FOUND)
 
-generate_y_from_ym(modules/afamqp/afamqp-grammar)
+    set(AFAMQP_SOURCES
+        afamqp.c
+        afamqp.h
+        afamqp-parser.c
+        afamqp-parser.h
+        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.h
+        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
+        )
 
-bison_target(AfamqpGrammar
-    ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.y
-    ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
-    COMPILE_FLAGS ${BISON_FLAGS})
-#add_flex_bison_dependency(CfgLexer AffileGrammar)
+    generate_y_from_ym(modules/afamqp/afamqp-grammar)
 
-include_directories (${CMAKE_CURRENT_BINARY_DIR})
-include_directories (${CMAKE_CURRENT_SOURCE_DIR})
-add_library(afamqp MODULE ${AFAMQP_SOURCES})
+    bison_target(AfamqpGrammar
+        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.y
+        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
+        COMPILE_FLAGS ${BISON_FLAGS})
+    #add_flex_bison_dependency(CfgLexer AffileGrammar)
 
-target_link_libraries(afamqp ${LIBRABBITMQ_LIBRARIES})
-target_include_directories(afamqp PUBLIC ${LIBRABBITMQ_INCLUDE_DIRS})
-target_compile_options(afamqp PUBLIC ${LIBRABBITMQ_CFLAGS_OTHER})
+    include_directories (${CMAKE_CURRENT_BINARY_DIR})
+    include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+    add_library(afamqp MODULE ${AFAMQP_SOURCES})
 
-add_dependencies(afamqp syslog-ng)
+    target_link_libraries(afamqp ${LIBRABBITMQ_LIBRARIES})
+    target_include_directories(afamqp PUBLIC ${LIBRABBITMQ_INCLUDE_DIRS})
+    target_compile_options(afamqp PUBLIC ${LIBRABBITMQ_CFLAGS_OTHER})
+
+    add_dependencies(afamqp syslog-ng)
+
+endif(LIBRABBITMQ_FOUND)
