@@ -11,6 +11,7 @@ add_flex_bison_dependency(CfgLexer CfgGrammar)
 
 add_subdirectory(compat)
 add_subdirectory(control)
+add_subdirectory(debugger)
 add_subdirectory(filter)
 add_subdirectory(logmsg)
 add_subdirectory(logproto)
@@ -104,12 +105,15 @@ set (LIB_HEADERS
     host-id.h
     ${COMPAT_HEADERS}
     ${CONTROL_HEADERS}
+    ${DEBUGGER_HEADERS}
     ${FILTER_HEADERS}
     ${LOGMSG_HEADERS}
     ${LOGPROTO_HEADERS}
+    ${PARSER_HEADERS}
     ${REWRITE_HEADERS}
     ${STATS_HEADERS}
     ${TEMPLATE_HEADERS}
+    ${TRANSPORT_HEADERS}
     ${VALUE_PAIRS_HEADERS}
     ${CMAKE_BINARY_DIR}/lib/cfg-grammar.h
     ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.h
@@ -195,12 +199,15 @@ set(LIB_SOURCES
     host-id.c
     ${COMPAT_SOURCES}
     ${CONTROL_SOURCES}
+    ${DEBUGGER_SOURCES}
     ${FILTER_SOURCES}
     ${LOGMSG_SOURCES}
     ${LOGPROTO_SOURCES}
+    ${PARSER_SOURCES}
     ${REWRITE_SOURCES}
     ${STATS_SOURCES}
     ${TEMPLATE_SOURCES}
+    ${TRANSPORT_SOURCES}
     ${VALUE_PAIRS_SOURCES}
     ${CMAKE_BINARY_DIR}/lib/cfg-grammar.c
     ${CMAKE_BINARY_DIR}/lib/block-ref-grammar.c
@@ -259,4 +266,5 @@ target_include_directories(syslog-ng
 
 target_link_libraries(
     syslog-ng
-    ${CORE_LIBRARIES})
+    LINK_PUBLIC
+        ${CORE_LIBRARIES})
