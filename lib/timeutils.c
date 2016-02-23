@@ -306,7 +306,7 @@ check_nanosleep(void)
 
   for (attempts = 0; attempts < 3; attempts++)
     {
-      clock_gettime(CLOCK_MONOTONIC, &start);
+      start = get_monotonic_time();
       sleep_amount.tv_sec = 0;
       /* 0.1 msec */
       sleep_amount.tv_nsec = 1e5;
@@ -314,7 +314,7 @@ check_nanosleep(void)
       while (nanosleep(&sleep_amount, &sleep_amount) < 0)
         ;
 
-      clock_gettime(CLOCK_MONOTONIC, &stop);
+      stop = get_monotonic_time();
       diff = timespec_diff_nsec(&stop, &start);
       if (diff < 5e5)
         return TRUE;
