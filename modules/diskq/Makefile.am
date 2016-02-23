@@ -1,5 +1,5 @@
 bin_PROGRAMS += modules/diskq/dqtool
-lib_LTLIBRARIES += modules/diskq/libsyslog-ng-disk-buffer.la
+noinst_LTLIBRARIES += modules/diskq/libsyslog-ng-disk-buffer.la
 module_LTLIBRARIES += modules/diskq/libdisk-buffer.la
 
 modules_diskq_libsyslog_ng_disk_buffer_la_SOURCES = \
