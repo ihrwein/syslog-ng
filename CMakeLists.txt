@@ -53,6 +53,9 @@ find_package(Eventlog REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(FLEX REQUIRED)
 
+pkg_check_modules(LIBPCRE REQUIRED libpcre)
+
+
 if (WITH_GETTEXT)
     set (CMAKE_PREFIX_PATH ${WITH_GETTEXT})
     find_package(Gettext REQUIRED QUIET)
@@ -67,6 +70,7 @@ set(CORE_INCLUDE_DIRS
     ${Gettext_INCLUDE_DIR}
     ${Ivykis_INCLUDE_DIRS}
     ${OPENSSL_INCLUDE_DIRS}
+    ${LIBPCRE_INCLUDE_DIRS}
 )
 
 set(CORE_LIBRARIES
@@ -79,7 +83,9 @@ set(CORE_LIBRARIES
     ${Gettext_LIBRARIES}
     ${Ivykis_LIBRARIES}
     ${OPENSSL_LIBRARIES}
-    ${RESOLV_LIBRARIES})
+    ${RESOLV_LIBRARIES}
+    ${LIBPCRE_LIBRARIES}
+    )
 
 include_directories(SYSTEM ${CORE_INCLUDE_DIRS})
 
