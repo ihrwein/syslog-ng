@@ -1,0 +1,22 @@
+set(DATE_PARSER_SOURCES
+    date-plugin.c
+    date-parser.c
+    date-parser.h
+    date-parser-parser.c
+    date-parser-parser.h
+    strptime-tz.c
+    strptime-tz.h
+    date-grammar.c
+    date-grammar.h
+)
+
+generate_y_from_ym(modules/date/date-grammar)
+
+bison_target(DateParserGrammar
+    ${CMAKE_CURRENT_BINARY_DIR}/date-grammar.y
+    ${CMAKE_CURRENT_BINARY_DIR}/date-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+include_directories (${CMAKE_CURRENT_BINARY_DIR})
+include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+add_library(date MODULE ${DATE_PARSER_SOURCES})
