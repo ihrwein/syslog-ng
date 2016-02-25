@@ -6,8 +6,8 @@ set(DATE_PARSER_SOURCES
     date-parser-parser.h
     strptime-tz.c
     strptime-tz.h
-    date-grammar.c
-    date-grammar.h
+    ${CMAKE_CURRENT_BINARY_DIR}/date-grammar.c
+    ${CMAKE_CURRENT_BINARY_DIR}/date-grammar.h
 )
 
 generate_y_from_ym(modules/date/date-grammar)
