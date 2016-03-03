@@ -18,4 +18,4 @@ bison_target(PseudoFileGrammar
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(pseudofile MODULE ${PSEUDOFILE_SOURCES})
-add_dependencies(pseudofile syslog-ng)
+target_link_libraries(pseudofile PRIVATE syslog-ng)

@@ -38,7 +38,7 @@ add_library(patterndb ${PATTERNDB_SOURCES})
 #
 set_target_properties(patterndb PROPERTIES COMPILE_FLAGS "-fPIC -Wno-pointer-sign")
 add_dependencies(patterndb syslog-ng)
-target_link_libraries(patterndb syslog-ng)
+target_link_libraries(patterndb PUBLIC syslog-ng)
 
 set(DBPARSER_SOURCES
     stateful-parser.c
@@ -62,8 +62,8 @@ bison_target(DBParserGrammar
     COMPILE_FLAGS ${BISON_FLAGS})
 
 add_library(dbparser MODULE ${DBPARSER_SOURCES})
-target_link_libraries(dbparser patterndb)
+target_link_libraries(dbparser PRIVATE patterndb)
 target_include_directories(dbparser PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-add_dependencies(dbparser syslog-ng)
+target_link_libraries(dbparser PRIVATE syslog-ng)
 
 add_subdirectory(pdbtool)
