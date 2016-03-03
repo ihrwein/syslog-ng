@@ -22,3 +22,4 @@ bison_target(AfprogGrammar
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(afprog MODULE ${AFPROG_SOURCES})
+add_dependencies(afprog syslog-ng)
