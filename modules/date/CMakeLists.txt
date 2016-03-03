@@ -20,3 +20,4 @@ bison_target(DateParserGrammar
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(date MODULE ${DATE_PARSER_SOURCES})
+add_dependencies(date syslog-ng)
