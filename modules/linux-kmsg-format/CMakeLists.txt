@@ -6,4 +6,4 @@ set(LINUX_KMSG_FORMAT_SOURCES
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_library(linux-kmsg-format MODULE ${LINUX_KMSG_FORMAT_SOURCES})
-add_dependencies(linux-kmsg-format syslog-ng)
+target_link_libraries(linux-kmsg-format PRIVATE syslog-ng)

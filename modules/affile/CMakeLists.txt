@@ -30,4 +30,4 @@ bison_target(AffileGrammar
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(affile MODULE ${AFFILE_SOURCES})
-add_dependencies(affile syslog-ng)
+target_link_libraries(affile PRIVATE syslog-ng)

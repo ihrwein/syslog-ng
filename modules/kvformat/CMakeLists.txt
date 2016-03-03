@@ -24,4 +24,4 @@ bison_target(KVFormatGrammar
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(kvformat MODULE ${KVFORMAT_SOURCES})
-add_dependencies(kvformat syslog-ng)
+target_link_libraries(kvformat PRIVATE syslog-ng)
