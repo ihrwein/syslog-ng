@@ -1,4 +1,10 @@
-option(ENABLE_PACCT "Enable support for reading Process Accounting files (EXPERIMENTAL, Linux only)." ON)
+if (CMAKE_SYSTEM_NAME STREQUAL Linux)
+    set (ENABLE_PACCT_DEFAULT ON)
+else()
+    set (ENABLE_PACCT_DEFAULT OFF)
+endif()
+
+option(ENABLE_PACCT "Enable support for reading Process Accounting files (EXPERIMENTAL, Linux only)." ${ENABLE_PACCT_DEFAULT})
 
 if (ENABLE_PACCT)
     set(PACCT_FORMAT_SOURCES
