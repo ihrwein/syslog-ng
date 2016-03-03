@@ -20,3 +20,4 @@ bison_target(CSVParserGrammar
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(csvparser MODULE ${CSVPARSER_SOURCES})
+add_dependencies(csvparser syslog-ng)
