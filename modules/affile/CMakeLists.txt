@@ -26,8 +26,8 @@ bison_target(AffileGrammar
     ${CMAKE_CURRENT_BINARY_DIR}/affile-grammar.y
     ${CMAKE_CURRENT_BINARY_DIR}/affile-grammar.c
     COMPILE_FLAGS ${BISON_FLAGS})
-#add_flex_bison_dependency(CfgLexer AffileGrammar)
 
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(affile MODULE ${AFFILE_SOURCES})
+add_dependencies(affile syslog-ng)
