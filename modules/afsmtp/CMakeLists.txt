@@ -29,6 +29,5 @@ if (BUILD_AFSMTP)
     target_link_libraries (afsmtp ${ESMTP_LIBRARIES})
     target_include_directories (afsmtp SYSTEM PRIVATE ${ESMTP_INCLUDE_DIR})
     target_include_directories (afsmtp PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-
-    # add_dependencies(afsmtp syslog-ng)
+    add_dependencies(afsmtp syslog-ng)
 endif()
