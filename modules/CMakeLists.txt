@@ -1,5 +1,5 @@
 
-option(ENABLE_AMQP "Enable AMQP module" ON)
+option(ENABLE_AMQP "Enable AMQP module" OFF)
 if(ENABLE_AMQP)
     add_subdirectory(afamqp)
 endif(ENABLE_AMQP)

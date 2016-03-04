@@ -3,13 +3,17 @@ pkg_search_module(LIBRABBITMQ REQUIRED librabbitmq>=0.5.3)
 
 if(LIBRABBITMQ_FOUND)
 
+    set(AFAMQP_HEADERS
+        "${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.h"
+        "afamqp-parser.h"
+        "afamqp.h"
+        )
+
     set(AFAMQP_SOURCES
-        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c
-        ${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.h
-        afamqp-parser.c
-        afamqp-parser.h
-        afamqp.c
-        afamqp.h)
+        "${CMAKE_CURRENT_BINARY_DIR}/afamqp-grammar.c"
+        "afamqp-parser.c"
+        "afamqp.c"
+        )
 
     generate_y_from_ym(modules/afamqp/afamqp-grammar)
 
