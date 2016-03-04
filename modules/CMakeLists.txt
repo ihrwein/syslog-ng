@@ -4,6 +4,11 @@ if(ENABLE_AMQP)
     add_subdirectory(afamqp)
 endif(ENABLE_AMQP)
 
+option(ENABLE_AFUSER "Enable afuser module" OFF)
+if(ENABLE_AFUSER)
+    add_subdirectory(afuser)
+endif(ENABLE_AFUSER)
+
 add_subdirectory(affile)
 add_subdirectory(afprog)
 add_subdirectory(afsmtp)
