@@ -22,7 +22,7 @@ endif()
 if (BUILD_AFSQL)
     generate_y_from_ym(modules/afsql/afsql-grammar)
 
-    bison_target(JsonGrammar
+    bison_target(SqlGrammar
         ${CMAKE_CURRENT_BINARY_DIR}/afsql-grammar.y
         ${CMAKE_CURRENT_BINARY_DIR}/afsql-grammar.c
         COMPILE_FLAGS ${BISON_FLAGS})
