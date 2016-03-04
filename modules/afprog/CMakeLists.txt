@@ -1,15 +1,15 @@
 
 set(AFPROG_HEADERS
-    afprog.h
-    afprog-parser.h
-    ${CMAKE_CURRENT_BINARY_DIR}/afprog-grammar.h
+    "afprog.h"
+    "afprog-parser.h"
+    "${CMAKE_CURRENT_BINARY_DIR}/afprog-grammar.h"
 )
 
 set(AFPROG_SOURCES
-    afprog.c
-    afprog-parser.c
-    afprog-plugin.c
-    ${CMAKE_CURRENT_BINARY_DIR}/afprog-grammar.c
+    "afprog.c"
+    "afprog-parser.c"
+    "afprog-plugin.c"
+    "${CMAKE_CURRENT_BINARY_DIR}/afprog-grammar.c"
 )
 
 generate_y_from_ym(modules/afprog/afprog-grammar)
