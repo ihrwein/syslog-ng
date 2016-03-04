@@ -103,6 +103,7 @@ set (LIB_HEADERS
     ringbuffer.h
     ack_tracker.h
     host-id.h
+    resolved-configurable-paths.h
     ${COMPAT_HEADERS}
     ${CONTROL_HEADERS}
     ${DEBUGGER_HEADERS}
@@ -197,6 +198,7 @@ set(LIB_SOURCES
     userdb.c
     utf8utils.c
     host-id.c
+    resolved-configurable-paths.c
     ${COMPAT_SOURCES}
     ${CONTROL_SOURCES}
     ${DEBUGGER_SOURCES}
