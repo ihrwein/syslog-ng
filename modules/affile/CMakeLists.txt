@@ -1,12 +1,12 @@
 set(AFFILE_HEADERS
-    logproto-linux-proc-kmsg-reader.h
-    logproto-file-writer.h
-    poll-file-changes.h
-    affile-common.h
-    affile-source.h
-    affile-dest.h
-    affile-parser.h
-    ${CMAKE_CURRENT_BINARY_DIR}/affile-grammar.h
+    "logproto-linux-proc-kmsg-reader.h"
+    "logproto-file-writer.h"
+    "poll-file-changes.h"
+    "affile-common.h"
+    "affile-source.h"
+    "affile-dest.h"
+    "affile-parser.h"
+    "${CMAKE_CURRENT_BINARY_DIR}/affile-grammar.h"
 )
 
 set(AFFILE_SOURCES
