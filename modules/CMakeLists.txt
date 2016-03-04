@@ -9,6 +9,11 @@ if(ENABLE_AFUSER)
     add_subdirectory(afuser)
 endif(ENABLE_AFUSER)
 
+option(ENABLE_REDIS "Enable redis module" OFF)
+if(ENABLE_REDIS)
+    add_subdirectory(redis)
+endif(ENABLE_REDIS)
+
 add_subdirectory(affile)
 add_subdirectory(afprog)
 add_subdirectory(afsmtp)
