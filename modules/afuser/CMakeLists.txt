@@ -1,0 +1,25 @@
+set(AFUSER_HEADERS
+    "${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.h"
+    "afuser-parser.h"
+    "afuser.h"
+    )
+
+set(AFUSER_SOURCES
+	"afuser-plugin.c"
+	"afuser.c"
+    "${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.c"
+    "afuser-parser.c"
+    )
+
+generate_y_from_ym(modules/afuser/afuser-grammar)
+
+bison_target(AfuserGrammar
+    ${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.y
+    ${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
+include_directories (${CMAKE_CURRENT_BINARY_DIR})
+include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+add_library(afuser MODULE ${AFUSER_SOURCE})
+
+add_dependencies(afuser syslog-ng)
