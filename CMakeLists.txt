@@ -66,6 +66,7 @@ find_package(Eventlog REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(FLEX REQUIRED)
 find_package(LibNet REQUIRED)
+find_package(Resolv REQUIRED)
 find_package(Wrap)
 
 pkg_check_modules(LIBPCRE REQUIRED libpcre)
@@ -107,6 +108,7 @@ set(CORE_LIBRARIES
     ${OPENSSL_LIBRARIES}
     ${RESOLV_LIBRARIES}
     ${LIBPCRE_LIBRARIES}
+    ${RESOLV_LIBRARIES}
     )
 
 include_directories(SYSTEM ${CORE_INCLUDE_DIRS})
