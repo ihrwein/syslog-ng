@@ -9,6 +9,11 @@ if(ENABLE_AFUSER)
     add_subdirectory(afuser)
 endif(ENABLE_AFUSER)
 
+option(ENABLE_MONGODB "Enable mongodb module" OFF)
+if(ENABLE_MONGODB)
+    add_subdirectory(afmongodb)
+endif(ENABLE_MONGODB)
+
 option(ENABLE_REDIS "Enable redis module" OFF)
 if(ENABLE_REDIS)
     add_subdirectory(redis)
