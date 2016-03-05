@@ -16,4 +16,5 @@ set(COMPAT_SOURCES
     compat/pio.c
     compat/strcasestr.c
     compat/strtok_r.c
+    compat/time.c
     PARENT_SCOPE)
