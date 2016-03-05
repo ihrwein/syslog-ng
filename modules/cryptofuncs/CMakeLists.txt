@@ -1,0 +1,10 @@
+set (CRYPTOFUNCS_SOURCES
+    cryptofuncs.c
+)
+
+find_package(OpenSSL REQUIRED)
+
+add_library(cryptofuncs MODULE ${CRYPTOFUNCS_SOURCES})
+target_include_directories (cryptofuncs PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories (cryptofuncs PRIVATE SYSTEM ${OPENSSL_INCLUDE_DIRS})
+target_link_libraries(cryptofuncs PRIVATE syslog-ng ${OPENSSL_LIBRARIES})
