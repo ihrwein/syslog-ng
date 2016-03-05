@@ -31,6 +31,10 @@ set (SYSLOG_NG_PATH_MODULEDIR "modulestuff")
 set (SYSLOG_NG_PACKAGE_NAME "packagestuff")
 set (SYSLOG_NG_PATH_XSDDIR "\${datadir}/syslog-ng/xsd")
 
+# CMake will generate tests only if the enable_testing() command has been invoked.
+# The CTest module invokes the command automatically when the BUILD_TESTING option is ON.
+enable_testing()
+
 include (CheckTypeSize)
 include (CheckStructMember)
 include (CheckSymbolExists)
