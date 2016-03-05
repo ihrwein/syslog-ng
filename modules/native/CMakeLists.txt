@@ -30,5 +30,5 @@ if (ENABLE_NATIVE)
   target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
   target_include_directories (syslog-ng-native-connector PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-  add_dependencies(syslog-ng-native-connector syslog-ng)
+  target_link_libraries(syslog-ng-native-connector PRIVATE syslog-ng)
 endif()

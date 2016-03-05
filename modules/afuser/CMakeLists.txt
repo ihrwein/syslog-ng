@@ -22,4 +22,4 @@ include_directories (${CMAKE_CURRENT_BINARY_DIR})
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_library(afuser MODULE ${AFUSER_SOURCE})
 
-add_dependencies(afuser syslog-ng)
+target_link_libraries(afuser PRIVATE syslog-ng)

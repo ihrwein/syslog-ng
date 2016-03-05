@@ -30,6 +30,6 @@ if(LIBRABBITMQ_FOUND)
     target_include_directories(afamqp PUBLIC ${LIBRABBITMQ_INCLUDE_DIRS})
     target_compile_options(afamqp PUBLIC ${LIBRABBITMQ_CFLAGS_OTHER})
 
-    add_dependencies(afamqp syslog-ng)
+    target_link_libraries(afamqp PRIVATE syslog-ng)
 
 endif(LIBRABBITMQ_FOUND)
