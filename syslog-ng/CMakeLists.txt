@@ -5,5 +5,3 @@ add_executable(syslog-ng-bin ${syslog_ng_bin_sources})
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/)
 target_link_libraries(syslog-ng-bin syslog-ng)
-
-add_dependencies(syslog-ng-bin syslog-ng)

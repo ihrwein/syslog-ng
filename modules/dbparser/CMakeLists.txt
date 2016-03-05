@@ -37,7 +37,6 @@ add_library(patterndb ${PATTERNDB_SOURCES})
 # warning option.
 #
 set_target_properties(patterndb PROPERTIES COMPILE_FLAGS "-fPIC -Wno-pointer-sign")
-add_dependencies(patterndb syslog-ng)
 target_link_libraries(patterndb PUBLIC syslog-ng)
 
 set(DBPARSER_SOURCES
