@@ -8,6 +8,7 @@
 
 #include <string.h>
 
+GlobalConfig *configuration;
 MsgFormatOptions parse_options;
 LogTemplateOptions template_options;
 
