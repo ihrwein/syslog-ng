@@ -1,4 +1,3 @@
-
 set(AFPROG_HEADERS
     "afprog.h"
     "afprog-parser.h"
