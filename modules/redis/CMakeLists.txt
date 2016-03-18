@@ -12,14 +12,24 @@ set(REDIS_SOURCES
 
 generate_y_from_ym(modules/redis/redis-grammar)
 
-bison_target(RedisGrammar
-    ${CMAKE_CURRENT_BINARY_DIR}/redis-grammar.y
-    ${CMAKE_CURRENT_BINARY_DIR}/redis-grammar.c
-    COMPILE_FLAGS ${BISON_FLAGS})
+find_package(Hiredis)
 
-include_directories (${CMAKE_CURRENT_BINARY_DIR})
-include_directories (${CMAKE_CURRENT_SOURCE_DIR})
-add_library(redis MODULE ${REDIS_SOURCES})
-target_link_libraries(redis PRIVATE syslog-ng)
+if (HIREDIS_FOUND)
+  option(ENABLE_REDIS "Enable redis module" ON)
+else()
+  option(ENABLE_REDIS "Enable redis module" OFF)
+endif()
 
-install(TARGETS redis LIBRARY DESTINATION lib/syslog-ng/)
+if (ENABLE_REDIS)
+  bison_target(RedisGrammar
+      ${CMAKE_CURRENT_BINARY_DIR}/redis-grammar.y
+      ${CMAKE_CURRENT_BINARY_DIR}/redis-grammar.c
+      COMPILE_FLAGS ${BISON_FLAGS})
+
+  include_directories (${CMAKE_CURRENT_BINARY_DIR})
+  include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+  add_library(redis MODULE ${REDIS_SOURCES})
+  target_link_libraries(redis PRIVATE syslog-ng)
+
+  install(TARGETS redis LIBRARY DESTINATION lib/syslog-ng/)
+endif()

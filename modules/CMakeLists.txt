@@ -14,11 +14,7 @@ if(ENABLE_MONGODB)
     add_subdirectory(afmongodb)
 endif(ENABLE_MONGODB)
 
-option(ENABLE_REDIS "Enable redis module" OFF)
-if(ENABLE_REDIS)
-    add_subdirectory(redis)
-endif(ENABLE_REDIS)
-
+add_subdirectory(redis)
 add_subdirectory(affile)
 add_subdirectory(afprog)
 add_subdirectory(afsmtp)
