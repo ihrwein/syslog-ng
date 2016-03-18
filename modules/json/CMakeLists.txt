@@ -12,17 +12,15 @@ set(JSON_SOURCES
     ${CMAKE_CURRENT_BINARY_DIR}/json-parser-grammar.c
 )
 
-option(ENABLE_JSON "Enable JSON plugin" ON)
-
 find_package(JsonC)
 
-if(JSONC_FOUND AND ENABLE_JSON)
-    set(BUILD_JSON ON)
+if(JSONC_FOUND)
+    option(ENABLE_JSON "Enable JSON plugin" ON)
 else()
-    set(BUILD_JSON OFF)
+    option(ENABLE_JSON "Enable JSON plugin" OFF)
 endif()
 
-if (BUILD_JSON)
+if (ENABLE_JSON)
     generate_y_from_ym(modules/json/json-parser-grammar)
 
     bison_target(JsonGrammar
