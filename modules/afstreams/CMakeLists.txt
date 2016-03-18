@@ -8,19 +8,17 @@ set(AFSTREAMS_SOURCES
     ${CMAKE_CURRENT_BINARY_DIR}/afstreams-grammar.c
 )
 
-option(ENABLE_SUN_STREAMS "Enable Sun Streams source" ON)
-
 include (CheckIncludeFile)
 check_include_file(sys/strlog.h HAVE_STRLOG)
 check_include_file(stropts.h HAVE_STROPTS)
 
-if(HAVE_STRLOG AND HAVE_STROPTS AND ENABLE_SUN_STREAMS)
-    set(BUILD_AFSTREAMS ON)
+if(HAVE_STRLOG AND HAVE_STROPTS)
+    option(ENABLE_SUN_STREAMS "Enable Sun Streams source" ON)
 else()
-    set(BUILD_AFSTREAMS OFF)
+    option(ENABLE_SUN_STREAMS "Enable Sun Streams source" OFF)
 endif()
 
-if (BUILD_AFSTREAMS)
+if (ENABLE_SUN_STREAMS)
     generate_y_from_ym(modules/afstreams/afstreams-grammar)
 
     bison_target(StreamsGrammar
@@ -31,6 +29,6 @@ if (BUILD_AFSTREAMS)
     add_library(afstreams MODULE ${AFSTREAMS_SOURCES})
     target_include_directories (afstreams PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
     target_link_libraries(afstreams PRIVATE syslog-ng)
-    
+
     install(TARGETS afstreams LIBRARY DESTINATION lib/syslog-ng/)
 endif()
