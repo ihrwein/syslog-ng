@@ -4,16 +4,13 @@ if(ENABLE_AMQP)
     add_subdirectory(afamqp)
 endif(ENABLE_AMQP)
 
-option(ENABLE_AFUSER "Enable afuser module" OFF)
-if(ENABLE_AFUSER)
-    add_subdirectory(afuser)
-endif(ENABLE_AFUSER)
 
 option(ENABLE_MONGODB "Enable mongodb module" OFF)
 if(ENABLE_MONGODB)
     add_subdirectory(afmongodb)
 endif(ENABLE_MONGODB)
 
+add_subdirectory(afuser)
 add_subdirectory(redis)
 add_subdirectory(affile)
 add_subdirectory(afprog)

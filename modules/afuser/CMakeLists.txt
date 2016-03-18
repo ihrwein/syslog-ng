@@ -14,14 +14,18 @@ set(AFUSER_SOURCES
 generate_y_from_ym(modules/afuser/afuser-grammar)
 
 bison_target(AfuserGrammar
-    ${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.y
-    ${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.c
-    COMPILE_FLAGS ${BISON_FLAGS})
+  ${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.y
+  ${CMAKE_CURRENT_BINARY_DIR}/afuser-grammar.c
+COMPILE_FLAGS ${BISON_FLAGS})
 
-include_directories (${CMAKE_CURRENT_BINARY_DIR})
-include_directories (${CMAKE_CURRENT_SOURCE_DIR})
-add_library(afuser MODULE ${AFUSER_SOURCES})
+option(ENABLE_AFUSER "Enable afuser module" ON)
 
-target_link_libraries(afuser PRIVATE syslog-ng)
+if (ENABLE_AFUSER)
+  include_directories (${CMAKE_CURRENT_BINARY_DIR})
+  include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+  add_library(afuser MODULE ${AFUSER_SOURCES})
 
-install(TARGETS afuser LIBRARY DESTINATION lib/syslog-ng)
+  target_link_libraries(afuser PRIVATE syslog-ng)
+
+  install(TARGETS afuser LIBRARY DESTINATION lib/syslog-ng)
+endif()
