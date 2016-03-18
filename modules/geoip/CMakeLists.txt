@@ -12,15 +12,13 @@ generate_y_from_ym(modules/geoip/geoip-parser-grammar)
 
 find_package(LibGeoIP)
 
-option(ENABLE_GEOIP "Enable GeoIP parser" ON)
-
-if(LIBGEOIP_FOUND AND ENABLE_GEOIP)
-    set(BUILD_GEOIP ON)
+if(LIBGEOIP_FOUND)
+    option(ENABLE_GEOIP "Enable GeoIP parser" ON)
 else()
-    set(BUILD_GEOIP OFF)
+    option(ENABLE_GEOIP "Enable GeoIP parser" OFF)
 endif()
 
-if (BUILD_GEOIP)
+if (ENABLE_GEOIP)
     bison_target(GeoIPGrammar
         ${CMAKE_CURRENT_BINARY_DIR}/geoip-parser-grammar.y
         ${CMAKE_CURRENT_BINARY_DIR}/geoip-parser-grammar.c
