@@ -1,25 +1,24 @@
 option(ENABLE_NATIVE "Enable to build native bindings (for Rust, C++)" ON)
 
+set (NATIVE_SOURCES
+    native-parser.c
+    parser.c
+    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
+    )
+
+set (NATIVE_HEADERS
+    native-parser.h
+    parser.h
+    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.h
+    )
+
+generate_y_from_ym (modules/native/native-grammar)
+bison_target(NativeGrammar
+    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.y
+    ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
+    COMPILE_FLAGS ${BISON_FLAGS})
+
 if (ENABLE_NATIVE)
-  set (NATIVE_SOURCES
-      native-parser.c
-      parser.c
-      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
-      )
-
-  set (NATIVE_HEADERS
-      native-parser.h
-      parser.h
-      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.h
-      )
-
-  generate_y_from_ym (modules/native/native-grammar)
-  bison_target(NativeGrammar
-      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.y
-      ${CMAKE_CURRENT_BINARY_DIR}/native-grammar.c
-      COMPILE_FLAGS ${BISON_FLAGS})
-  #add_flex_bison_dependency(CfgLexer NativeGrammar)
-
   set(PKG_CONFIG_EXEC_PREFIX "\${prefix}")
   set(PKG_CONFIG_LIBDIR "\${exec_prefix}/lib")
   set(PKG_CONFIG_LIBS "-L\${libdir} -lsyslog-ng-native-connector")
