@@ -8,18 +8,16 @@ set(AFSQL_SOURCES
     ${CMAKE_CURRENT_BINARY_DIR}/afsql-grammar.c
 )
 
-option(ENABLE_SQL "Enable SQL plugin" ON)
-
 find_package(LibDBI)
 find_package(OpenSSL)
 
-if(LIBDBI_FOUND AND ENABLE_SQL)
-    set(BUILD_AFSQL ON)
+if(LIBDBI_FOUND)
+    option(ENABLE_SQL "Enable SQL plugin" ON)
 else()
-    set(BUILD_AFSQL OFF)
+    option(ENABLE_SQL "Enable SQL plugin" OFF)
 endif()
 
-if (BUILD_AFSQL)
+if (ENABLE_SQL)
     generate_y_from_ym(modules/afsql/afsql-grammar)
 
     bison_target(SqlGrammar
@@ -32,6 +30,6 @@ if (BUILD_AFSQL)
     target_include_directories (afsql SYSTEM PRIVATE ${LIBDBI_INCLUDE_DIRS})
     target_include_directories (afsql PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
     target_link_libraries(afsql PRIVATE syslog-ng)
-    
+
     install(TARGETS afsql LIBRARY DESTINATION lib/syslog-ng/)
 endif()
