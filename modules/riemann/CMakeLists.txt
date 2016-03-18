@@ -1,5 +1,3 @@
-option(ENABLE_RIEMANN "Enable riemann destination" ON)
-
 set (RIEMANN_SOURCES
     riemann-grammar.y
     riemann.c
@@ -20,10 +18,10 @@ bison_target(RiemannGrammar
 
 find_package(RiemannClient)
 
-if (ENABLE_RIEMANN AND Riemann_FOUND)
-    set(BUILD_RIEMANN TRUE)
+if (Riemann_FOUND)
+    option(ENABLE_RIEMANN "Enable riemann destination" ON)
 else()
-    set(BUILD_RIEMANN FALSE)
+    option(ENABLE_RIEMANN "Enable riemann destination" OFF)
 endif()
 
 if (BUILD_RIEMANN)
@@ -32,6 +30,6 @@ if (BUILD_RIEMANN)
     target_include_directories (riemann PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
     target_include_directories (riemann PRIVATE ${Riemann_INCLUDE_DIR})
     target_link_libraries(riemann PRIVATE syslog-ng ${Riemann_LIBRARIES})
-    
+
     install(TARGETS riemann LIBRARY DESTINATION lib/syslog-ng/)
 endif()
