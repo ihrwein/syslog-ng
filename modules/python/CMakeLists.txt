@@ -1,4 +1,3 @@
-option(ENABLE_PYTHON "Enable Python module" ON)
 
 find_package(PythonLibs)
 
@@ -34,13 +33,13 @@ bison_target(PythonGrammar
     ${CMAKE_CURRENT_BINARY_DIR}/python-grammar.c
     COMPILE_FLAGS ${BISON_FLAGS})
 
-if (ENABLE_PYTHON AND PYTHONLIBS_FOUND)
-    set(BUILD_PYTHON TRUE)
+if (PYTHONLIBS_FOUND)
+    option(ENABLE_PYTHON "Enable Python module" ON)
 else()
-    set(BUILD_PYTHON FALSE)
+    option(ENABLE_PYTHON "Enable Python module" OFF)
 endif()
 
-if (BUILD_PYTHON)
+if (ENABLE_PYTHON)
     add_subdirectory(pylib)
     add_library(mod-python MODULE ${PYTHON_SOURCES})
     target_include_directories (mod-python PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
