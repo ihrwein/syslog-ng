@@ -51,6 +51,8 @@ set (LIBDIR "\${exec_prefix}/lib")
 set (INCLUDEDIR "\${prefix}/include")
 set (TOOLSDIR "\${datadir}/syslog-ng/tools")
 
+
+
 # CMake will generate tests only if the enable_testing() command has been invoked.
 # The CTest module invokes the command automatically when the BUILD_TESTING option is ON.
 enable_testing()
@@ -197,3 +199,16 @@ set (includedir "\${includedir}")
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/syslog-ng.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/syslog-ng.pc)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/syslog-ng.pc DESTINATION lib/pkgconfig)
+
+
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Lol Kek <lolkek@kek.com>")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY  "Short summary")
+set(CPACK_PACKAGE_DESCRIPTION "Long summary")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS  "")
+set(CPACK_DEBIAN_PACKAGE_SECTION  "admin")
+
+set(CPACK_PACKAGE_VERSION "${SYSLOG_NG_VERSION}")
+set(CPACK_PACKAGE_NAME "syslog-ng")
+set(CPACK_GENERATOR  "DEB")
+
+include(CPack)
