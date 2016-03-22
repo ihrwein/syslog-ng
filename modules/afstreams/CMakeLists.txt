@@ -30,5 +30,5 @@ if (ENABLE_SUN_STREAMS)
     target_include_directories (afstreams PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
     target_link_libraries(afstreams PRIVATE syslog-ng)
 
-    install(TARGETS afstreams LIBRARY DESTINATION lib/syslog-ng/)
+    install(TARGETS afstreams LIBRARY DESTINATION lib/syslog-ng/ COMPONENT afstreams)
 endif()

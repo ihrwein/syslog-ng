@@ -31,5 +31,5 @@ if (ENABLE_SQL)
     target_include_directories (afsql PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
     target_link_libraries(afsql PRIVATE syslog-ng)
 
-    install(TARGETS afsql LIBRARY DESTINATION lib/syslog-ng/)
+    install(TARGETS afsql LIBRARY DESTINATION lib/syslog-ng/ COMPONENT afsql)
 endif()

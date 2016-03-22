@@ -33,4 +33,5 @@ add_library(affile MODULE ${AFFILE_SOURCES})
 target_link_libraries(affile PRIVATE syslog-ng)
 
 install(TARGETS affile
-    LIBRARY DESTINATION lib/syslog-ng/ COMPONENT affile)
+    LIBRARY DESTINATION lib/syslog-ng/
+    COMPONENT affile)

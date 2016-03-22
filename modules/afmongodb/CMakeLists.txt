@@ -33,6 +33,6 @@ if(LIBMONGOC_FOUND)
 
     add_dependencies(afmongodb syslog-ng)
     
-    install(TARGETS afmongodb LIBRARY DESTINATION lib/syslog-ng/)
+    install(TARGETS afmongodb LIBRARY DESTINATION lib/syslog-ng/ COMPONENT afmongodb)
 
 endif(LIBMONGOC_FOUND)

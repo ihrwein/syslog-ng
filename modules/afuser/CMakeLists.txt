@@ -27,5 +27,5 @@ if (ENABLE_AFUSER)
 
   target_link_libraries(afuser PRIVATE syslog-ng)
 
-  install(TARGETS afuser LIBRARY DESTINATION lib/syslog-ng)
+  install(TARGETS afuser LIBRARY DESTINATION lib/syslog-ng COMPONENT afuser)
 endif()
