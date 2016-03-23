@@ -66,5 +66,6 @@ target_include_directories(dbparser PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_
 target_link_libraries(dbparser PRIVATE syslog-ng)
 
 install(TARGETS dbparser
-        LIBRARY DESTINATION lib/syslog-ng/)
+        LIBRARY DESTINATION lib/syslog-ng/
+        COMPONENT dbparser)
 add_subdirectory(pdbtool)

@@ -42,5 +42,5 @@ add_executable(dqtool ${DQTOOL_SOURCES})
 target_link_libraries(dqtool PRIVATE syslog-ng-disk-buffer)
 target_include_directories(dqtool PRIVATE ${PROJECT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
-install(TARGETS dqtool RUNTIME DESTINATION bin)
-install(TARGETS disk-buffer LIBRARY DESTINATION lib/syslog-ng)
+install(TARGETS dqtool RUNTIME DESTINATION bin COMPONENT diskbuffer)
+install(TARGETS disk-buffer LIBRARY DESTINATION lib/syslog-ng COMPONENT diskbuffer)

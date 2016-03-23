@@ -31,5 +31,5 @@ if (ENABLE_REDIS)
   add_library(redis MODULE ${REDIS_SOURCES})
   target_link_libraries(redis PRIVATE syslog-ng)
 
-  install(TARGETS redis LIBRARY DESTINATION lib/syslog-ng/)
+  install(TARGETS redis LIBRARY DESTINATION lib/syslog-ng/ COMPONENT redis)
 endif()

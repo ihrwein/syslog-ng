@@ -34,5 +34,5 @@ if (ENABLE_JSON)
     target_include_directories (json-plugin PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
     target_link_libraries(json-plugin PRIVATE syslog-ng)
 
-    install(TARGETS json-plugin LIBRARY DESTINATION lib/syslog-ng/)
+    install(TARGETS json-plugin LIBRARY DESTINATION lib/syslog-ng/ COMPONENT json)
 endif()

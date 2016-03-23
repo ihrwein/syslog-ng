@@ -63,4 +63,4 @@ target_include_directories(afsocket PRIVATE SYSTEM ${WRAP_INCLUDE_DIRS})
 target_include_directories(afsocket PRIVATE SYSTEM ${Libsystemd_INCLUDE_DIRS})
 target_compile_definitions(afsocket PRIVATE ${LIBNET_DEFINES})
 
-install(TARGETS afsocket LIBRARY DESTINATION lib/syslog-ng/ COMPONENT core)
+install(TARGETS afsocket LIBRARY DESTINATION lib/syslog-ng/ COMPONENT afsocket)

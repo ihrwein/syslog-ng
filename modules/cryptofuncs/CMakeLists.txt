@@ -10,5 +10,5 @@ if (OPENSSL_FOUND)
     target_include_directories (cryptofuncs PRIVATE SYSTEM ${OPENSSL_INCLUDE_DIRS})
     target_link_libraries(cryptofuncs PRIVATE syslog-ng ${OPENSSL_LIBRARIES})
 
-    install(TARGETS cryptofuncs LIBRARY DESTINATION lib/syslog-ng/)
+    install(TARGETS cryptofuncs LIBRARY DESTINATION lib/syslog-ng/ COMPONENT cryptofuncs)
 endif()
