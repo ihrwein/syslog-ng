@@ -272,7 +272,7 @@ target_include_directories(syslog-ng
 
 target_link_libraries(
     syslog-ng
-    LINK_PUBLIC
+    LINK_PRIVATE
         ${CORE_LIBRARIES})
 
 set_target_properties(syslog-ng
