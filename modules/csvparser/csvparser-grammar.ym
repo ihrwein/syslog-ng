@@ -50,7 +50,6 @@
 
 /* INCLUDE_DECLS */
 
-%token KW_CSV_PARSER
 %token KW_DIALECT
 %token KW_PREFIX
 %token KW_COLUMNS
@@ -73,12 +72,12 @@ start
 
 
 parser_expr_csv
-        : KW_CSV_PARSER '('
+        : LL_IDENTIFIER '('
           {
             last_parser = *instance = csv_parser_new(configuration);
           }
           parser_csv_opts
-          ')'					{ $$ = last_parser; }
+          ')'					{ $$ = last_parser; free($1); }
         ;
 
 
