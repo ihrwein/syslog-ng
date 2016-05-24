@@ -77,7 +77,7 @@ parser_expr_csv
             last_parser = *instance = csv_parser_new(configuration);
           }
           parser_csv_opts
-          ')'					{ $$ = last_parser; free($1); }
+          ')'					{ $$ = last_parser; }
         ;
 
 
