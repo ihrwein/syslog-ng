@@ -75,7 +75,7 @@ native_parser_init(LogPipe *s)
 {
   ParserNative *self = (ParserNative *) s;
 
-  return !!native_parser_proxy_init(self->native_object);
+  return native_parser_proxy_init(self->native_object) && log_parser_init_method(s);
 }
 
 static void
